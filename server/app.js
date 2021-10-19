@@ -7,6 +7,7 @@ require('dotenv').config();
 const sequelize = require('./utils/postgress-sql')
 const routes = require('./routes/routes');
 
+
 const app = express();
 const port = process.env.PORT;
 
