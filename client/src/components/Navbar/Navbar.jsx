@@ -6,6 +6,18 @@ import { withRouter } from "react-router";
 
 const Navbar = (props) => {
 
+const [firebaseUser, setFirebaseUser] = React.useState(false);
+
+  React.useEffect(() => {
+    auth.onAuthStateChanged(user => {
+      if(user) {
+        setFirebaseUser(user)
+      } else {
+        setFirebaseUser(null)
+      }
+    })
+  }, [])
+
 const cerrarSesion = () => {
   auth.signOut()
     .then(() => {
@@ -21,7 +33,7 @@ const cerrarSesion = () => {
           Inicio
         </NavLink>
         {
-          props.firebaseUser !== null ? (
+          firebaseUser !== null ? (
             <button className="btn btn-dark" onClick={() => cerrarSesion()}>Cerrar Sesión</button>
           ) : (
               <NavLink className="btn btn-dark mr-4 boton" to="/login">
