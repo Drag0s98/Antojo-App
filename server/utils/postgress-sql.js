@@ -1,15 +1,15 @@
-const { Sequelize } = require('sequelize')
+const { Pool } = require("pg");
 
-const sequelize = new Sequelize(
-    process.env.SQL_URI,
-    {
-        dialectOptions: {
-            ssl:{
-                require: true,
-                rejectUnauthorized: false
-            }
-        }
+const pool = new Pool({
+    connectionString: process.env.SQL_URI,
+    ssl: {
+        rejectUnauthorized: false
     }
-)
+});
+pool.connect();
+pool.on("connect", () => {
 
-module.exports = sequelize;
+    console.log("Connection to SQL established");
+});
+
+module.exports = pool;

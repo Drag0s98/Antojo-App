@@ -4,8 +4,9 @@ const cors = require('cors');
 require('dotenv').config();
 
 //Internal imports
-const sequelize = require('./utils/postgress-sql')
+require('./utils/postgress-sql')
 const routes = require('./routes/routes');
+
 
 const app = express();
 const port = process.env.PORT;
@@ -25,15 +26,6 @@ app.get('*', (req, res) => {
 })
 
 //Api listen
-const server = app.listen(port, async () => {
+app.listen(port, async () => {
     console.log(`Server working on: ${port}`);
-    //Connect to DB
-    try {
-        //replace .authenticate() for .sync({ force: false }) to add CREATE TABLE IF NOT EXIST <tableName>
-        await sequelize.authenticate();
-        console.log('Connection has been established successfully.');
-    } catch (error) {
-        console.error('Unable to connect to the database:', error);
-    }
-
 })
