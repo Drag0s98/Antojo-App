@@ -1,12 +1,19 @@
 import React from "react";
-import Map from '../Map';
+import { Route, Switch } from 'react-router-dom';
+
+import Browser from '../Browser';
+
 
 const Main = () => {
+
+
+
   return (
-  <div>
-    <h3>Main</h3>
-    <Map />
-  </div>
+    <main>
+      <Switch>
+        <Route to='/' component={Browser} exact />
+      </Switch>
+    </main>
   );
 };
 
