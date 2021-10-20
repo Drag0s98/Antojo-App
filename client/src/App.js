@@ -8,29 +8,16 @@ import Footer from './components/Footer';
 import Navbar from './components/Navbar/Navbar';
 import Home from './components/Home/Home';
 import Login from './components/Login/Login';
-import {auth} from './firebase'
 import React from 'react';
 import Reset from './components/Reset/Reset';
 
 function App() {
 
-  const [firebaseUser, setFirebaseUser] = React.useState(false)
 
-  React.useEffect(() => {
-    auth.onAuthStateChanged(user => {
-      if(user) {
-        setFirebaseUser(user)
-      } else {
-        setFirebaseUser(null)
-      }
-    })
-  }, [])
-
-
-  return firebaseUser !== false ? (
+  return (
     <div className="container">
       <BrowserRouter>
-        <Navbar firebaseUser={firebaseUser}/>
+        <Navbar/>
         <Switch>
           <Route path="/" exact>
             <Home />
@@ -48,9 +35,7 @@ function App() {
       </BrowserRouter>
       <Footer />
     </div>
-  ) : (
-    <p>Cargando...</p>
-  )
+  );
 }
 
 export default App;
