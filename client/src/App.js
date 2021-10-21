@@ -14,6 +14,7 @@ import Home from './components/Home/Home';
 import Login from './components/Login/Login';
 import React from 'react';
 import Reset from './components/Reset/Reset';
+import Chat from './components/Chat/Chat';
 
 function App() {
   //Creo un estado en el padre para poder utilizarlo en los demas componentes
@@ -34,22 +35,17 @@ function App() {
   return (
     <div className="container">
       <BrowserRouter>
+      <Chat />
         <Navbar/>
-        <Switch>
-          <Route path="/" exact>
-            <Home />
-            </Route>
-            <Route path='/login'>
-              <Login />
-              </Route>
-              <Route path='/reset'>
-              <Reset />
-              </Route>
+      
+
+       
+           
               {loading === false? <DataContext.Provider value={contextObj}>
              <Header />
              <Main />
               </DataContext.Provider>: ''}
-        </Switch>
+      
       </BrowserRouter>
       <Footer />
     </div>
