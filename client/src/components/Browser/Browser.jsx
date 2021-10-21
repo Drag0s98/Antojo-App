@@ -2,7 +2,6 @@ import React, { useContext, useState, useEffect } from "react";
 import axios from 'axios';
 
 
-import Map from '../Map';
 import { DataContext } from '../../context/context'
 
 
@@ -60,28 +59,10 @@ const Browser = () => {
       <h1>Bienvenido a Antojo!</h1>
       <form onSubmit={handleSubmit}>
         <label>Introduce una busca</label>
+        <br />
         <input type="text" name="browser" onChange={handleChange} placeholder='hamburguesa' />
         <button>Search</button>
       </form>
-      {//Si hay busqueda me la imprimes, si no, me das todos los restaurantes.
-        search === true ? searchValue[0].map((param, i) => {
-          return (
-            <article key={i}>
-              <p>{param.name}</p>
-              <br /><br />
-              <p>{param.address}</p>
-            </article>
-          )
-        }) : restaurants.map((param, i) => {
-          return (
-            <article key={i}>
-              <p>{param.name}</p>
-              <br /><br />
-              <p>{param.address}</p>
-            </article>
-          )
-        })}
-      <Map />
     </section>
   );
 };
