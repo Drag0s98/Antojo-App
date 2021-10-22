@@ -9,6 +9,15 @@ import './styles/styles.scss'
 import Header from './components/Header';
 import Main from './components/Main';
 import Footer from './components/Footer';
+<<<<<<< HEAD
+=======
+import Navbar from './components/Navbar/Navbar';
+import Home from './components/Home/Home';
+import Login from './components/Login/Login';
+import React from 'react';
+import Reset from './components/Reset/Reset';
+import Chat from './components/Chat/Chat';
+>>>>>>> parent of 1e5d418... componente erróneo
 
 
 function App() {
@@ -30,6 +39,11 @@ function App() {
   return (
     <div className="container">
       <BrowserRouter>
+<<<<<<< HEAD
+=======
+      <Chat />
+        <Navbar/>
+>>>>>>> parent of 1e5d418... componente erróneo
       
 
        
