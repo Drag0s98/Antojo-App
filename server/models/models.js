@@ -2,7 +2,7 @@ const pool = require('../utils/postgress-sql.js');
 
 const entries = {
 
-    get_restaurants: async () => { 
+    get_restaurants: async () => {
         let result;
         try {
             result = await pool.query(`
@@ -75,7 +75,31 @@ const entries = {
             `);
             result = await pool.query(sql_query, [id]);
         } catch (error) {
-            console.log('Error at get restaurants by id ' + error );
+            console.log('Error at get restaurants by id ' + error);
+        }
+        return result.rows;
+    },
+    post_card: async(id_user, titular, encrypt_card_num, encrypt_cvv, encrypt_exp_date) => {
+        let result; 
+        try {
+            const sql_query = (` 
+            INSERT INTO public.credit_card(
+                id_user, titular, card_num, cvv, exp_date)
+                VALUES ($1, $2, $3, $4, $5);
+            `)
+                result = await pool.query(sql_query, [id_user, titular, encrypt_card_num, encrypt_cvv, encrypt_exp_date])
+        } catch (error) {
+            console.log('Error to post card ' + error);
+            return'error'
+        }
+        return result.rows;
+    }, 
+    get_cards: async () => {
+        let result;
+        try {
+            result = await pool.query(`SELECT * FROM public.credit_card ORDER BY id_card ASC`);
+        } catch (error) {
+            console.log('Error to get card ' + error);
         }
         return result.rows;
     }
