@@ -14,7 +14,6 @@ import Home from './components/Home/Home';
 import Login from './components/Login/Login';
 import React from 'react';
 import Reset from './components/Reset/Reset';
-import Chat from './components/Chat/Chat';
 
 function App() {
 
@@ -34,7 +33,7 @@ function App() {
   return (
     <div className="container">
       <BrowserRouter>
-      <Chat />
+      
         <Navbar/>
       
 
