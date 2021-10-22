@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Ellipsis } from "react-spinners-css";
+
 import Browser from '../Browser';
 import Map from '../Map';
 import axios_hook from '../../hooks/get-axios';
