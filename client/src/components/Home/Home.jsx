@@ -13,7 +13,6 @@ const Home = () => {
   const { loading, result } = axios_hook('http://localhost:5000/api/dishes');
 
   useEffect(() => {
-    console.log(result)
     let numA = 5;
     let arr = []
     result.filter((element) => {
