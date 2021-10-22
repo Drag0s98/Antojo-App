@@ -5,7 +5,6 @@ import "leaflet/dist/leaflet.css";
 //Marcador
 import markerIconPng from "leaflet/dist/images/marker-icon.png";
 import { Icon } from "leaflet";
-
 const Map = () => {
   const coordinates = [40.42166, -3.69271];
   
