@@ -10,6 +10,7 @@ import Header from './components/Header';
 import Main from './components/Main';
 import Footer from './components/Footer';
 
+
 function App() {
   //Creo un estado en el padre para poder utilizarlo en los demas componentes
   const [restaurants, setRestaurants] = useState(null)
@@ -29,10 +30,20 @@ function App() {
   return (
     <div className="container">
       <BrowserRouter>
+      
+
+       
+           
+              {loading === false? <DataContext.Provider value={contextObj}>
+             <Header />
+             <Main />
+              </DataContext.Provider>: ''}
+      
         {loading === false ? <DataContext.Provider value={contextObj}>
           <Header />
           <Main />
         </DataContext.Provider> : ''}
+
       </BrowserRouter>
       <Footer />
     </div>
