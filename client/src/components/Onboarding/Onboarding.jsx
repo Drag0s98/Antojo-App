@@ -2,6 +2,9 @@ import React, { useState } from "react";
 import Carousel from "react-bootstrap/Carousel";
 import { Link } from "react-router-dom";
 
+import image1 from "../../assets/slide1.jpg";
+import image2 from "../../assets/slide2.jpg";
+
 const Onboarding = () => {
   const [index, setIndex] = useState(0);
   
@@ -19,11 +22,11 @@ const Onboarding = () => {
       <article className="onboarding--carousel">
         <Carousel activeIndex={index} onSelect={handleSelect}>
           <Carousel.Item>
-            <img className="d-block w-100" src="https://image.freepik.com/free-photo/chef-cooking-food-restaurant-kitchen_53876-67.jpg" alt="First slide" />
+            <img className="d-block w-100" src={image1} alt="First slide" />
             <Carousel.Caption></Carousel.Caption>
           </Carousel.Item>
           <Carousel.Item>
-            <img className="d-block w-100" src="https://image.freepik.com/free-photo/friends-enjoying-lunch-restaurant_329181-11934.jpg" alt="Second slide" />
+            <img className="d-block w-100" src={image2} alt="Second slide" />
             <Carousel.Caption></Carousel.Caption>
           </Carousel.Item>
         </Carousel>
