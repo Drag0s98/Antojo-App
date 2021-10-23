@@ -32,7 +32,7 @@ const Home = () => {
     setSpinner(true)
     setTimeout(() => {
       setSpinner(false)
-    }, 4000)
+    }, 2000)
   }, [])
 
 
