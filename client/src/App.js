@@ -1,6 +1,6 @@
 //External imports
 import React, { useEffect, useState } from 'react';
-import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import { BrowserRouter, Switch, Route, useHistory } from 'react-router-dom';
 import axios_hook from './hooks/get-axios';
 
 
@@ -14,13 +14,13 @@ import Footer from './components/Footer';
 function App() {
   //Creo un estado en el padre para poder utilizarlo en los demas componentes
   const [restaurants, setRestaurants] = useState(null)
+  const [itsLog, setitsLog] = useState(false);
 
   const contextObj = { //Hago un objeto para pasarselo por provider a los hijos
-    restaurants, setRestaurants
+    restaurants, setRestaurants, itsLog, setitsLog
   }
 
   const { loading, result } = axios_hook(`http://localhost:5000/api/restaurants`);
-
   //Utilizo un use efect para cuando cambie el loading del fetch introduzca su resultado en el estado padre
   useEffect(() => {
     setRestaurants(result)

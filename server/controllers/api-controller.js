@@ -30,10 +30,10 @@ const pages = {
             res.status(400).json({ message: 'Some error has ocurred' });
         }
     },
-    post_users: async (req, res) => {
+    post_users_register: async (req, res) => {
         try {
-            const data = await db.get_users();
-            res.status(200).json(data);
+            db.post_user_register(req.body)
+            res.status(200).json({ message: 'register complete' });
         } catch (error) {
             console.log('Error at the post users' + error);
             res.status(400).json({ message: 'Some error has ocurred' });
@@ -73,14 +73,14 @@ const pages = {
             let encrypt_card_num = await bcrypt.hash(card_num, salt);
             let encrypt_cvv = await bcrypt.hash(cvv, salt);
             let encrypt_exp_date = await bcrypt.hash(exp_date, salt);
-            let response  = await db.post_card(id_user, titular, encrypt_card_num, encrypt_cvv,encrypt_exp_date)            
-            response === 'error'? res.status(401).json({ message: 'Some error has ocurred '}): res.status(201).json({ message: "post succes"})
+            let response = await db.post_card(id_user, titular, encrypt_card_num, encrypt_cvv, encrypt_exp_date)
+            response === 'error' ? res.status(401).json({ message: 'Some error has ocurred ' }) : res.status(201).json({ message: "post succes" })
         } catch (error) {
             console.log('Error at the post card' + error);
             res.status(401).json({ message: 'Some error has ocurred' });
         }
     },
-    get_cards: async (req, res ) => {
+    get_cards: async (req, res) => {
         try {
             let response = await db.get_cards();
             console.log(response);

@@ -79,21 +79,21 @@ const entries = {
         }
         return result.rows;
     },
-    post_card: async(id_user, titular, encrypt_card_num, encrypt_cvv, encrypt_exp_date) => {
-        let result; 
+    post_card: async (id_user, titular, encrypt_card_num, encrypt_cvv, encrypt_exp_date) => {
+        let result;
         try {
             const sql_query = (` 
             INSERT INTO public.credit_card(
                 id_user, titular, card_num, cvv, exp_date)
                 VALUES ($1, $2, $3, $4, $5);
             `)
-                result = await pool.query(sql_query, [id_user, titular, encrypt_card_num, encrypt_cvv, encrypt_exp_date])
+            result = await pool.query(sql_query, [id_user, titular, encrypt_card_num, encrypt_cvv, encrypt_exp_date])
         } catch (error) {
             console.log('Error to post card ' + error);
-            return'error'
+            return 'error'
         }
         return result.rows;
-    }, 
+    },
     get_cards: async () => {
         let result;
         try {
@@ -102,6 +102,21 @@ const entries = {
             console.log('Error to get card ' + error);
         }
         return result.rows;
+    },
+    post_user_register: async ({ img, username, uid }) => {
+        let result;
+        try {
+            let sql_query = (`
+            INSERT INTO public.users(
+                img, username, uid)
+                VALUES ($1, $2, $3);
+            `);
+            result = await pool.query(sql_query, [img, username, uid])
+
+        } catch (error) {
+            console.log('Error to post user ' + error);
+        }
+        return result;
     }
 
 };
