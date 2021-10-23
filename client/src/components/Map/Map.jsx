@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
+import { MapContainer, TileLayer, Marker, Popup, MapConsumer } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import markerIconPng from "leaflet/dist/images/marker-icon.png";
 import { Icon } from "leaflet";
 import { usePosition } from "../../hooks/usePosition";
+import Browser from "../Browser";
 
 const Map = ({ watch, settings }) => {
   const { latitude, longitude } = usePosition(watch, settings);
@@ -29,7 +30,7 @@ const Map = ({ watch, settings }) => {
             zoom={13}
             scrollWheelZoom={false}
             style={{ height: "80vh", width: "50%" }}
-            // Style funciona con vh en height y % en width
+          // Style funciona con vh en height y % en width
           >
             <TileLayer
               attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
