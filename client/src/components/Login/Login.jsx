@@ -1,9 +1,9 @@
 import { async } from "@firebase/util";
-import React from "react";
-import { useState } from "react";
-import { useCallback } from "react";
+import React, { useState, useCallback, useContext } from "react";
 import { auth, db, google } from "../../firebase";
 import { withRouter } from "react-router";
+import axios from 'axios'
+import { DataContext } from "../../context/context";
 
 
 const Login = (props) => {
@@ -11,10 +11,11 @@ const Login = (props) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [displayName, setDisplayName] = useState("")
-
+  const [image, setImage] = useState(null);
+  const [nose, setNose] = useState(null);
   const [error, setError] = useState(null);
-
   const [registro, setRegistro] = useState(true);
+  const { itsLog, setitsLog } = useContext(DataContext)
 
   const loginGoogle = () => {
     auth.signInWithPopup(google)
@@ -28,63 +29,71 @@ const Login = (props) => {
   const sendData = (e) => {
     e.preventDefault()
 
-    if(!email.trim()) {
+    if (!email.trim()) {
       setError('Introduce email')
       return
     }
-    if(!password.trim()) {
+    if (!password.trim()) {
       setError('Introduce contraseña')
       return
     }
 
-    if(password.length < 6) {
+    if (password.length < 6) {
       setError('La contraseña debe tener al menos 6 caracteres')
       return
     }
     setError(null)
 
-    if(registro) {
-      registrar()
+    if (registro) {
+      registrar(e)
     } else {
       login()
     }
   }
 
-  const login = useCallback(async() => {
+  const login = useCallback(async () => {
     try {
-      await auth.signInWithEmailAndPassword(email, password)
+      let res = await auth.signInWithEmailAndPassword(email, password)
       setEmail("");
       setPassword("");
       setError(null);
-      props.history.push('/')
+      console.log(res);
+      setitsLog(true);
+      props.history.push('/home')
     } catch (error) {
-      if(error.code === 'auth/invalid-email') {
+      if (error.code === 'auth/invalid-email') {
         setError('Email no válido')
       }
-      if(error.code === 'auth/user-not-found') {
+      if (error.code === 'auth/user-not-found') {
         setError('Email no registrado')
       }
-      if(error.code === 'auth/wrong-password') {
+      if (error.code === 'auth/wrong-password') {
         setError('Contraseña errónea')
       }
     }
   }, [email, password, props.history])
 
-  const registrar = useCallback(async() => {
+  const registrar = useCallback(async (e) => {
 
     try {
       const res = await auth.createUserWithEmailAndPassword(email, password)
-      console.log(res);
+      const uid = res.user.uid
+      const img = URL.createObjectURL(image.image)
+      const username = e.target.username.value;
+      axios.post(`http://localhost:5000/api/register`, {
+        img: img,
+        username: username,
+        uid: uid
+      })
       await db.collection('usuarios').doc(res.user.uid).set({
-          email: res.user.email,
-          uid: res.user.uid,
-        
-
-      }) //colección usuarios
+        email: res.user.email,
+        uid: res.user.uid,
+      }); //colección usuarios
       setEmail("");
       setPassword("");
-      setError(null)
-      props.history.push('/')
+      setError(null);
+      setitsLog(true);
+      props.history.push('/home');
     } catch (error) {
       if (error.code === 'auth/invalid-email') {
         setError('Email no válido')
@@ -95,95 +104,103 @@ const Login = (props) => {
     }
 
   }, [email, password, props.history])
-  
 
+  const handleImage = (e) => {
+    if (e.target.files[0].type === 'image/png' || e.target.files[0].type === 'image/jpeg' || e.target.files[0].type === 'image/jpg') {
+      setImage({ image: e.target.files[0] })
+    }
+  }
 
   return (
-  <div className="mt-5">
-    <h3 className="text-center">
+    <div className="mt-5">
+      <h3 className="text-center">
 
-    {registro ? "Registro de usuario" : "Login"}
+        {registro ? "Registro de usuario" : "Login"}
 
-    </h3>
-    <hr />
-    <div className="row justify-content-center">
-      <div className="col-12 col-sm-8 col-md-6 col-xl-4">
-        <form onSubmit={sendData}>
-          {
-            error ? (
-              <div className="alert alert-danger">
-                {error}
-              </div>
-            ) : null
-          }
-          <input 
-          type="email" 
-          className="form-control mb-3" 
-          placeholder="Email"
-          onChange={e => setEmail(e.target.value)}
-          value={email}/>
-          <input 
-          
-          type="password" 
-          className="form-control mb-4" 
-          placeholder="Contraseña" 
-          onChange={e => setPassword(e.target.value)}
-          value={password}/>
-         
-          {/* <input type="text"
+      </h3>
+      <hr />
+      <div className="row justify-content-center">
+        <div className="col-12 col-sm-8 col-md-6 col-xl-4">
+          <form onSubmit={sendData}>
+            {
+              error ? (
+                <div className="alert alert-danger">
+                  {error}
+                </div>
+              ) : null
+            }
+            <input
+              type="email"
+              className="form-control mb-3"
+              placeholder="Email"
+              onChange={e => setEmail(e.target.value)}
+              value={email} />
+            <input
+
+              type="password"
+              className="form-control mb-4"
+              placeholder="Contraseña"
+              onChange={e => setPassword(e.target.value)}
+              value={password} />
+            {registro === true ? (
+              <>
+                <input type='text' name='username' placeholder='Username' className='form-control mb-3' />
+                <input type="file" name='files' onChange={handleImage} />
+              </>
+            ) : ''}
+            {/* <input type="text"
           className="form-control mb-4" 
           placeholder="Nombre"
           onChange={e => setDisplayName(e.target.value)}
           value={displayName}
           /> */}
-         
-          <button className="btn btn-dark btn-lg col-12 mb-2" type="submit">
-            
-          {
-            registro ? "Registrarse" : "Acceder"
-          }
+            <button className="btn btn-dark btn-lg col-12 mb-2" type="submit">
 
-          </button>
-          <button 
-          className="btn btn-info btn-sm col-12"
-          type="button"
-          onClick={()=> setRegistro(!registro)}>
-            
-          {
-            registro ? "¿Ya estás registrado?" : "¿No tienes cuenta?"
-          }
+              {
+                registro ? "Registrarse" : "Acceder"
+              }
 
-          </button>
-          <button 
-          className="btn btn-info btn-sm col-12 mt-3"
-          type="button"
-          onClick={()=> loginGoogle(registro)}>
-            
-          {
-            registro ? "Regitro con Google" : "Registro con Google"
-          }
+            </button>
+            <button
+              className="btn btn-info btn-sm col-12"
+              type="button"
+              onClick={() => setRegistro(!registro)}>
 
-          </button>
+              {
+                registro ? "¿Ya estás registrado?" : "¿No tienes cuenta?"
+              }
 
-          
-          {
-            !registro ? (
-            <button 
-            className="btn btn-danger btn-lg col-12 mt-4" 
-            type="button" 
-            onClick={()=> props.history.push('/reset')}>
-            Recuperar contraseña
+            </button>
+            <button
+              className="btn btn-info btn-sm col-12 mt-3"
+              type="button"
+              onClick={() => loginGoogle(registro)}>
+
+              {
+                registro ? "Regitro con Google" : "Registro con Google"
+              }
+
             </button>
 
-            ) : null
-          }
 
-         
-        </form>
+            {
+              !registro ? (
+                <button
+                  className="btn btn-danger btn-lg col-12 mt-4"
+                  type="button"
+                  onClick={() => props.history.push('/reset')}>
+                  Recuperar contraseña
+                </button>
+
+              ) : null
+            }
+
+
+          </form>
+        </div>
       </div>
-    </div>
 
-  </div>
+    </div>
   )
 };
 

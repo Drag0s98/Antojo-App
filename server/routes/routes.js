@@ -13,7 +13,7 @@ router.get('/dish/:id', pages.get_dish_restaurant);
 router.get('/restaurants/:id', pages.get_restaurantsBy_id);
 router.get('/payment', pages.get_cards);
 
-router.post('/register', pages.post_users);
+router.post('/register', pages.post_users_register);
 router.post('/payment', pages.post_payment);
 
 
