@@ -21,7 +21,7 @@ const Main = () => {
         <Route path='/reset' component={Reset} />
         <Route path='/search' component={Search} />
         <Route path='/more' component={More_Info} />
-        <Route path='/addcreditcard' component={Add_CreditCard} />
+        <Route path='/addcard' component={Add_CreditCard} />
         <Route component={Error} />
       </Switch>
     </main>
