@@ -67,7 +67,6 @@ const pages = {
             const card_num = req.body.card_num
             const cvv = req.body.cvv
             const exp_date = req.body.exp_date
-
             // Comienzo el proceso de encriptacion
             let salt = await bcrypt.genSalt(10);
             let encrypt_card_num = await bcrypt.hash(card_num, salt);
@@ -87,6 +86,16 @@ const pages = {
             res.status(200).json(response);
         } catch (error) {
             console.log('Error at the get cards' + error);
+            res.status(400).json({ message: 'Some error has ocurred' });
+        }
+    },
+    get_dishesBy_category: async (req, res) => {
+        try {
+            let response = await db.get_dishesBy_category(req.params.category);
+            res.status(200).json(response);
+            
+        } catch (error) {
+            console.log('Error at the get dishes by category' + error);
             res.status(400).json({ message: 'Some error has ocurred' });
         }
     }

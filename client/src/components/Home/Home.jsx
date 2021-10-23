@@ -37,25 +37,25 @@ const Home = () => {
 
 
   return (
-    
+
     <section>
 
       {
 
-        spinner ? 
-        <div>
-        'Bienvenidos a Yami'
-        <PacmanLoader
-        
-        size={150}
-        color={'#123abc'}
-        loading={spinner}
-        />
-</div>
-        :
+        spinner ?
+          <div>
+            'Bienvenidos a Yami'
+            <PacmanLoader
 
-        <section>
-        <Browser />
+              size={150}
+              color={'#123abc'}
+              loading={spinner}
+            />
+          </div>
+          :
+
+          <section>
+            <Browser />
             <Map />
             <article className='ranking_box' >
               <h2>Ranking </h2>
@@ -86,10 +86,10 @@ const Home = () => {
               <h2>Recomendacioens</h2>
               <p>Aqui irian las recomendaciones</p>
             </article>
-            </section>
+          </section>
       }
 
-   
+
     </section>
   );
 };

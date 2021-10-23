@@ -15,7 +15,9 @@ const Login = (props) => {
   const [nose, setNose] = useState(null);
   const [error, setError] = useState(null);
   const [registro, setRegistro] = useState(true);
-  const { itsLog, setitsLog } = useContext(DataContext)
+  const { itsLog, setitsLog, uid, setUid } = useContext(DataContext)
+
+
 
   const loginGoogle = () => {
     auth.signInWithPopup(google)
@@ -59,6 +61,7 @@ const Login = (props) => {
       setError(null);
       console.log(res);
       setitsLog(true);
+      setUid(res.user.uid)
       props.history.push('/home')
     } catch (error) {
       if (error.code === 'auth/invalid-email') {
@@ -93,6 +96,7 @@ const Login = (props) => {
       setPassword("");
       setError(null);
       setitsLog(true);
+      setUid(uid);
       props.history.push('/home');
     } catch (error) {
       if (error.code === 'auth/invalid-email') {
@@ -114,9 +118,7 @@ const Login = (props) => {
   return (
     <div className="mt-5">
       <h3 className="text-center">
-
         {registro ? "Registro de usuario" : "Login"}
-
       </h3>
       <hr />
       <div className="row justify-content-center">

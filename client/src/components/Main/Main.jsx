@@ -1,5 +1,5 @@
-import React from "react";
-import { Route, Switch } from 'react-router-dom';
+import React, { useContext } from "react";
+import { Route, Switch, useHistory } from 'react-router-dom';
 
 import Onboarding from '../Onboarding';
 import Login from "../Login";
@@ -9,8 +9,17 @@ import Error from '../Error';
 import Search from '../Result_Search';
 import More_Info from "../More_Info";
 import Add_CreditCard from "../Add_CreditCard";
+import { DataContext } from "../../context/context";
 
 const Main = () => {
+
+  const { itsLog, setitsLog } = useContext(DataContext)
+  const history = useHistory();
+
+  if(itsLog === false) {
+    //Descomentarlo al terminar la aplicacion
+   // history.push('/login')
+  }
 
   return (
     <main>

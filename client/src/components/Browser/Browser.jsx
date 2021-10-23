@@ -22,8 +22,6 @@ const Browser = () => {
     event.preventDefault()
     filter(event.target.browser.value)
   }
-
-
   //Creo un filtro por nombre de plato para el input
   const filter = async (inputSearch) => {
     let filterSearch = await dishes.filter((element) => {
@@ -35,12 +33,29 @@ const Browser = () => {
     })
     setSearchValue(...searchValue, filterSearch)
   }
+  const healthyFilter = async (e) => {
+    console.log(e.target.value);
+    switch (e.target.value) {
+      case 'healthy':
+        console.log('push');
+        history.push('/search', { filter: 'Healthy' })
+        break;
+      case 'vegan':
+        history.push('/search', { filter: 'Vegan' })
+        break;
+      case 'vegetarian':
+        history.push('/search', { filter: 'Vegetarian' })
+        break;
+      default:
+        break;
+    }
+  }
 
   if (searchValue !== '') history.push('/search', searchValue)
 
 
   return (
-    <section>
+    <section className='browserBox'>
       <h1>Bienvenido a Antojo!</h1>
       <form onSubmit={handleSubmit}>
         <label>Introduce una busca</label>
@@ -48,6 +63,9 @@ const Browser = () => {
         <input type="text" name="browser" placeholder='hamburguesa' />
         <button>Search</button>
       </form>
+      <button value='healthy' onClick={healthyFilter}>Healthy</button>
+      <button value='vegan' onClick={healthyFilter}>Vegan</button>
+      <button value='vegetarian' onClick={healthyFilter} >Vegetarian</button>
     </section>
   );
 };
