@@ -1,27 +1,59 @@
 import React from "react";
-//Leaflet
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
-//Marcador
 import markerIconPng from "leaflet/dist/images/marker-icon.png";
 import { Icon } from "leaflet";
-const Map = () => {
+import { usePosition } from "../../hooks/usePosition";
+
+const Map = ({ watch, settings }) => {
+  const {
+    latitude,
+    longitude,
+    // timestamp,
+    // accuracy,
+    // speed,
+    error,
+  } = usePosition(watch, settings);
+
+  const loader =
+    !latitude && !error ? (
+      <>
+        <div>Fetching location...</div>
+        <br />
+      </>
+    ) : null;
+
   const coordinates = [40.42166, -3.69271];
-  
+  //const geolocation = [{latitude},{longitude}];
+
   return (
     <div>
+      {loader}
+      <section>
+        latitude: {latitude}
+        <br />
+        longitude: {longitude}
+        <br />
+        coordinates: {latitude},{longitude}
+        <br />
+        {/* timestamp: {timestamp}<br/>
+        accuracy: {accuracy && `${accuracy}m`}<br/>
+        speed: {speed}<br/> 
+        error: {error}*/}
+      </section>
       <h4>Map</h4>
       <MapContainer
+        //center={[{latitude},{longitude}]}
+        //center={geolocation}
         center={coordinates}
         zoom={13}
         scrollWheelZoom={false}
-        style={{ height: "80vh", width: "50%" }} 
-        // Style funciona con vh en height y % en width 
+        style={{ height: "80vh", width: "50%" }}
+        // Style funciona con vh en height y % en width
       >
         <TileLayer
           attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
           url={`https://api.mapbox.com/styles/v1/tamaragmartin/ckuykd13k01un14of1yunvqli/tiles/256/{z}/{x}/{y}@2x?access_token=${process.env.REACT_APP_MAPBOX_KEY}`}
-          
         />
         <Marker
           position={coordinates}
