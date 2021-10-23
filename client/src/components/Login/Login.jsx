@@ -23,6 +23,8 @@ const Login = (props) => {
     auth.signInWithPopup(google)
       .then(res => {
         console.log(res);
+        props.history.push('/home');
+
       }).catch(err => {
         console.log(err);
       })
@@ -77,13 +79,12 @@ const Login = (props) => {
   }, [email, password, props.history])
 
   const registrar = useCallback(async (e) => {
-
     try {
       const res = await auth.createUserWithEmailAndPassword(email, password)
       const uid = res.user.uid
       const img = URL.createObjectURL(image.image)
       const username = e.target.username.value;
-      axios.post(`http://localhost:5000/api/register`, {
+      await axios.post(`http://localhost:5000/api/register`, {
         img: img,
         username: username,
         uid: uid
@@ -106,7 +107,6 @@ const Login = (props) => {
         setError('El email ya existe')
       }
     }
-
   }, [email, password, props.history])
 
   const handleImage = (e) => {
