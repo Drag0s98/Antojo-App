@@ -8,6 +8,7 @@ import Home from '../Home';
 import Error from '../Error';
 import Search from '../Result_Search';
 import More_Info from "../More_Info";
+import Add_CreditCard from "../Add_CreditCard";
 
 const Main = () => {
 
@@ -20,6 +21,7 @@ const Main = () => {
         <Route path='/reset' component={Reset} />
         <Route path='/search' component={Search} />
         <Route path='/more' component={More_Info} />
+        <Route path='/addcreditcard' component={Add_CreditCard} />
         <Route component={Error} />
       </Switch>
     </main>
