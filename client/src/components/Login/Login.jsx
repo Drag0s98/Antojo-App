@@ -1,4 +1,3 @@
-import { async } from "@firebase/util";
 import React, { useState, useCallback, useContext } from "react";
 import { auth, db, google } from "../../firebase";
 import { withRouter } from "react-router";
@@ -11,7 +10,7 @@ const Login = (props) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [displayName, setDisplayName] = useState("")
-  const [image, setImage] = useState(null);
+  const [image, setImage] = useState('');
   const [nose, setNose] = useState(null);
   const [error, setError] = useState(null);
   const [registro, setRegistro] = useState(true);
@@ -41,7 +40,6 @@ const Login = (props) => {
       setError('Introduce contraseña')
       return
     }
-
     if (password.length < 6) {
       setError('La contraseña debe tener al menos 6 caracteres')
       return
@@ -53,7 +51,7 @@ const Login = (props) => {
     } else {
       login()
     }
-  }
+  };
 
   const login = useCallback(async () => {
     try {
@@ -61,7 +59,6 @@ const Login = (props) => {
       setEmail("");
       setPassword("");
       setError(null);
-      console.log(res);
       setitsLog(true);
       setUid(res.user.uid)
       props.history.push('/home')
@@ -76,18 +73,18 @@ const Login = (props) => {
         setError('Contraseña errónea')
       }
     }
-  }, [email, password, props.history])
+  }, [email, password, props.history, setUid, setitsLog]);
 
   const registrar = useCallback(async (e) => {
     try {
       const res = await auth.createUserWithEmailAndPassword(email, password)
-      const uid = res.user.uid
+      const uidForm = res.user.uid
       const img = URL.createObjectURL(image.image)
       const username = e.target.username.value;
       await axios.post(`http://localhost:5000/api/register`, {
         img: img,
         username: username,
-        uid: uid
+        uid: uidForm
       })
       await db.collection('usuarios').doc(res.user.uid).set({
         email: res.user.email,
@@ -97,7 +94,7 @@ const Login = (props) => {
       setPassword("");
       setError(null);
       setitsLog(true);
-      setUid(uid);
+      setUid(uidForm);
       props.history.push('/home');
     } catch (error) {
       if (error.code === 'auth/invalid-email') {
@@ -107,7 +104,7 @@ const Login = (props) => {
         setError('El email ya existe')
       }
     }
-  }, [email, password, props.history])
+  }, [email, password, props.history, image.image, setUid, setitsLog]);
 
   const handleImage = (e) => {
     if (e.target.files[0].type === 'image/png' || e.target.files[0].type === 'image/jpeg' || e.target.files[0].type === 'image/jpg') {
@@ -150,12 +147,6 @@ const Login = (props) => {
                 <input type="file" name='files' onChange={handleImage} />
               </>
             ) : ''}
-            {/* <input type="text"
-          className="form-control mb-4" 
-          placeholder="Nombre"
-          onChange={e => setDisplayName(e.target.value)}
-          value={displayName}
-          /> */}
             <button className="btn btn-dark btn-lg col-12 mb-2" type="submit">
 
               {
