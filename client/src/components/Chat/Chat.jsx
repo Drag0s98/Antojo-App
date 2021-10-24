@@ -29,7 +29,6 @@ const Chat = () => {
         {
 
           mensajes.map(({id, text, photoURL, uid}) => {
-            console.log(mensajes);
             return <div key={id} className={`msg ${uid === auth.currentUser.uid ? 'sent' : 'received'}`}>
                 <img src={photoURL} alt="" className="fotochat"/>
                  <p className="textochat">{text}</p>
