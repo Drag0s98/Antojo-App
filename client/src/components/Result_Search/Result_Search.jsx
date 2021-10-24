@@ -2,6 +2,8 @@ import React, { useState, useEffect, useCallback } from 'react'
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
 import { usePosition } from "../../hooks/usePosition";
+import More_Info from '../More_Info';
+
 
 
 function Result_Search({ location, watch, settings }) {
@@ -17,6 +19,8 @@ function Result_Search({ location, watch, settings }) {
     let history = useHistory();
 
     const [newSearch, setNewSearch] = useState(null);
+    
+
     const [byCategory, setByCategory] = useState(null);
 
     useEffect(() => {
@@ -26,6 +30,7 @@ function Result_Search({ location, watch, settings }) {
         }
     }, [location.state.filter])
 
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         console.log(e.target.browser.value);
@@ -34,7 +39,7 @@ function Result_Search({ location, watch, settings }) {
 
     const handleClick = async (e) => {
         let id_dish = e.target.attributes.value.value;
-        history.push('/more', { id_dish: id_dish })
+        history.push('/more', {id_dish: id_dish})
     }
 
     //Calcular distancia
@@ -174,6 +179,7 @@ function Result_Search({ location, watch, settings }) {
                     )
                 }) : ''}
             </article>
+            
         </section>
     )
 }

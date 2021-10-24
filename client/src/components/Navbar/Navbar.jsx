@@ -26,7 +26,7 @@ const cerrarSesion = () => {
 }
 
   return <div className="navbar navbar-dark bg-dark">
-    <Link className="navbar-brand ml- nombre" to="/">Ñamy</Link>
+    <Link className="navbar-brand ml- nombre">Yamy</Link>
     <div>
       <div className="dev-flex">
         <NavLink className="btn btn-dark mr-4 boton1 active" to="/" exact>
@@ -34,7 +34,10 @@ const cerrarSesion = () => {
         </NavLink>
         {
           firebaseUser !== null ? (
+            <div>
             <button className="btn btn-dark" onClick={() => cerrarSesion()}>Cerrar Sesión</button>
+            <NavLink className="btn btn-dark" to="/chat">Chat</NavLink></div>
+            
           ) : (
               <NavLink className="btn btn-dark mr-4 boton" to="/login">
           Login

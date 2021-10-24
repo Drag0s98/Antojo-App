@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from "react";
+
+import './Home.css'
 import { Link } from "react-router-dom";
+
 
 import Browser from '../Browser';
 import Map from '../Map';
@@ -23,7 +26,9 @@ const Home = () => {
       } else {
         return null;
       }
+
     })
+    console.log(arr)
     setRanking(arr);
   }, [loading, result])
 
@@ -43,6 +48,21 @@ const Home = () => {
 
       {
 
+
+        spinner ? 
+        <div>
+        'Bienvenidos a Yami'
+        <PacmanLoader
+        
+        size={150}
+        color={'#123abc'}
+        loading={spinner}
+        />
+</div>
+        :
+
+        <section  className="prueba">
+        <Browser />
         spinner ?
           <div>
             'Bienvenidos a Yami'
@@ -56,7 +76,7 @@ const Home = () => {
           :
 
           <section>
-            <Browser />
+            <Browser /
             <Map />
             <article className='ranking_box' >
               <h2>Ranking </h2>

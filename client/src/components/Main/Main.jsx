@@ -9,10 +9,14 @@ import Home from '../Home';
 import Error from '../Error';
 import Search from '../Result_Search';
 import More_Info from "../More_Info";
+
+import Chat from "../Chat/Chat";
+
 import Add_CreditCard from "../Add_CreditCard";
 import Address from "../Address/Address";
 import Add_Address from "../Add_Address";
 import Credit_Cards from "../Credit_Cards/Credit_Cards";
+
 
 const Main = () => {
 
@@ -26,6 +30,7 @@ const Main = () => {
         <Route path='/login' component={Login} />
         <Route path='/reset' component={Reset} />
         <Route path='/search' component={Search} />
+        <Route path='/chat' component={Chat} />
         <Route path='/more' component={More_Info} />
         <Route path='/card' component={Credit_Cards} />
         <Route path='/addcard' component={Add_CreditCard} />
