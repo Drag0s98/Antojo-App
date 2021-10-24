@@ -1,5 +1,5 @@
 import React, { useState, useCallback, useContext } from "react";
-import { auth, db, google } from "../../firebase";
+import { auth, db, google, getAuth } from "../../firebase";
 import { withRouter } from "react-router";
 
 import Navbar from "../Navbar/Navbar";
@@ -22,8 +22,6 @@ const Login = (props) => {
   const [error, setError] = useState(null);
   const [registro, setRegistro] = useState(true);
   const { itsLog, setitsLog, uid, setUid } = useContext(DataContext)
-  console.log(uid)
-
 
   const loginGoogle = () => {
     auth.signInWithPopup(google)
