@@ -1,13 +1,26 @@
 import React from 'react';
+import { useParams } from 'react-router';
+
+
+// el coponente es More_Info , y recoge los props por location.state. Tienes un context en el padre que guarda todos los restarantes , tendras que hacerlo por peticiones a la base de datos, creo que la query esta echa, si no la puedes hacer sin problema.
 
 function More_Info({ location }) {
 
-    console.log(location.state); 
+    //fetch id  platos
+    //fetch restaurantes con ese plato
+
+    console.log(location);
 
     return (
-        <section>
-            <p>Aqui tiene que aparecer la informacion del plato en profundidad, el restaurante etc... Como en el wireframe</p>
-        </section>
+        <>
+        <div className="tgview">
+             <h3 className="tituloview"></h3>
+             
+        
+             
+        </div>
+          
+         </>
     )
 }
 

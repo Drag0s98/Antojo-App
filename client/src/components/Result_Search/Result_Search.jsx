@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
+import More_Info from '../More_Info';
+
 
 function Result_Search({ location }) {
 
@@ -10,6 +12,8 @@ function Result_Search({ location }) {
     console.log(location.state.filter);
 
     const [newSearch, setNewSearch] = useState(null);
+    
+
     const [byCategory, setByCategory] = useState(null);
 
     useEffect(() => {
@@ -19,6 +23,7 @@ function Result_Search({ location }) {
        }
     }, [location.state.filter])
 
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         console.log(e.target.browser.value);
@@ -27,7 +32,7 @@ function Result_Search({ location }) {
 
     const handleClick = async (e) => {
         let id_dish = e.target.attributes.value.value;
-        history.push('/more', { id_dish: id_dish })
+        history.push('/more', {id_dish: id_dish})
     }
 
 //Calcular distancia
@@ -67,6 +72,8 @@ function getDistance(origin, destination) {
             </article>
             <br />
             <article>
+
+                            
                 {location.state.length >= 1 ?
                     location.state.map((param, i) => {
                         return (
@@ -84,6 +91,7 @@ function getDistance(origin, destination) {
                     )
                 }) : ''}
             </article>
+            
         </section>
     )
 }
