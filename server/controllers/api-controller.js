@@ -64,6 +64,7 @@ const pages = {
     post_payment: async (req, res) => {
         try {
             //Recojo las variables
+
             const uid = req.body.uid
             const titular = req.body.titular
             const card_num = req.body.card_num
@@ -84,8 +85,7 @@ const pages = {
     },
     get_cards: async (req, res) => {
         try {
-            let response = await db.get_cards();
-            console.log(response);
+            let response = await db.get_cards(req.params.id);
             res.status(200).json(response);
         } catch (error) {
             console.log('Error at the get cards' + error);

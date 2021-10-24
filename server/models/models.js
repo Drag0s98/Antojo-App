@@ -95,10 +95,13 @@ const entries = {
         }
         return result.rows;
     },
-    get_cards: async () => {
+    get_cards: async (id) => {
         let result;
         try {
-            result = await pool.query(`SELECT * FROM public.credit_card ORDER BY id_card ASC`);
+            const sql_query = (` 
+            SELECT * FROM public.credit_card WHERE id_user= $1;
+            `)
+            result = await pool.query(sql_query, [id])
         } catch (error) {
             console.log('Error to get card ' + error);
         }
