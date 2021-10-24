@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { DataContext } from "../../context/context";
+import { useHistory } from "react-router-dom";
 
 const apiURL = "http://localhost:5000/api/payment";
 
@@ -8,6 +9,7 @@ const Add_CreditCard = () => {
   const [card, setCard] = useState(null);
   const { uid, setUid } = useContext(DataContext);
 
+  const history = useHistory();
    useEffect(() => {
      axios.get(`${apiURL}`).then((response) => {
        setCard(response.data);
@@ -18,8 +20,9 @@ const Add_CreditCard = () => {
 
   function postCard (event) {
     event.preventDefault();
+
     axios.post(apiURL, {
-        uid: uid.uid,
+        uid: uid,
         titular: event.target.elements.name.value,
         card_num: event.target.elements.number.value,
         cvv: event.target.elements.cvv.value,
@@ -29,18 +32,12 @@ const Add_CreditCard = () => {
       .then((response) => {
         setCard(response.data);
       });
-      
-      console.log(uid.uid)
-      console.log(event.target.elements.name.value)
-      console.log(event.target.elements.number.value)
-      console.log(event.target.elements.cvv.value)
-      console.log(event.target.elements.date.value)
-      console.log(event.target.elements.alias.value)
+      history.push('/card')
   };
 
   return (
     <>
-      <button>«--</button>
+      <button onClick={() => history.push('/card')}>«--</button>
       <h4>Añadir tarjeta</h4>
       <form action="submit" onSubmit={postCard}>
         <label>Crea un alias para tu tarjeta: </label>
