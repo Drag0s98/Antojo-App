@@ -26,13 +26,14 @@ const entries = {
         }
         return result.rows;
     },
-    get_users: async () => {
+    get_users: async (email) => {
         let result;
         try {
-            result = await pool.query(`
+            const sql_query = (`
             SELECT id_user
-            FROM public.users;
+            FROM public.users WHERE email=$1;
             `)
+            result = await pool.query(sql_query, [email])
         } catch (error) {
             console.log('Error at get users' + error);
         }
@@ -79,31 +80,87 @@ const entries = {
         }
         return result.rows;
     },
-    post_card: async(id_user, titular, encrypt_card_num, encrypt_cvv, encrypt_exp_date) => {
-        let result; 
+    post_card: async (uid, titular, encrypt_card_num, encrypt_cvv, encrypt_exp_date, card_name) => {
+        let result;
         try {
             const sql_query = (` 
             INSERT INTO public.credit_card(
-                id_user, titular, card_num, cvv, exp_date)
-                VALUES ($1, $2, $3, $4, $5);
+                id_user, titular, card_num, cvv, exp_date, card_name)
+                VALUES ($1, $2, $3, $4, $5, $6);
             `)
-                result = await pool.query(sql_query, [id_user, titular, encrypt_card_num, encrypt_cvv, encrypt_exp_date])
+            result = await pool.query(sql_query, [uid, titular, encrypt_card_num, encrypt_cvv, encrypt_exp_date, card_name])
         } catch (error) {
             console.log('Error to post card ' + error);
-            return'error'
+            return 'error'
         }
         return result.rows;
-    }, 
-    get_cards: async () => {
+    },
+    get_cards: async (id) => {
         let result;
         try {
-            result = await pool.query(`SELECT * FROM public.credit_card ORDER BY id_card ASC`);
+            const sql_query = (` 
+            SELECT * FROM public.credit_card WHERE id_user= $1;
+            `)
+            result = await pool.query(sql_query, [id])
         } catch (error) {
             console.log('Error to get card ' + error);
         }
         return result.rows;
+    },
+    post_user_register: async ({ img, username, uidForm, emailForm }) => {
+        let result;
+        try {
+            let sql_query = (`
+            INSERT INTO public.users(
+                img, username, uid, email)
+                VALUES ($1, $2, $3, $4);
+            `);
+            result = await pool.query(sql_query, [img, username, uidForm, emailForm])
+        } catch (error) {
+            console.log('Error to post user ' + error);
+        }
+        return result;
+    },
+    get_dishesBy_category: async (category) => {
+        let result;
+        try {
+            let sql_query = (`
+            SELECT id_dish, name, category, price, rating, offer
+            FROM public.dishes WHERE category=$1
+            `)
+            result = await pool.query(sql_query, [category]);
+        } catch (error) {
+            console.log('Error to get dishes by category ' + error);
+        }
+        return result.rows;
+    },
+    get_addressBy_user: async (id) => {
+        let result;
+        try {
+            let sql_query = (`
+            SELECT name, domicile, domicile_num, domicile_piso
+            FROM public.users WHERE id_user=$1
+            `)
+            result = await pool.query(sql_query, [id])
+        } catch (error) {
+            console.log('Error to get address by user ' + error);
+        }
+        return result.rows;
+    },
+    post_addressBy_user: async ({ id_user, domicile, domicile_num, domicile_piso }) => {
+        let result;
+        try {
+            let sql_query = (` 
+            UPDATE public.users
+	            SET domicile=$2, domicile_num=$3, domicile_piso=$4
+	            WHERE id_user=$1;
+            `)
+            result = await pool.query(sql_query, [id_user, domicile, domicile_num, domicile_piso]);
+        } catch (error) {
+            console.log('Error to post addres by user ' + error);
+        }
+        return result;
     }
-
 };
 
 module.exports = entries;

@@ -1,5 +1,9 @@
 import React, { useState, useEffect } from "react";
+
 import './Home.css'
+import { Link } from "react-router-dom";
+
+
 import Browser from '../Browser';
 import Map from '../Map';
 import axios_hook from '../../hooks/get-axios';
@@ -34,15 +38,16 @@ const Home = () => {
     setSpinner(true)
     setTimeout(() => {
       setSpinner(false)
-    }, 4000)
+    }, 2000)
   }, [])
 
 
   return (
-    
+
     <section>
 
       {
+
 
         spinner ? 
         <div>
@@ -58,6 +63,20 @@ const Home = () => {
 
         <section  className="prueba">
         <Browser />
+        spinner ?
+          <div>
+            'Bienvenidos a Yami'
+            <PacmanLoader
+
+              size={150}
+              color={'#123abc'}
+              loading={spinner}
+            />
+          </div>
+          :
+
+          <section>
+            <Browser /
             <Map />
             <article className='ranking_box' >
               <h2>Ranking </h2>
@@ -88,10 +107,14 @@ const Home = () => {
               <h2>Recomendacioens</h2>
               <p>Aqui irian las recomendaciones</p>
             </article>
-            </section>
+          </section>
       }
-
-   
+      
+      <Link to={`/addcard`}>
+        <button type="submit" name="button">
+          Añadir tarjeta 
+        </button>
+      </Link>
     </section>
   );
 };
