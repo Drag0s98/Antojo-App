@@ -80,15 +80,15 @@ const entries = {
         }
         return result.rows;
     },
-    post_card: async (titular, encrypt_card_num, encrypt_cvv, encrypt_exp_date, card_name, uid) => {
+    post_card: async (uid, titular, encrypt_card_num, encrypt_cvv, encrypt_exp_date, card_name) => {
         let result;
         try {
             const sql_query = (` 
             INSERT INTO public.credit_card(
-                titular, card_num, cvv, exp_date, card_name, uid)
+                id_user, titular, card_num, cvv, exp_date, card_name)
                 VALUES ($1, $2, $3, $4, $5, $6);
             `)
-            result = await pool.query(sql_query, [titular, encrypt_card_num, encrypt_cvv, encrypt_exp_date, card_name, uid])
+            result = await pool.query(sql_query, [uid, titular, encrypt_card_num, encrypt_cvv, encrypt_exp_date, card_name])
         } catch (error) {
             console.log('Error to post card ' + error);
             return 'error'
@@ -134,10 +134,29 @@ const entries = {
     get_addressBy_user: async (id) => {
         let result;
         try {
-
+            let sql_query = (`
+            SELECT name, domicile, domicile_num, domicile_piso
+            FROM public.users WHERE id_user=$1
+            `)
+            result = await pool.query(sql_query, [id])
         } catch (error) {
             console.log('Error to get address by user ' + error);
         }
+        return result.rows;
+    },
+    post_addressBy_user: async ({ id_user, domicile, domicile_num, domicile_piso }) => {
+        let result;
+        try {
+            let sql_query = (` 
+            UPDATE public.users
+	            SET domicile=$2, domicile_num=$3, domicile_piso=$4
+	            WHERE id_user=$1;
+            `)
+            result = await pool.query(sql_query, [id_user, domicile, domicile_num, domicile_piso]);
+        } catch (error) {
+            console.log('Error to post addres by user ' + error);
+        }
+        return result;
     }
 };
 
