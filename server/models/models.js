@@ -113,7 +113,6 @@ const entries = {
                 VALUES ($1, $2, $3, $4);
             `);
             result = await pool.query(sql_query, [img, username, uidForm, emailForm])
-
         } catch (error) {
             console.log('Error to post user ' + error);
         }

@@ -15,7 +15,7 @@ const Login = (props) => {
   const [error, setError] = useState(null);
   const [registro, setRegistro] = useState(true);
   const { itsLog, setitsLog, uid, setUid } = useContext(DataContext)
-
+  console.log(uid)
 
 
   const loginGoogle = () => {
@@ -68,11 +68,11 @@ const Login = (props) => {
     if (registro) {
       registrar(e)
     } else {
-      login()
+      login(e)
     }
   };
 
-  const login = useCallback(async () => {
+  const login = useCallback(async (e) => {
     try {
       let res = await auth.signInWithEmailAndPassword(email, password)
       let response = await axios.get(`http://localhost:5000/api/login/${res.user.email}`)
@@ -105,6 +105,7 @@ const Login = (props) => {
         img = URL.createObjectURL(image.image)
       }
       const res = await auth.createUserWithEmailAndPassword(email, password)
+
       let emailForm = e.target.email.value;
       let uidForm = res.user.uid
       let username = e.target.username.value;
