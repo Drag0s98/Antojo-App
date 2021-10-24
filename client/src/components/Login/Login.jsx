@@ -20,10 +20,30 @@ const Login = (props) => {
 
   const loginGoogle = () => {
     auth.signInWithPopup(google)
-      .then(res => {
-        console.log(res);
+      .then(async (res) => {
+        setitsLog(true);
+        let emailForm = res.user.email;
+        let uidForm = res.user.uid
+        let username = res.user.displayName;
+        let user = {
+          uidForm,
+          emailForm,
+          username
+        }
+        let response = await axios.post(`http://localhost:5000/api/register`, user)
+        console.log(response);
+        await db.collection('usuarios').doc(res.user.uid).set({
+          email: res.user.email,
+          uid: res.user.uid,
+        }); //colección usuarios
+        let response_get = await axios.get(`http://localhost:5000/api/login/${res.user.email}`)
+        console.log(response_get);
+        setEmail("");
+        setPassword("");
+        setError(null);
+        setitsLog(true);
+        setUid(response_get.data[0].id_user);
         props.history.push('/home');
-
       }).catch(err => {
         console.log(err);
       })
@@ -45,7 +65,6 @@ const Login = (props) => {
       return
     }
     setError(null)
-
     if (registro) {
       registrar(e)
     } else {
@@ -56,12 +75,12 @@ const Login = (props) => {
   const login = useCallback(async (e) => {
     try {
       let res = await auth.signInWithEmailAndPassword(email, password)
-      let username = e.target.username.value;
+      let response = await axios.get(`http://localhost:5000/api/login/${res.user.email}`)
       setEmail("");
       setPassword("");
       setError(null);
       setitsLog(true);
-      // setUid(res.user.uid)
+      setUid(response.data[0].id_user)
       props.history.push('/home')
     } catch (error) {
       if (error.code === 'auth/invalid-email') {
@@ -78,29 +97,39 @@ const Login = (props) => {
 
   const registrar = useCallback(async (e) => {
     try {
+      let img
+      console.log(image.image);
+      if (image.image === undefined) {
+        img = null
+      } else {
+        img = URL.createObjectURL(image.image)
+      }
       const res = await auth.createUserWithEmailAndPassword(email, password)
-      const uidForm = res.user.uid
-      const img = URL.createObjectURL(image.image)
-      const username = e.target.username.value;
-      const getEmail = e.target.email.value;
-      const nose = await axios.post(`http://localhost:5000/api/register`, {
-        img: img,
-        username: username,
-        uid: uidForm,
-        email: getEmail
-      });
-      console.log(nose);
+
+      let emailForm = e.target.email.value;
+      let uidForm = res.user.uid
+      let username = e.target.username.value;
+      let user = {
+        uidForm,
+        img,
+        emailForm,
+        username
+      }
+      let response = await axios.post(`http://localhost:5000/api/register`, user)
+      console.log(response);
       await db.collection('usuarios').doc(res.user.uid).set({
         email: res.user.email,
         uid: res.user.uid,
       }); //colección usuarios
+      let respose_get = await axios.get(`http://localhost:5000/api/login/${res.user.email}`)
       setEmail("");
       setPassword("");
       setError(null);
       setitsLog(true);
-      setUid(uidForm);
+      setUid(respose_get.data[0].id_user);
       props.history.push('/home');
     } catch (error) {
+      console.log(error);
       if (error.code === 'auth/invalid-email') {
         setError('Email no válido')
       }
