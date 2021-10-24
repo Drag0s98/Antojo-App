@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
+import More_Info from '../More_Info';
+
 
 function Result_Search({ location }) {
 
@@ -9,6 +11,11 @@ function Result_Search({ location }) {
     let history = useHistory();
 
     const [newSearch, setNewSearch] = useState(null);
+    
+
+ 
+
+    
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -18,7 +25,6 @@ function Result_Search({ location }) {
 
     const handleClick = async (e) => {
         let id_dish = e.target.attributes.value.value;
-
         history.push('/more', {id_dish: id_dish})
     }
 
@@ -35,14 +41,17 @@ function Result_Search({ location }) {
             <br />
             <article>
                 {location.state.map((param, i) => {
+                    console.log(location.state);
                     return (
                         <div key={i}>
                             <p>{param.name}</p>
                             <button onClick={handleClick} value={param.id_dish}>Mas informacion</button>
+                            
                         </div>
                     )
                 })}
             </article>
+            
         </section>
     )
 }

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-
+import './Home.css'
 import Browser from '../Browser';
 import Map from '../Map';
 import axios_hook from '../../hooks/get-axios';
@@ -22,7 +22,9 @@ const Home = () => {
       } else {
         return null;
       }
+
     })
+    console.log(arr)
     setRanking(arr);
   }, [loading, result])
 
@@ -54,7 +56,7 @@ const Home = () => {
 </div>
         :
 
-        <section>
+        <section  className="prueba">
         <Browser />
             <Map />
             <article className='ranking_box' >

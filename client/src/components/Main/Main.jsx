@@ -8,6 +8,7 @@ import Home from '../Home';
 import Error from '../Error';
 import Search from '../Result_Search';
 import More_Info from "../More_Info";
+import Chat from "../Chat/Chat";
 
 const Main = () => {
 
@@ -19,6 +20,7 @@ const Main = () => {
         <Route path='/login' component={Login} />
         <Route path='/reset' component={Reset} />
         <Route path='/search' component={Search} />
+        <Route path='/chat' component={Chat} />
         <Route path='/more' component={More_Info} />
         <Route component={Error} />
       </Switch>

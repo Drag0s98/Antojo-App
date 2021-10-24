@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useCallback } from "react";
 import { auth, db, google } from "../../firebase";
 import { withRouter } from "react-router";
+import Navbar from "../Navbar/Navbar";
 
 
 const Login = (props) => {
@@ -11,6 +12,8 @@ const Login = (props) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [displayName, setDisplayName] = useState("")
+
+  const [mensajes, setMensajes] = useState([])
 
   const [error, setError] = useState(null);
 
@@ -98,8 +101,14 @@ const Login = (props) => {
   
 
 
+
+
+  
+
   return (
+  
   <div className="mt-5">
+    <Navbar />
     <h3 className="text-center">
 
     {registro ? "Registro de usuario" : "Login"}
@@ -125,6 +134,7 @@ const Login = (props) => {
           <input 
           
           type="password" 
+          autoComplete="current-password"
           className="form-control mb-4" 
           placeholder="Contraseña" 
           onChange={e => setPassword(e.target.value)}
