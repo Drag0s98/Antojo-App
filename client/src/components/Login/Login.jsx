@@ -15,7 +15,7 @@ const Login = (props) => {
   const [error, setError] = useState(null);
   const [registro, setRegistro] = useState(true);
   const { itsLog, setitsLog, uid, setUid } = useContext(DataContext)
-
+  console.log(uid)
 
 
   const loginGoogle = () => {
@@ -49,18 +49,19 @@ const Login = (props) => {
     if (registro) {
       registrar(e)
     } else {
-      login()
+      login(e)
     }
   };
 
-  const login = useCallback(async () => {
+  const login = useCallback(async (e) => {
     try {
       let res = await auth.signInWithEmailAndPassword(email, password)
+      let username = e.target.username.value;
       setEmail("");
       setPassword("");
       setError(null);
       setitsLog(true);
-      setUid(res.user.uid)
+      // setUid(res.user.uid)
       props.history.push('/home')
     } catch (error) {
       if (error.code === 'auth/invalid-email') {
@@ -81,11 +82,14 @@ const Login = (props) => {
       const uidForm = res.user.uid
       const img = URL.createObjectURL(image.image)
       const username = e.target.username.value;
-      await axios.post(`http://localhost:5000/api/register`, {
+      const getEmail = e.target.email.value;
+      const nose = await axios.post(`http://localhost:5000/api/register`, {
         img: img,
         username: username,
-        uid: uidForm
-      })
+        uid: uidForm,
+        email: getEmail
+      });
+      console.log(nose);
       await db.collection('usuarios').doc(res.user.uid).set({
         email: res.user.email,
         uid: res.user.uid,
@@ -131,6 +135,7 @@ const Login = (props) => {
             <input
               type="email"
               className="form-control mb-3"
+              name='email'
               placeholder="Email"
               onChange={e => setEmail(e.target.value)}
               value={email} />

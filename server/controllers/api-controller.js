@@ -24,7 +24,9 @@ const pages = {
     },
     get_users: async (req, res) => {
         try {
-
+            let email = req.params.id
+            let response = await db.get_users(email);
+            res.status(200).json(response);
         } catch (error) {
             console.log('Error at the get users' + error);
             res.status(400).json({ message: 'Some error has ocurred' });

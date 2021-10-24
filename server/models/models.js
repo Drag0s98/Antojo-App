@@ -26,13 +26,14 @@ const entries = {
         }
         return result.rows;
     },
-    get_users: async () => {
+    get_users: async (email) => {
         let result;
         try {
-            result = await pool.query(`
+            const sql_query = (`
             SELECT id_user
-            FROM public.users;
+            FROM public.users WHERE email=$1;
             `)
+            result = await pool.query(sql_query, [email])
         } catch (error) {
             console.log('Error at get users' + error);
         }
@@ -103,15 +104,15 @@ const entries = {
         }
         return result.rows;
     },
-    post_user_register: async ({ img, username, uid }) => {
+    post_user_register: async ({ img, username, uid, email }) => {
         let result;
         try {
             let sql_query = (`
             INSERT INTO public.users(
-                img, username, uid)
-                VALUES ($1, $2, $3);
+                img, username, uid, email)
+                VALUES ($1, $2, $3, $4);
             `);
-            result = await pool.query(sql_query, [img, username, uid])
+            result = await pool.query(sql_query, [img, username, uid, email])
 
         } catch (error) {
             console.log('Error to post user ' + error);
