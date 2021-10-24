@@ -26,13 +26,14 @@ const entries = {
         }
         return result.rows;
     },
-    get_users: async () => {
+    get_users: async (email) => {
         let result;
         try {
-            result = await pool.query(`
+            const sql_query = (`
             SELECT id_user
-            FROM public.users;
+            FROM public.users WHERE email=$1;
             `)
+            result = await pool.query(sql_query, [email])
         } catch (error) {
             console.log('Error at get users' + error);
         }
@@ -79,15 +80,15 @@ const entries = {
         }
         return result.rows;
     },
-    post_card: async (id_user, titular, encrypt_card_num, encrypt_cvv, encrypt_exp_date, card_name) => {
+    post_card: async (titular, encrypt_card_num, encrypt_cvv, encrypt_exp_date, card_name, uid) => {
         let result;
         try {
             const sql_query = (` 
             INSERT INTO public.credit_card(
-                id_user, titular, card_num, cvv, exp_date, card_name)
+                titular, card_num, cvv, exp_date, card_name, uid)
                 VALUES ($1, $2, $3, $4, $5, $6);
             `)
-            result = await pool.query(sql_query, [id_user, titular, encrypt_card_num, encrypt_cvv, encrypt_exp_date, card_name])
+            result = await pool.query(sql_query, [titular, encrypt_card_num, encrypt_cvv, encrypt_exp_date, card_name, uid])
         } catch (error) {
             console.log('Error to post card ' + error);
             return 'error'
@@ -103,15 +104,15 @@ const entries = {
         }
         return result.rows;
     },
-    post_user_register: async ({ img, username, uid }) => {
+    post_user_register: async ({ img, username, uidForm, emailForm }) => {
         let result;
         try {
             let sql_query = (`
             INSERT INTO public.users(
-                img, username, uid)
-                VALUES ($1, $2, $3);
+                img, username, uid, email)
+                VALUES ($1, $2, $3, $4);
             `);
-            result = await pool.query(sql_query, [img, username, uid])
+            result = await pool.query(sql_query, [img, username, uidForm, emailForm])
 
         } catch (error) {
             console.log('Error to post user ' + error);
@@ -130,6 +131,14 @@ const entries = {
             console.log('Error to get dishes by category ' + error);
         }
         return result.rows;
+    },
+    get_addressBy_user: async (id) => {
+        let result;
+        try {
+
+        } catch (error) {
+            console.log('Error to get address by user ' + error);
+        }
     }
 };
 

@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { Route, Switch, useHistory } from 'react-router-dom';
 
+import { DataContext } from "../../context/context";
 import Onboarding from '../Onboarding';
 import Login from "../Login";
 import Reset from "../Reset";
@@ -9,7 +10,7 @@ import Error from '../Error';
 import Search from '../Result_Search';
 import More_Info from "../More_Info";
 import Add_CreditCard from "../Add_CreditCard";
-import { DataContext } from "../../context/context";
+import Address from "../Address/Address";
 
 const Main = () => {
 
@@ -31,6 +32,7 @@ const Main = () => {
         <Route path='/search' component={Search} />
         <Route path='/more' component={More_Info} />
         <Route path='/addcard' component={Add_CreditCard} />
+        <Route path='/address' component={Address} />
         <Route component={Error} />
       </Switch>
     </main>
