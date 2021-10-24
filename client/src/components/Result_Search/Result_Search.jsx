@@ -30,6 +30,31 @@ function Result_Search({ location }) {
         history.push('/more', { id_dish: id_dish })
     }
 
+//Calcular distancia
+function getDistance(origin, destination) {
+  
+    const lat1 = toRadian(origin[0]);
+    const lon1 = toRadian(origin[1]);
+    const lat2 = toRadian(destination[0]);
+    const lon2 = toRadian(destination[1]);
+
+    const deltaLat = lat2 - lat1;
+    const deltaLon = lon2 - lon1;
+
+    let a = Math.pow(Math.sin(deltaLat/2), 2) + Math.cos(lat1) * Math.cos(lat2) * Math.pow(Math.sin(deltaLon/2), 2);
+    let c = 2 * Math.asin(Math.sqrt(a));
+    let EARTH_RADIUS = 6371;
+    
+    return c * EARTH_RADIUS * 1000;
+    }
+  
+    function toRadian(degree) {
+        return degree*Math.PI/180;
+    }
+    
+    const distance = getDistance([36.70971, -4.43404], [36.75066, -4.06265]) // [origen lat, origen lon],[destination lat, destination lon]
+    console.log('Distancia entre los 2 puntos:'+ distance)
+
     return (
         <section>
             <article>
