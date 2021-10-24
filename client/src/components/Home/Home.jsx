@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 
 import Browser from '../Browser';
 import Map from '../Map';
@@ -88,8 +89,12 @@ const Home = () => {
             </article>
           </section>
       }
-
-
+      
+      <Link to={`/addcard`}>
+        <button type="submit" name="button">
+          Añadir tarjeta 
+        </button>
+      </Link>
     </section>
   );
 };

@@ -80,15 +80,15 @@ const entries = {
         }
         return result.rows;
     },
-    post_card: async (titular, encrypt_card_num, encrypt_cvv, encrypt_exp_date, card_name, uid) => {
+    post_card: async (uid, titular, encrypt_card_num, encrypt_cvv, encrypt_exp_date, card_name) => {
         let result;
         try {
             const sql_query = (` 
             INSERT INTO public.credit_card(
-                titular, card_num, cvv, exp_date, card_name, uid)
+                id_user, titular, card_num, cvv, exp_date, card_name)
                 VALUES ($1, $2, $3, $4, $5, $6);
             `)
-            result = await pool.query(sql_query, [titular, encrypt_card_num, encrypt_cvv, encrypt_exp_date, card_name, uid])
+            result = await pool.query(sql_query, [uid, titular, encrypt_card_num, encrypt_cvv, encrypt_exp_date, card_name])
         } catch (error) {
             console.log('Error to post card ' + error);
             return 'error'

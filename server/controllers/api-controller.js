@@ -75,7 +75,7 @@ const pages = {
             let encrypt_card_num = await bcrypt.hash(card_num, salt);
             let encrypt_cvv = await bcrypt.hash(cvv, salt);
             let encrypt_exp_date = await bcrypt.hash(exp_date, salt);
-            let response = await db.post_card(titular, encrypt_card_num, encrypt_cvv, encrypt_exp_date, card_name, uid)
+            let response = await db.post_card(uid, titular, encrypt_card_num, encrypt_cvv, encrypt_exp_date, card_name)
             response === 'error' ? res.status(401).json({ message: 'Some error has ocurred ' }) : res.status(201).json({ message: "post succes" })
         } catch (error) {
             console.log('Error at the post card' + error);
