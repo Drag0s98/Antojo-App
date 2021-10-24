@@ -43,7 +43,7 @@
 .sendMsg {
     position: fixed;
     display: flex;
-    width: 492%;
+    width: 94%;
     bottom: 0;
     z-index: 1;
     border-top: 1px solid lightgray;

@@ -3,7 +3,6 @@ import React, { useEffect, useState } from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import axios_hook from './hooks/get-axios';
 
-
 //Personal imports
 import { DataContext } from './context/context'
 import './styles/styles.scss'
