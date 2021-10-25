@@ -12,9 +12,9 @@ const Onboarding = () => {
   return (
     <section className="onboarding">
       <article className="onboarding--carousel">
-        <Carousel activeIndex={index} onSelect={handleSelect}>
+        <Carousel activeIndex={index} onSelect={handleSelect} variant="dark">
           <Carousel.Item>
-            <div>
+            <div className="onboarding--carousel--item">
               <h1>¡Bienvenido a Yamy!</h1>
               <p>
                 Amet minim mollit non deserunt ullamco est sit aliqua dolor do
@@ -28,7 +28,7 @@ const Onboarding = () => {
             </div>
           </Carousel.Item>
           <Carousel.Item>
-            <div>
+            <div className="onboarding--carousel--item">
               <h1>Pide lo que quieras...</h1>
               <p>
                 Amet minim mollit non deserunt ullamco est sit aliqua dolor do
