@@ -29,7 +29,7 @@ const Onboarding = () => {
           </Carousel.Item>
         </Carousel>
       </article>
-      <Link to={`/home`}>
+      <Link to={`/login`}>
         <button type="submit" name="button" className="onboarding--btn">
           Saltar
         </button>
