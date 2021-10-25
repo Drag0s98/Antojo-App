@@ -1,8 +1,9 @@
-@import './components/header';
-@import './components/onboarding';
-@import "./components/browser";
-
 @import './utils/mixins';
 @import './utils/variables';
 
 @import "./views/app";
+
+@import './components/header';
+@import './components/onboarding';
+@import "./components/browser";
+@import './components/login';

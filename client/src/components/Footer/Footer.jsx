@@ -1,7 +1,13 @@
 import React from "react";
 
+import Navbar from "../Navbar/Navbar";
+
 const Footer = () => {
-  return <div className="footer">Footer</div>;
+  return (
+    <footer>
+      hola
+    </footer>
+  );
 };
 
 export default Footer;

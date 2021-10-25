@@ -1,16 +1,16 @@
 import React from "react";
-import {Link, NavLink} from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import './Navbar.css';
 import { auth } from "../../firebase";
 import { withRouter } from "react-router";
 
 const Navbar = (props) => {
 
-const [firebaseUser, setFirebaseUser] = React.useState(false);
+  const [firebaseUser, setFirebaseUser] = React.useState(false);
 
   React.useEffect(() => {
     auth.onAuthStateChanged(user => {
-      if(user) {
+      if (user) {
         setFirebaseUser(user)
       } else {
         setFirebaseUser(null)
@@ -18,12 +18,12 @@ const [firebaseUser, setFirebaseUser] = React.useState(false);
     })
   }, [])
 
-const cerrarSesion = () => {
-  auth.signOut()
-    .then(() => {
-      props.history.push('/login')
-    })
-}
+  const cerrarSesion = () => {
+    auth.signOut()
+      .then(() => {
+        props.history.push('/login')
+      })
+  }
 
   return <div className="navbar navbar-dark bg-dark">
     <Link className="navbar-brand ml- nombre">Yamy</Link>
@@ -35,16 +35,15 @@ const cerrarSesion = () => {
         {
           firebaseUser !== null ? (
             <div>
-            <button className="btn btn-dark" onClick={() => cerrarSesion()}>Cerrar Sesión</button>
-            <NavLink className="btn btn-dark" to="/chat">Chat</NavLink></div>
-            
+              <button className="btn btn-dark" onClick={() => cerrarSesion()}>Cerrar Sesión</button>
+              <NavLink className="btn btn-dark" to="/chat">Chat</NavLink></div>
+
           ) : (
-              <NavLink className="btn btn-dark mr-4 boton" to="/login">
-          Login
-              </NavLink>
+            <NavLink className="btn btn-dark mr-4 boton" to="/login">
+              Login
+            </NavLink>
           )
         }
-      
       </div>
     </div>
   </div>;
