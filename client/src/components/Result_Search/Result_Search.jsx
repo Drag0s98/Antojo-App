@@ -19,7 +19,7 @@ function Result_Search({ location, watch, settings }) {
     let history = useHistory();
 
     const [newSearch, setNewSearch] = useState(null);
-    
+
 
     const [byCategory, setByCategory] = useState(null);
 
@@ -39,7 +39,7 @@ function Result_Search({ location, watch, settings }) {
 
     const handleClick = async (e) => {
         let id_dish = e.target.attributes.value.value;
-        history.push('/more', {id_dish: id_dish})
+        history.push('/more', { id_dish: id_dish })
     }
 
     //Calcular distancia
@@ -161,13 +161,16 @@ function Result_Search({ location, watch, settings }) {
             </article>
             <br />
             <article>
-                {order !==  null ? order.map((param, i) => {
+                {order !== null ? order.map((param, i) => {
                     console.log(param);
                     return (
                         <div key={i}>
                             {location.state[0].name}
                             {param.name}
-                            <button onClick={() => history.push('/more', param.name )}>Pedir!</button>
+                            <button onClick={() => history.push('/more', {
+                                dish: location.state[0],
+                                restaurant: param.name
+                            })}>Pedir!</button>
                         </div>
                     )
                 }) : ''}
@@ -179,7 +182,7 @@ function Result_Search({ location, watch, settings }) {
                     )
                 }) : ''}
             </article>
-            
+
         </section>
     )
 }
