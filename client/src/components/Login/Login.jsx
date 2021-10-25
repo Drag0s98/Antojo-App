@@ -19,7 +19,8 @@ const Login = (props) => {
   const [error_pass, setError_pass] = useState(null);
   const [error_email, setError_email] = useState(null);
   const [registro, setRegistro] = useState(true);
-  const { itsLog, setitsLog, uid, setUid } = useContext(DataContext)
+  const { itsLog, setitsLog, uid, setUid, setHeader } = useContext(DataContext)
+  setHeader(true);
 
   const loginGoogle = () => {
     auth.signInWithPopup(google)
