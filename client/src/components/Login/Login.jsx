@@ -1,9 +1,12 @@
 import React, { useState, useCallback, useContext } from "react";
 import { auth, db, google, getAuth } from "../../firebase";
 import { withRouter } from "react-router";
-
 import Navbar from "../Navbar/Navbar";
 import axios from 'axios'
+import TextField from '@mui/material/TextField';
+
+import warning from '../../styles/assets/img/png/warning.png'
+
 import { DataContext } from "../../context/context";
 
 
@@ -12,14 +15,9 @@ const Login = (props) => {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [displayName, setDisplayName] = useState("")
-
-  const [mensajes, setMensajes] = useState([])
-
   const [image, setImage] = useState('');
-  const [nose, setNose] = useState(null);
-
-  const [error, setError] = useState(null);
+  const [error_pass, setError_pass] = useState(null);
+  const [error_email, setError_email] = useState(null);
   const [registro, setRegistro] = useState(true);
   const { itsLog, setitsLog, uid, setUid } = useContext(DataContext)
 
@@ -45,7 +43,8 @@ const Login = (props) => {
         console.log(response_get);
         setEmail("");
         setPassword("");
-        setError(null);
+        setError_email(null);
+        setError_pass(null);
         setitsLog(true);
         setUid(response_get.data[0].id_user);
         props.history.push('/home');
@@ -58,18 +57,19 @@ const Login = (props) => {
     e.preventDefault()
 
     if (!email.trim()) {
-      setError('Introduce email')
+      setError_email(' Introduce email')
       return
     }
     if (!password.trim()) {
-      setError('Introduce contraseña')
+      setError_pass(' Introduce contraseña')
       return
     }
     if (password.length < 6) {
-      setError('La contraseña debe tener al menos 6 caracteres')
+      setError_pass(' La contraseña debe tener al menos 6 caracteres')
       return
     }
-    setError(null)
+    setError_pass(null);
+    setError_email(null);
     if (registro) {
       registrar(e)
     } else {
@@ -83,19 +83,20 @@ const Login = (props) => {
       let response = await axios.get(`http://localhost:5000/api/login/${res.user.email}`)
       setEmail("");
       setPassword("");
-      setError(null);
+      setError_email(null);
+      setError_pass(null);
       setitsLog(true);
       setUid(response.data[0].id_user)
       props.history.push('/home')
     } catch (error) {
       if (error.code === 'auth/invalid-email') {
-        setError('Email no válido')
+        setError_email(' Email no válido')
       }
       if (error.code === 'auth/user-not-found') {
-        setError('Email no registrado')
+        setError_email(' Email no registrado')
       }
       if (error.code === 'auth/wrong-password') {
-        setError('Contraseña errónea')
+        setError_pass(' Contraseña errónea')
       }
     }
   }, [email, password, props.history, setUid, setitsLog]);
@@ -129,17 +130,18 @@ const Login = (props) => {
       let respose_get = await axios.get(`http://localhost:5000/api/login/${res.user.email}`)
       setEmail("");
       setPassword("");
-      setError(null);
+      setError_email(null);
+      setError_pass(null);
       setitsLog(true);
       setUid(respose_get.data[0].id_user);
       props.history.push('/home');
     } catch (error) {
       console.log(error);
       if (error.code === 'auth/invalid-email') {
-        setError('Email no válido')
+        setError_email(' Email no válido')
       }
       if (error.code === 'auth/email-already-in-use') {
-        setError('El email ya existe')
+        setError_email(' El email ya existe')
       }
     }
   }, [email, password, props.history, image.image, setUid, setitsLog]);
@@ -150,181 +152,149 @@ const Login = (props) => {
     }
   }
 
-
-
-
-
   return (
-
-
-    <div className="mt-5">
-      <Navbar />
-      <h3 className="text-center">
-
-        {registro ? "Registro de usuario" : "Login"}
-
-      </h3>
-      <hr />
-      <div className="row justify-content-center">
-        <div className="col-12 col-sm-8 col-md-6 col-xl-4">
-          <form onSubmit={sendData}>
+    <section className='auth_container'>
+      {registro === true ? (
+        <>
+          <h3 className='auth_title'>
+            {registro ? 'Registro' : 'Login'}
+          </h3>
+          <form onSubmit={sendData} className='form_auth'>
+            <div className="form-floating mb-3">
+              <input type="email" className="form-control" id="floatingInput" placeholder="email" onChange={e => setEmail(e.target.value)} value={email} />
+              <label for="floatingInput">Email</label>
+            </div>
             {
-              error ? (
-                <div className="alert alert-danger">
-                  {error}
+              error_email ? (
+                <div>
+                  <p className='error_msg'>
+                    <img src={warning} alt="" />
+                    {error_email}
+                  </p>
                 </div>
               ) : null
             }
-          </form>
-        </div>
-      </div>
-      <input
-        type="email"
-        className="form-control mb-3"
-        placeholder="Email"
-        onChange={e => setEmail(e.target.value)}
-        value={email} />
-      <input
-
-        type="password"
-        autoComplete="current-password"
-        className="form-control mb-4"
-        placeholder="Contraseña"
-        onChange={e => setPassword(e.target.value)}
-        value={password} />
-
-      {/* <input type="text"
-          className="form-control mb-4" 
-          placeholder="Nombre"
-          onChange={e => setDisplayName(e.target.value)}
-          value={displayName}
-          /> */}
-
-      <button className="btn btn-dark btn-lg col-12 mb-2" type="submit">
-
-        {
-          registro ? "Registrarse" : "Acceder"
-        }
-
-      </button>
-      <button
-        className="btn btn-info btn-sm col-12"
-        type="button"
-        onClick={() => setRegistro(!registro)}>
-
-        {
-          registro ? "¿Ya estás registrado?" : "¿No tienes cuenta?"
-        }
-
-      </button>
-      <button
-        className="btn btn-info btn-sm col-12 mt-3"
-        type="button"
-        onClick={() => loginGoogle(registro)}>
-
-        {
-          registro ? "Regitro con Google" : "Registro con Google"
-        }
-
-      </button>
-
-
-      {
-        !registro ? (
-          <div>
-            <button
-              className="btn btn-danger btn-lg col-12 mt-4"
-              type="button"
-              onClick={() => props.history.push('/reset')}>
-              Recuperar contraseña</button>
-
-            <div className="mt-5">
-              <h3 className="text-center">
-                {registro ? "Registro de usuario" : "Login"}
-              </h3>
-              <hr />
-              <div className="row justify-content-center">
-                <div className="col-12 col-sm-8 col-md-6 col-xl-4">
-                  <form onSubmit={sendData}>
-                    {
-                      error ? (
-                        <div className="alert alert-danger">
-                          {error}
-                        </div>
-                      ) : null
-                    }
-                    <input
-                      type="email"
-                      className="form-control mb-3"
-                      name='email'
-                      placeholder="Email"
-                      onChange={e => setEmail(e.target.value)}
-                      value={email} />
-                    <input
-
-                      type="password"
-                      className="form-control mb-4"
-                      placeholder="Contraseña"
-                      onChange={e => setPassword(e.target.value)}
-                      value={password} />
-                    {registro === true ? (
-                      <>
-                        <input type='text' name='username' placeholder='Username' className='form-control mb-3' />
-                        <input type="file" name='files' onChange={handleImage} />
-                      </>
-                    ) : ''}
-                    <button className="btn btn-dark btn-lg col-12 mb-2" type="submit">
-
-                      {
-                        registro ? "Registrarse" : "Acceder"
-                      }
-
-                    </button>
-                    <button
-                      className="btn btn-info btn-sm col-12"
-                      type="button"
-                      onClick={() => setRegistro(!registro)}>
-
-                      {
-                        registro ? "¿Ya estás registrado?" : "¿No tienes cuenta?"
-                      }
-
-
-                    </button>
-                    <button
-                      className="btn btn-info btn-sm col-12 mt-3"
-                      type="button"
-                      onClick={() => loginGoogle(registro)}>
-
-                      {
-                        registro ? "Regitro con Google" : "Registro con Google"
-                      }
-
-                    </button>
-
-
-                    {
-                      !registro ? (
-                        <button
-                          className="btn btn-danger btn-lg col-12 mt-4"
-                          type="button"
-                          onClick={() => props.history.push('/reset')}>
-                          Recuperar contraseña
-                        </button>
-
-                      ) : null
-                    }
-
-
-                  </form>
+            <div className="form-floating mb-3 second_inp">
+              <input type="Contraseña" className="form-control" id="floatingInput" placeholder="Contraseña" onChange={e => setPassword(e.target.value)} value={password} />
+              <label for="floatingInput">Contraseña</label>
+            </div>
+            {
+              error_pass ? (
+                <div>
+                  <p className='error_msg'>
+                    <img src={warning} alt="" />
+                    {error_pass}
+                  </p>
                 </div>
+              ) : null
+            }
+            <p className='answer_box' onClick={() => {
+              setError_email(null);
+              setError_pass(null);
+              setRegistro(!registro)
+            }
+            }>¿Tienes cuenta? Inicia sesión aquí</p>
+            <div className='buttons_container'>
+              <button type="submit" className='auth_btn'>
+                {
+                  registro ? "Registrarse" : "Iniciar sesión"
+                }
+              </button>
+
+              <button
+                type="button"
+                onClick={() => loginGoogle(registro)}>
+
+                {
+                  registro ? "Regitro con Google" : "Registro con Google"
+                }
+              </button>
+              <button
+                type="button"
+                onClick={() => props.history.push('/reset')}>
+                Recuperar contraseña</button>
+            </div>
+          </form>
+        </>
+      ) : ''}
+      {
+        registro === false ? (
+          <>
+            <h3 className='auth_title'>
+              {registro ? "Registro de usuario" : "Iniciar sesión"}
+            </h3>
+            <form onSubmit={sendData} className='form_auth'>
+              <div className="form-floating mb-3">
+                <input type="email" className="form-control" id="floatingInput" placeholder="email" onChange={e => setEmail(e.target.value)} value={email} />
+                <label for="floatingInput">Email</label>
+              </div>
+              {
+                error_email ? (
+                  <div>
+                    <p className='error_msg'>
+                      <img src={warning} alt="" />
+                      {error_email}
+                    </p>
+                  </div>
+                ) : null
+              }
+              <div className="form-floating mb-3 second_inp">
+                <input type="Contraseña" className="form-control" id="floatingInput" placeholder="Contraseña" onChange={e => setPassword(e.target.value)} value={password} />
+                <label for="floatingInput">Contraseña</label>
+              </div>
+              {
+                error_email ? (
+                  <div>
+                    <p className='error_msg'>
+                      <img src={warning} alt="" />
+                      {error_email}
+                    </p>
+                  </div>
+                ) : null
+              }
+              {registro === true ? (
+                <>
+                  <input type='text' name='username' placeholder='Username' />
+                  <input type="file" name='files' onChange={handleImage} />
+                </>
+              ) : ''}
+              <p className='answer_box' onClick={() => {
+                setError_email(null);
+                setError_pass(null);
+                setRegistro(!registro)
+              }}>¿Aún no tienes cuenta?, registrate aquí</p>
+              <div className='buttons_container'>
+
+                <button type="submit" className='auth_btn'>
+                  {
+                    registro ? "Registrarse" : "Iniciar sesión"
+                  }
+                </button>
+                <button
+                  type="button"
+                  onClick={() => loginGoogle(registro)}>
+
+                  {
+                    registro ? "Regitro con Google" : "Registro con Google"
+                  }
+
+                </button>
+                {
+                  !registro ? (
+                    <button
+                      type="button"
+                      onClick={() => props.history.push('/reset')}>
+                      Recuperar contraseña
+                    </button>
+
+                  ) : null
+                }
               </div>
 
-            </div>
-          </div>
-
+            </form>
+          </>
         ) : ''}
-    </div>
+    </section>
   )
 }
 export default withRouter(Login);
