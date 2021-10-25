@@ -7,17 +7,24 @@ const defaultSettings = {
 };
 
 export const usePosition = (watch = false, settings = defaultSettings) => {
-  const [position, setPosition] = useState({});
+  const [position, setPosition] = useState({
+    latitude: 40.41811185571833,
+    longitude: -3.7035610009072655,
+  });
   const [error, setError] = useState(null);
 
   const onChange = ({ coords, timestamp }) => {
-    setPosition({
-      latitude: coords.latitude,
-      longitude: coords.longitude,
-      //   accuracy: coords.accuracy,
-      //   speed: coords.speed,
-      //   timestamp,
-    });
+    try {
+      setPosition({
+        latitude: coords.latitude,
+        longitude: coords.longitude,
+        //   accuracy: coords.accuracy,
+        //   speed: coords.speed,
+        //   timestamp,
+      });
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const onError = (error) => {
