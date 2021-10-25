@@ -4,7 +4,6 @@ import "leaflet/dist/leaflet.css";
 import markerIconPng from "leaflet/dist/images/marker-icon.png";
 import { Icon } from "leaflet";
 import { usePosition } from "../../hooks/usePosition";
-import Browser from "../Browser";
 
 const Map = ({ watch, settings }) => {
   const { latitude, longitude } = usePosition(watch, settings);
@@ -19,7 +18,7 @@ const Map = ({ watch, settings }) => {
 
   const coordinates = [40.42166, -3.69271];
   const geolocation = [latitude, longitude];
-  console.log(geolocation);
+
 
   return (
     <>

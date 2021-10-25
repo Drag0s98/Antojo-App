@@ -1,5 +1,5 @@
 import React, { useState, useCallback, useContext } from "react";
-import { auth, db, google } from "../../firebase";
+import { auth, db, google, getAuth } from "../../firebase";
 import { withRouter } from "react-router";
 
 import Navbar from "../Navbar/Navbar";
@@ -22,8 +22,6 @@ const Login = (props) => {
   const [error, setError] = useState(null);
   const [registro, setRegistro] = useState(true);
   const { itsLog, setitsLog, uid, setUid } = useContext(DataContext)
-  console.log(uid)
-
 
   const loginGoogle = () => {
     auth.signInWithPopup(google)
@@ -154,90 +152,17 @@ const Login = (props) => {
 
 
 
-  
+
 
   return (
-  
-  <div className="mt-5">
-    <Navbar />
-    <h3 className="text-center">
 
-    {registro ? "Registro de usuario" : "Login"}
-
-    </h3>
-    <hr />
-    <div className="row justify-content-center">
-      <div className="col-12 col-sm-8 col-md-6 col-xl-4">
-        <form onSubmit={sendData}>
-          {
-            error ? (
-              <div className="alert alert-danger">
-                {error}
-              </div>
-            ) : null
-          }
-          <input 
-          type="email" 
-          className="form-control mb-3" 
-          placeholder="Email"
-          onChange={e => setEmail(e.target.value)}
-          value={email}/>
-          <input 
-          
-          type="password" 
-          autoComplete="current-password"
-          className="form-control mb-4" 
-          placeholder="Contraseña" 
-          onChange={e => setPassword(e.target.value)}
-          value={password}/>
-         
-          {/* <input type="text"
-          className="form-control mb-4" 
-          placeholder="Nombre"
-          onChange={e => setDisplayName(e.target.value)}
-          value={displayName}
-          /> */}
-         
-          <button className="btn btn-dark btn-lg col-12 mb-2" type="submit">
-            
-          {
-            registro ? "Registrarse" : "Acceder"
-          }
-
-          </button>
-          <button 
-          className="btn btn-info btn-sm col-12"
-          type="button"
-          onClick={()=> setRegistro(!registro)}>
-            
-          {
-            registro ? "¿Ya estás registrado?" : "¿No tienes cuenta?"
-          }
-
-          </button>
-          <button 
-          className="btn btn-info btn-sm col-12 mt-3"
-          type="button"
-          onClick={()=> loginGoogle(registro)}>
-            
-          {
-            registro ? "Regitro con Google" : "Registro con Google"
-          }
-
-          </button>
-
-          
-          {
-            !registro ? (
-            <button 
-            className="btn btn-danger btn-lg col-12 mt-4" 
-            type="button" 
-            onClick={()=> props.history.push('/reset')}>
-            Recuperar contraseña
 
     <div className="mt-5">
+      <Navbar />
       <h3 className="text-center">
+
         {registro ? "Registro de usuario" : "Login"}
+
       </h3>
       <hr />
       <div className="row justify-content-center">
@@ -250,75 +175,156 @@ const Login = (props) => {
                 </div>
               ) : null
             }
-            <input
-              type="email"
-              className="form-control mb-3"
-              name='email'
-              placeholder="Email"
-              onChange={e => setEmail(e.target.value)}
-              value={email} />
-            <input
-
-              type="password"
-              className="form-control mb-4"
-              placeholder="Contraseña"
-              onChange={e => setPassword(e.target.value)}
-              value={password} />
-            {registro === true ? (
-              <>
-                <input type='text' name='username' placeholder='Username' className='form-control mb-3' />
-                <input type="file" name='files' onChange={handleImage} />
-              </>
-            ) : ''}
-            <button className="btn btn-dark btn-lg col-12 mb-2" type="submit">
-
-              {
-                registro ? "Registrarse" : "Acceder"
-              }
-
-            </button>
-            <button
-              className="btn btn-info btn-sm col-12"
-              type="button"
-              onClick={() => setRegistro(!registro)}>
-
-              {
-                registro ? "¿Ya estás registrado?" : "¿No tienes cuenta?"
-              }
-
-
-            </button>
-            <button
-              className="btn btn-info btn-sm col-12 mt-3"
-              type="button"
-              onClick={() => loginGoogle(registro)}>
-
-              {
-                registro ? "Regitro con Google" : "Registro con Google"
-              }
-
-            </button>
-
-
-            {
-              !registro ? (
-                <button
-                  className="btn btn-danger btn-lg col-12 mt-4"
-                  type="button"
-                  onClick={() => props.history.push('/reset')}>
-                  Recuperar contraseña
-                </button>
-
-              ) : null
-            }
-
-
           </form>
         </div>
       </div>
+      <input
+        type="email"
+        className="form-control mb-3"
+        placeholder="Email"
+        onChange={e => setEmail(e.target.value)}
+        value={email} />
+      <input
 
+        type="password"
+        autoComplete="current-password"
+        className="form-control mb-4"
+        placeholder="Contraseña"
+        onChange={e => setPassword(e.target.value)}
+        value={password} />
+
+      {/* <input type="text"
+          className="form-control mb-4" 
+          placeholder="Nombre"
+          onChange={e => setDisplayName(e.target.value)}
+          value={displayName}
+          /> */}
+
+      <button className="btn btn-dark btn-lg col-12 mb-2" type="submit">
+
+        {
+          registro ? "Registrarse" : "Acceder"
+        }
+
+      </button>
+      <button
+        className="btn btn-info btn-sm col-12"
+        type="button"
+        onClick={() => setRegistro(!registro)}>
+
+        {
+          registro ? "¿Ya estás registrado?" : "¿No tienes cuenta?"
+        }
+
+      </button>
+      <button
+        className="btn btn-info btn-sm col-12 mt-3"
+        type="button"
+        onClick={() => loginGoogle(registro)}>
+
+        {
+          registro ? "Regitro con Google" : "Registro con Google"
+        }
+
+      </button>
+
+
+      {
+        !registro ? (
+          <div>
+            <button
+              className="btn btn-danger btn-lg col-12 mt-4"
+              type="button"
+              onClick={() => props.history.push('/reset')}>
+              Recuperar contraseña</button>
+
+            <div className="mt-5">
+              <h3 className="text-center">
+                {registro ? "Registro de usuario" : "Login"}
+              </h3>
+              <hr />
+              <div className="row justify-content-center">
+                <div className="col-12 col-sm-8 col-md-6 col-xl-4">
+                  <form onSubmit={sendData}>
+                    {
+                      error ? (
+                        <div className="alert alert-danger">
+                          {error}
+                        </div>
+                      ) : null
+                    }
+                    <input
+                      type="email"
+                      className="form-control mb-3"
+                      name='email'
+                      placeholder="Email"
+                      onChange={e => setEmail(e.target.value)}
+                      value={email} />
+                    <input
+
+                      type="password"
+                      className="form-control mb-4"
+                      placeholder="Contraseña"
+                      onChange={e => setPassword(e.target.value)}
+                      value={password} />
+                    {registro === true ? (
+                      <>
+                        <input type='text' name='username' placeholder='Username' className='form-control mb-3' />
+                        <input type="file" name='files' onChange={handleImage} />
+                      </>
+                    ) : ''}
+                    <button className="btn btn-dark btn-lg col-12 mb-2" type="submit">
+
+                      {
+                        registro ? "Registrarse" : "Acceder"
+                      }
+
+                    </button>
+                    <button
+                      className="btn btn-info btn-sm col-12"
+                      type="button"
+                      onClick={() => setRegistro(!registro)}>
+
+                      {
+                        registro ? "¿Ya estás registrado?" : "¿No tienes cuenta?"
+                      }
+
+
+                    </button>
+                    <button
+                      className="btn btn-info btn-sm col-12 mt-3"
+                      type="button"
+                      onClick={() => loginGoogle(registro)}>
+
+                      {
+                        registro ? "Regitro con Google" : "Registro con Google"
+                      }
+
+                    </button>
+
+
+                    {
+                      !registro ? (
+                        <button
+                          className="btn btn-danger btn-lg col-12 mt-4"
+                          type="button"
+                          onClick={() => props.history.push('/reset')}>
+                          Recuperar contraseña
+                        </button>
+
+                      ) : null
+                    }
+
+
+                  </form>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+        ) : ''}
     </div>
   )
-};
-
+}
 export default withRouter(Login);
