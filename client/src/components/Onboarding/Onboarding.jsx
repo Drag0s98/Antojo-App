@@ -1,9 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import Carousel from "react-bootstrap/Carousel";
 import { Link } from "react-router-dom";
-
+import { DataContext } from "../../context/context";
 const Onboarding = () => {
   const [index, setIndex] = useState(0);
+  const { setHeader } = useContext(DataContext);
+  setHeader(false);
 
   const handleSelect = (selectedIndex, e) => {
     setIndex(selectedIndex);

@@ -1,17 +1,18 @@
-import React, { useState, useEffect } from "react";
-
-import { Link } from "react-router-dom";
+import React, { useState, useEffect, useContext } from "react";
 
 
 import Browser from '../Browser';
 import Map from '../Map';
 import axios_hook from '../../hooks/get-axios';
-import PacmanLoader from "react-spinners/PacmanLoader";
+import Loading from '../Loading';
+import { DataContext } from "../../context/context";
 
 const Home = () => {
 
   const [ranking, setRanking] = useState(null);
   const [spinner, setSpinner] = useState(false);
+  const { setHeader } = useContext(DataContext);
+  setHeader(true);
 
   const { loading, result } = axios_hook('http://localhost:5000/api/dishes');
 
@@ -42,32 +43,10 @@ const Home = () => {
 
 
   return (
-    <section>
-
+    <>
       {
-
-
-        spinner ?
-          <div>
-            'Bienvenidos a Yami'
-            <PacmanLoader
-
-              size={150}
-              color={'#123abc'}
-              loading={spinner}
-            />
-          </div>
-          :
+        spinner === true ? <Loading /> :
           <section className="prueba">
-            <div>
-              'Bienvenidos a Yami'
-              <PacmanLoader
-
-                size={150}
-                color={'#123abc'}
-                loading={spinner}
-              />
-            </div>
             <section>
               <Browser />
               <Map />
@@ -103,13 +82,7 @@ const Home = () => {
             </section>
           </section>
       }
-
-      <Link to={`/addcard`}>
-        <button type="submit" name="button">
-          Añadir tarjeta
-        </button>
-      </Link>
-    </section>
+    </>
   );
 };
 

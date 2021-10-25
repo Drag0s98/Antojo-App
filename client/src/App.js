@@ -16,10 +16,11 @@ function App() {
   const [itsLog, setitsLog] = useState(false);
   const [uid, setUid] = useState(null);
   const [myGeolocation, setmyGeolocation] = useState(null);
+  const [header, setHeader] = useState(true);
 
 
   const contextObj = { //Hago un objeto para pasarselo por provider a los hijos
-    restaurants, setRestaurants, itsLog, setitsLog, uid, setUid, myGeolocation, setmyGeolocation
+    restaurants, setRestaurants, itsLog, setitsLog, uid, setUid, myGeolocation, setmyGeolocation, setHeader
   }
 
   const { loading, result } = axios_hook(`http://localhost:5000/api/restaurants`);
@@ -28,11 +29,13 @@ function App() {
     setRestaurants(result)
   }, [loading, result])
 
+
+
   return (
     <div className="container">
+      {header === true ? <Header /> : ''}
       <BrowserRouter>
         {loading === false ? <DataContext.Provider value={contextObj}>
-          <Header />
           <Main />
         </DataContext.Provider> : ''}
       </BrowserRouter>
