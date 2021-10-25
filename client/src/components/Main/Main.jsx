@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { Route, Switch, useHistory } from 'react-router-dom';
+import { Route, Switch, useHistory, Redirect } from 'react-router-dom';
 
 import { DataContext } from "../../context/context";
 import Onboarding from '../Onboarding';
@@ -16,20 +16,15 @@ import Add_CreditCard from "../Add_CreditCard";
 import Address from "../Address/Address";
 import Add_Address from "../Add_Address";
 import Credit_Cards from "../Credit_Cards/Credit_Cards";
+import SearchBy_Cat from '../SearchBy_cat';
 
 
 const Main = () => {
 
   const { itsLog, setitsLog } = useContext(DataContext)
-  const history = useHistory();
-
-  if(itsLog === false) {
-    //Descomentarlo al terminar la aplicacion
-   // history.push('/login')
-  }
-
   return (
     <main>
+     {/*  {itsLog === false ? <Redirect to='/login' /> : ''} */}
       <Switch>
         <Route path='/' component={Onboarding} exact />
         <Route path='/home' component={Home} />
@@ -41,7 +36,8 @@ const Main = () => {
         <Route path='/card' component={Credit_Cards} />
         <Route path='/addcard' component={Add_CreditCard} />
         <Route path='/address' component={Address} />
-        <Route path='/add/address' component={Add_Address}/>
+        <Route path='/add/address' component={Add_Address} />
+        <Route path='/category' component={SearchBy_Cat} />
         <Route component={Error} />
       </Switch>
     </main>
