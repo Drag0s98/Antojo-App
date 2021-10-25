@@ -16,6 +16,7 @@ import Add_CreditCard from "../Add_CreditCard";
 import Address from "../Address/Address";
 import Add_Address from "../Add_Address";
 import Credit_Cards from "../Credit_Cards/Credit_Cards";
+import SearchBy_Cat from '../SearchBy_cat';
 
 
 const Main = () => {
@@ -36,6 +37,7 @@ const Main = () => {
         <Route path='/addcard' component={Add_CreditCard} />
         <Route path='/address' component={Address} />
         <Route path='/add/address' component={Add_Address} />
+        <Route path='/category' component={SearchBy_Cat} />
         <Route component={Error} />
       </Switch>
     </main>

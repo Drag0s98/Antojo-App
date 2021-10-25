@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react'
+import React, { useState, useEffect } from 'react'
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
 import { usePosition } from "../../hooks/usePosition";
@@ -23,13 +23,6 @@ function Result_Search({ location, watch, settings }) {
 
     const [byCategory, setByCategory] = useState(null);
 
-    useEffect(() => {
-        if (location.state.filter) {
-            axios.get(`http://localhost:5000/api/category/${location.state.filter}`)
-                .then((res) => setByCategory(res.data))
-        }
-    }, [location.state.filter])
-
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -37,10 +30,6 @@ function Result_Search({ location, watch, settings }) {
         let res = axios.get(``)
     }
 
-    const handleClick = async (e) => {
-        let id_dish = e.target.attributes.value.value;
-        history.push('/more', { id_dish: id_dish })
-    }
 
     //Calcular distancia
     function getDistance(origin, destination) {
