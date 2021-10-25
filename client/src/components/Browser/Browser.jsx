@@ -34,17 +34,16 @@ const Browser = () => {
     setSearchValue(...searchValue, filterSearch)
   }
   const healthyFilter = async (e) => {
-    console.log(e.target.value);
     switch (e.target.value) {
       case 'healthy':
         console.log('push');
-        history.push('/search', { filter: 'Healthy' })
+        history.push('/category', { filter: 'Healthy' })
         break;
       case 'vegan':
-        history.push('/search', { filter: 'Vegan' })
+        history.push('/category', { filter: 'Vegan' })
         break;
       case 'vegetarian':
-        history.push('/search', { filter: 'Vegetarian' })
+        history.push('/category', { filter: 'Vegetarian' })
         break;
       default:
         break;
