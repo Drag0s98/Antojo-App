@@ -2,7 +2,7 @@ import React from "react";
 import { useState } from "react";
 import { db, auth, google } from "../../firebase";
 import firebase from "firebase";
-import { Input, Button } from '@material-ui/core'
+import { Input, Button } from '@mui/material'
 
 const Agregar = ({scroll}) => {
 

@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 
-import './Home.css'
 import { Link } from "react-router-dom";
 
 
@@ -43,26 +42,11 @@ const Home = () => {
 
 
   return (
-
     <section>
 
       {
 
 
-        spinner ? 
-        <div>
-        'Bienvenidos a Yami'
-        <PacmanLoader
-        
-        size={150}
-        color={'#123abc'}
-        loading={spinner}
-        />
-</div>
-        :
-
-        <section  className="prueba">
-        <Browser />
         spinner ?
           <div>
             'Bienvenidos a Yami'
@@ -74,45 +58,55 @@ const Home = () => {
             />
           </div>
           :
+          <section className="prueba">
+            <div>
+              'Bienvenidos a Yami'
+              <PacmanLoader
 
-          <section>
-            <Browser /
-            <Map />
-            <article className='ranking_box' >
-              <h2>Ranking </h2>
-              {ranking != null ? ranking.map((param, i) => {
-                return (
-                  <p key={i}>
-                    {param.name}
-                  </p>
-                )
-              }) : ''}
-            </article>
-            <br />
-            <article className='offer_box'>
-              <h2>Ofertas</h2>
-              {ranking != null ? ranking.map((param, i) => {
-                if (param.offer === true) {
+                size={150}
+                color={'#123abc'}
+                loading={spinner}
+              />
+            </div>
+            <section>
+              <Browser />
+              <Map />
+              <article className='ranking_box' >
+                <h2>Ranking </h2>
+                {ranking != null ? ranking.map((param, i) => {
                   return (
                     <p key={i}>
                       {param.name}
                     </p>
                   )
-                } else {
-                  return null;
-                }
-              }) : ''}
-            </article>
-            <article className='recomendation_box'>
-              <h2>Recomendacioens</h2>
-              <p>Aqui irian las recomendaciones</p>
-            </article>
+                }) : ''}
+              </article>
+              <br />
+              <article className='offer_box'>
+                <h2>Ofertas</h2>
+                {ranking != null ? ranking.map((param, i) => {
+                  if (param.offer === true) {
+                    return (
+                      <p key={i}>
+                        {param.name}
+                      </p>
+                    )
+                  } else {
+                    return null;
+                  }
+                }) : ''}
+              </article>
+              <article className='recomendation_box'>
+                <h2>Recomendacioens</h2>
+                <p>Aqui irian las recomendaciones</p>
+              </article>
+            </section>
           </section>
       }
-      
+
       <Link to={`/addcard`}>
         <button type="submit" name="button">
-          Añadir tarjeta 
+          Añadir tarjeta
         </button>
       </Link>
     </section>
