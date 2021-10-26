@@ -28,8 +28,11 @@ const Address = () => {
 
   return (
     <section>
+      <header className="header-general">
+        <button onClick={() => history.push('/more')}>«--</button>
+        <h3>Selecciona dirección</h3>
+      </header>
       <article>
-        <h4>Seleccione una direccion</h4>
         <div className='domicile_box'>
           {addres ?
             <>

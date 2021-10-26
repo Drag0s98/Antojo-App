@@ -27,6 +27,10 @@ const Credit_Cards = () => {
 
   return (
     <section>
+      <header className="header-general">
+        <button onClick={() => history.push('/address')}>«--</button>
+        <h3>Método de pago</h3>
+      </header>
       <form onSubmit={handleSubmit}>
         {myCards !== ""
           ? myCards.map((param, i) => {
