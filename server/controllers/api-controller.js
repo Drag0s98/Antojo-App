@@ -53,15 +53,9 @@ const pages = {
     },
     get_restaurantsBy_id: async (req, res) => {
         try {
-            if(req.params.id != 0) {
-                let param = req.params.id;
-                const data = await db.get_restaurantsBy_id(param)
-                res.status(200).json(data)
-            }else{
-                let param = req.params.name;
-                const data = await db.get_restaurantsBy_name(param)
-                res.status(200).json(data)
-            }
+            let param = req.params.id;
+            const data = await db.get_restaurantsBy_id(param)
+            res.status(200).json(data)
         } catch (error) {
             console.log('Error at the get restaurant by id' + error);
             res.status(400).json({ message: 'Some error has ocurred' });
@@ -123,6 +117,15 @@ const pages = {
             res.status(200).json({ message: 'Success Post' })
         } catch (error) {
             console.log('Error at post addres by user ' + error);
+            res.status(400).json({ message: 'Some error has ocurred' })
+        }
+    },
+    get_restaurantBy_name: async(req, res) => {
+        try {
+            let response = await db.get_restaurantsBy_name(req.params.id)
+            res.status(200).json(response)
+        } catch (error) {
+            console.log('Error at get restaurant by name ' + error);
             res.status(400).json({ message: 'Some error has ocurred' })
         }
     }

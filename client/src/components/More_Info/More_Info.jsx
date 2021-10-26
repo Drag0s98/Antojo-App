@@ -12,9 +12,9 @@ import { DataContext } from '../../context/context';
 function More_Info({ location }) {
 
   const history = useHistory();
+  console.log(location.state);
 
-  const { orders, setOrders } = useContext(DataContext);
-  const [morerestaurants, setMorerestaurants] = useState([]);
+  const { orders, setOrders } = useContext(DataContext); 
 
   const objDish = {
     name: location.state.dish.name,
@@ -22,28 +22,17 @@ function More_Info({ location }) {
     restaurant: location.state.restaurant,
     price: location.state.dish.price
   }
-  let objRestaurant = {}
+
   useEffect(() => {
-    axios.get(`http://localhost:5000/api/restaurants/0${location.state.restaurant}`)
+    axios.get(`http://localhost:5000/api/more/${location.state.restaurant}`)
       .then((res) => {
         console.log(res.data);
-        objRestaurant = res.data[0]
-        setOrders([objRestaurant, objDish])//Le meto toda la informacion de ese restaurante
+        let objRestaurant = res.data[0]
+        setOrders([objRestaurant, objDish])//Le meto toda la informacion de ese restaurante y del plato
       })
   }, [location])
 
-  useEffect(() => {
-    axios.get(`http://localhost:5000/api/dish/${location.state.dish.name}`)
-      .then((res) => {
-        console.log(res.data);
-        res.data.map((param) => {
-          axios.get(`http://localhost:5000/api/restaurants/${param.id_restaurant}`)
-            .then((res) => {
-              console.log(res.data);
-            })
-        })
-      })
-  }, [orders])
+
 
   return (
     <>
