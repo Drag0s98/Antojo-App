@@ -1,5 +1,3 @@
-
-
 .auth_container {
   width: 100%;
   height: 100%;
@@ -29,13 +27,12 @@
     }
   }
   & > .second_inp {
-      margin-top: 2.5em;
+    margin-top: 2.5em;
   }
 
-  & > div > .error_msg { 
-    color: $semantic-color-red ;
+  & > div > .error_msg {
+    color: $semantic-color-red;
   }
-
 }
 .answer_box {
   width: 280px;
@@ -48,24 +45,52 @@
   margin-top: 2em;
 }
 .word_handle {
-    text-decoration: underline;
+  text-decoration: underline;
 }
-.buttons_container{
-    @include center;
-    flex-direction: column;
+.buttons_container {
+  @include center;
+  flex-direction: column;
 
-    & > .auth_btn { 
-        background-color: $secondary-color-naranja-botones;
-        color: white;
-        width: 304px;
-        height: 36px;
-        border-radius: 80px;
-        border: none;
-        &:hover { 
-          background-color: $secondary-color-naranja-hover;
-        }
+  & > .auth_btn {
+    background-color: $secondary-color-naranja-botones;
+    color: white;
+    width: 304px;
+    height: 36px;
+    border-radius: 80px;
+    border: none;
+    margin-bottom: 0.6em;
+    &:hover {
+      background-color: $secondary-color-naranja-hover;
     }
+  }
+
+  & > .google-btn {
+    background-color: $tertiary-color-white;
+    color: $secondary-color-naranja-botones;
+
+    width: 304px;
+    height: 36px;
+    border-radius: 80px;
+    margin-bottom: 0.4em;
+    border: none;
+    &:hover {
+      background-color: $secondary-color-naranja-hover;
+    }
+  }
+  & > .password-btn {
+    background-color: $tertiary-color-white;
+    color: $secondary-color-naranja-botones;
+
+    width: 304px;
+    height: 36px;
+    border-radius: 80px;
+    border: none;
+    margin-bottom: 0.6em;
+    &:hover {
+      background-color: $secondary-color-naranja-hover;
+    }
+  }
 }
-footer{
-    display: none;
+footer {
+  display: none;
 }
