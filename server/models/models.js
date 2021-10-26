@@ -173,6 +173,32 @@ const entries = {
             console.log('Error at get restaurants by name' + error);
         }
         return result.rows;
+    },
+    post_order: async ({ id_user, dish_name, price, cantidad }) => {
+        let result;
+        try {
+            const sql_query = (`
+            INSERT INTO public.orders(
+                id_user, dish_name, price, cantidad)
+                VALUES ($1, $2, $3, $4);
+            `);
+            result = await pool.query(sql_query, [id_user, dish_name, price, cantidad]);
+        } catch (error) {
+            console.log('Error to post order ' + error);
+        }
+    },
+    get_orders: async (id) => {
+        let result;
+        try {
+            const sql_query = (`
+            SELECT id_order, id_user, dish_name, created_at, cantidad, price
+	            FROM public.orders WHERE id_user=$1;
+            `)
+            result = await pool.query(sql_query, [id])
+        } catch (error) {
+            console.log('Error to get orders ' + error);
+        }
+        return result.rows;
     }
 };
 

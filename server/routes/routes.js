@@ -15,10 +15,12 @@ router.get('/payment/:id', pages.get_cards);
 router.get('/category/:category', pages.get_dishesBy_category);
 router.get('/address/:id', pages.get_addressBy_id);
 router.get('/more/:id', pages.get_restaurantBy_name)
+router.get('/orders/:id', pages.get_orders)
 
 router.post('/register', pages.post_users_register);
 router.post('/payment', pages.post_payment);
 router.post('/address', pages.post_addressBy_user);
+router.post('/orders', pages.post_order);
 
 
 

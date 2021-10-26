@@ -53,15 +53,16 @@ const Confirm_Order = ({ location }) => {
               })
                 .then(async (value) => {
                   if (value) {
-                    let obj = {
-                      orders,
-                      contadorValue,
-                      address
-                    }
+                    console.log(orders);
                     await new Promise(resolve => setTimeout(resolve, 500))
-                    setConfirmed(obj)
+                    await axios.post(`http://localhost:5000/api/orders`, {
+                      id_user: uid,
+                      dish_name: orders[1].name,
+                      price: orders[1].price,
+                      cantidad: contadorValue
+                    })
                     history.push('/orderconfirmation')
-                  }else{
+                  } else {
                     swal.close();
                   }
                 })
@@ -69,7 +70,6 @@ const Confirm_Order = ({ location }) => {
           </> : <Redirect to='/login' />
         }
       </div>
-      {/* PENDIENTE: Añadir Sweet Alert */}
     </section>
   );
 };
