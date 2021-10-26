@@ -1,39 +1,45 @@
-import React, { useState, useEffect, useContext } from 'react';
-import axios from 'axios';
+import React, { useState, useEffect, useContext } from "react";
+import axios from "axios";
 import { useHistory } from "react-router-dom";
 import { DataContext } from '../../context/context';
 import swal from 'sweetalert';
 
 
-
-
-
-// el coponente es More_Info , y recoge los props por location.state. Tienes un context en el padre que guarda todos los restarantes , tendras que hacerlo por peticiones a la base de datos, creo que la query esta echa, si no la puedes hacer sin problema.
+import { MapContainer, TileLayer, Marker, Popup, MapConsumer } from "react-leaflet";
+import "leaflet/dist/leaflet.css";
+import markerIconPng from "leaflet/dist/images/marker-icon.png";
+import { Icon } from "leaflet";
 
 function More_Info({ location }) {
-
   const history = useHistory();
-  console.log(location.state);
+  console.log("Location state: " + location.state);
 
-  const { orders, setOrders } = useContext(DataContext); 
+  const { orders, setOrders } = useContext(DataContext);
 
   const objDish = {
     name: location.state.dish.name,
     category: location.state.dish.category,
     restaurant: location.state.restaurant,
-    price: location.state.dish.price
+    price: location.state.dish.price,
+  };
+
+  const objRestaurant = {
+    name: location.state.restaurant.name,
+    address: location.state.restaurant.address,
+    coordinates: location.state.restaurant.coordinates
   }
 
   useEffect(() => {
-    axios.get(`http://localhost:5000/api/more/${location.state.restaurant}`)
+    axios
+      .get(`http://localhost:5000/api/more/${location.state.restaurant}`)
       .then((res) => {
         console.log(res.data);
-        let objRestaurant = res.data[0]
-        setOrders([objRestaurant, objDish])//Le meto toda la informacion de ese restaurante y del plato
-      })
-  }, [location])
+        let objRestaurant = res.data[0];
+        setOrders([objRestaurant, objDish]); //Le meto toda la informacion de ese restaurante y del plato
+      });
+  }, [location]);
 
-
+  const coordinates = [40.42166, -3.69271] // Coger coordenadas del restaurante
 
   return (
     <>
@@ -63,7 +69,7 @@ function More_Info({ location }) {
         </button>
       </div>
     </>
-  )
+  );
 }
 
 export default More_Info;

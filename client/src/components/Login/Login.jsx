@@ -187,31 +187,37 @@ const Login = (props) => {
                 </div>
               ) : null
             }
+            
+
+
             <p className='answer_box' onClick={() => {
               setError_email(null);
               setError_pass(null);
               setRegistro(!registro)
             }
-            }>¿Tienes cuenta? Inicia sesión aquí</p>
+
+
+            
+            }>¿Tienes cuenta? Inicia sesión {'\u00A0'}<u>aquí</u></p>
             <div className='buttons_container'>
               <button type="submit" className='auth_btn'>
                 {
-                  registro ? "Registrarse" : "Iniciar sesión"
+                  registro ? "Registro" : "Iniciar sesión"
                 }
               </button>
 
               <button
-                type="button"
+                type="button" className='google-btn'
                 onClick={() => loginGoogle(registro)}>
 
                 {
-                  registro ? "Regitro con Google" : "Registro con Google"
+                  registro ? "Registro con Google" : "Registro con Google"
                 }
               </button>
-              <button
-                type="button"
+              {/* <button
+                type="button" className='password-btn'
                 onClick={() => props.history.push('/reset')}>
-                Recuperar contraseña</button>
+                Recuperar contraseña</button> */}
             </div>
           </form>
         </>
@@ -251,31 +257,32 @@ const Login = (props) => {
                   </div>
                 ) : null
               }
+              
               <p className='answer_box' onClick={() => {
                 setError_email(null);
                 setError_pass(null);
                 setRegistro(!registro)
-              }}>¿Aún no tienes cuenta? Registrate aquí</p>
+              }}>¿Aún no tienes cuenta? Regístrate {'\u00A0'}<u>aquí</u></p>
               <div className='buttons_container'>
 
                 <button type="submit" className='auth_btn'>
                   {
-                    registro ? "Registrarse" : "Iniciar sesión"
+                    registro ? "Registro" : "Iniciar sesión"
                   }
                 </button>
                 <button
-                  type="button"
+                  type="button" className='google-btn'
                   onClick={() => loginGoogle(registro)}>
 
                   {
-                    registro ? "Regitro con Google" : "Registro con Google"
+                    registro ? "Identifícate con Google" : "Identifícate con Google"
                   }
 
                 </button>
                 {
                   !registro ? (
                     <button
-                      type="button"
+                      type="button" className='password-btn'
                       onClick={() => props.history.push('/reset')}>
                       Recuperar contraseña
                     </button>
