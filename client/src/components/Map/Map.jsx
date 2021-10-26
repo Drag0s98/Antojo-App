@@ -19,7 +19,6 @@ const Map = ({ watch, settings }) => {
   const coordinates = [40.42166, -3.69271];
   const geolocation = [latitude, longitude];
 
-
   return (
     <>
       {location ? (
@@ -28,8 +27,8 @@ const Map = ({ watch, settings }) => {
             center={geolocation}
             zoom={13}
             scrollWheelZoom={false}
-            style={{ height: "80vh", width: "50%" }}
-          // Style funciona con vh en height y % en width
+            style={{ height: "80vh", width: "100%" }}
+            // Style funciona con vh en height y % en width
           >
             <TileLayer
               attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'

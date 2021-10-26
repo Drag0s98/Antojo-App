@@ -1,9 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import Carousel from "react-bootstrap/Carousel";
 import { Link } from "react-router-dom";
-
+import { DataContext } from "../../context/context";
 const Onboarding = () => {
   const [index, setIndex] = useState(0);
+  const { setHeader } = useContext(DataContext);
+  setHeader(false);
 
   const handleSelect = (selectedIndex, e) => {
     setIndex(selectedIndex);
@@ -19,10 +21,12 @@ const Onboarding = () => {
               <p>
                 Amet minim mollit non deserunt ullamco est sit aliqua dolor do
                 amet sint. Velit officia consequat duis enim velit mollit.
-                Exercitation veniam consequat sunt nostrud amet. Amet minim
-                mollit non deserunt ullamco est sit aliqua dolor do amet sint.
-                Velit officia consequat duis enim velit mollit. Exercitation
-                veniam consequat sunt nostrud amet.
+                Exercitation veniam consequat sunt nostrud amet. 
+              </p>
+              <p>
+                Amet minim mollit non deserunt ullamco est sit aliqua dolor do
+                amet sint. Velit officia consequat duis enim velit mollit.
+                Exercitation veniam consequat sunt nostrud amet. 
               </p>
               <br />
             </div>
@@ -33,10 +37,12 @@ const Onboarding = () => {
               <p>
                 Amet minim mollit non deserunt ullamco est sit aliqua dolor do
                 amet sint. Velit officia consequat duis enim velit mollit.
-                Exercitation veniam consequat sunt nostrud amet. Amet minim
-                mollit non deserunt ullamco est sit aliqua dolor do amet sint.
-                Velit officia consequat duis enim velit mollit. Exercitation
-                veniam consequat sunt nostrud amet.
+                Exercitation veniam consequat sunt nostrud amet. 
+              </p>
+              <p>
+                Amet minim mollit non deserunt ullamco est sit aliqua dolor do
+                amet sint. Velit officia consequat duis enim velit mollit.
+                Exercitation veniam consequat sunt nostrud amet. 
               </p>
               <br />
             </div>
