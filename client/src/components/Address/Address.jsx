@@ -7,7 +7,7 @@ import { DataContext } from "../../context/context";
 
 
 const Address = () => {
-  
+
   const [addres, setAddres] = useState(null);
   const { uid } = useContext(DataContext)
 
@@ -31,20 +31,20 @@ const Address = () => {
       <article>
         <h4>Seleccione una direccion</h4>
         <div className='domicile_box'>
-          {addres !== null ?
+          {addres ?
             <>
               <p>Name {addres.name}</p>
               <p>Domicile {addres.domicile}</p>
               <p>Domicile num {addres.domicile_num}</p>
               <p>Domicile piso {addres.domicile_piso}</p>
               <button onClick={handleClick}>Cambiar domicilio</button>
+              <button onClick={() => history.push('/card')}>Continuar</button>
             </>
             :
-             <>
+            <>
               <button onClick={handleClick}>Agrega un domicilio</button>
             </>
-
-            }
+          }
         </div>
       </article>
     </section>

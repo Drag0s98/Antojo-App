@@ -5,7 +5,7 @@ import { useHistory } from "react-router-dom";
 const Add_Address = ({ location }) => {
   let history = useHistory();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (location.state != null) {
       const address = {
@@ -14,7 +14,8 @@ const Add_Address = ({ location }) => {
         domicile_num: e.target.number.value,
         domicile_piso: e.target.piso.value
       }
-      axios.post(`http://localhost:5000/api/address`, address)
+      await axios.post(`http://localhost:5000/api/address`, address) 
+      await new Promise(resolve => setTimeout(resolve, 1000))
       history.push('/address', address)
     }
   }

@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import { useHistory } from "react-router-dom";
 import { DataContext } from '../../context/context';
+import swal from 'sweetalert';
 
 
 
@@ -42,9 +43,23 @@ function More_Info({ location }) {
         Restaurante: <h3>{location.state.restaurant}</h3>
         Precio: <p>{location.state.dish.price}</p>
         <button onClick={() => {
-          history.push('/card')
+          swal({
+            title: '¡Su plato ha sido añadido a pedidos!',
+            text: '¿Deseas pagar ya el plato?',
+            buttons: true,
+            className: 'popUp'
+          })
+          .then(async(value) => {
+            if(value){
+              await new Promise(resolve => setTimeout(resolve, 200))
+              history.push('/address')
+            }else{
+              swal.close();
+            }
+          })
+          
         }} >
-          Pagar
+          Pedir plato
         </button>
       </div>
     </>
