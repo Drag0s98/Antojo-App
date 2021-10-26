@@ -18,9 +18,6 @@ function Result_Search({ location, watch, settings }) {
     const [coords, setCoords] = useState(null);
     let history = useHistory();
 
-    const [newSearch, setNewSearch] = useState(null);
-
-
     const [byCategory, setByCategory] = useState(null);
 
 
@@ -56,7 +53,6 @@ function Result_Search({ location, watch, settings }) {
 
     useEffect(() => {
         if (location.state !== undefined) {
-            console.log('location', location.state);
             location.state.map(async (param) => {
                 return await axios.get(`http://localhost:5000/api/dish/${param.name}`)
                     .then((res) => {
@@ -83,20 +79,17 @@ function Result_Search({ location, watch, settings }) {
     useEffect(() => {
         let array = []
         if (restaurants !== '') {
-            new Promise(resolve => setTimeout(resolve, 100))
+            new Promise(resolve => setTimeout(resolve, 500))
                 .then(() => {
                     restaurants.map((param) => {
-                        console.log(param);
                         let arr = param.coordinates.split(',');
                         let lat = parseFloat(arr[0])
                         let lon = parseFloat(arr[1])
-                        console.log(lat, lon);
                         let obj = {
                             name: param.name,
                             lat: lat,
                             lon: lon
                         }
-                        console.log(obj);
                         return array.push(obj)
                     })
                     setCoords(array)
@@ -125,11 +118,11 @@ function Result_Search({ location, watch, settings }) {
     useEffect(() => {
         let arr = []
         if (order != null) {
-            new Promise(resolve => setTimeout(resolve, 200))
+            new Promise(resolve => setTimeout(resolve, 600))
                 .then(() => {
                     order.filter((element, i) => {
                         arr.push(element.distance)
-                        arr.sort((a, b) => b - a)
+                        arr.sort((a, b) => a - b)
                         if (arr[i] === element.distance) {
                             return element
                         }
@@ -152,11 +145,9 @@ function Result_Search({ location, watch, settings }) {
             <br />
             <article>
                 {order !== null ? order.map((param, i) => {
-                    console.log(param);
                     return (
                         <div key={i}>
                             {location.state[0].name}
-                            {console.log('location2', location.state)}
                             {param.name}
                             <button onClick={() => history.push('/more', {
                                 dish: location.state[0],

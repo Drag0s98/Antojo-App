@@ -50,7 +50,6 @@ const Browser = () => {
   };
 
   if (searchValue !== "") history.push("/search", searchValue);
-
   return (
     <section className="browser">
       <div className="browser--box-input">
