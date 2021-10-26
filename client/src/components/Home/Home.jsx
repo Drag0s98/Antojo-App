@@ -37,14 +37,14 @@ const Home = () => {
 
   return (
     <>
-      {
-        spinner === true ? <Loading /> :
+     {
+     spinner === true ? <Loading /> :
           <section className="prueba">
             <section>
               <Browser />
               <Map />
               <article className='ranking_box' >
-                <h2>Ranking </h2>
+                <h2>Top 3 platos </h2>
                 {ranking != null ? ranking.map((param, i) => {
                   return (
                     <p key={i}>
@@ -60,34 +60,19 @@ const Home = () => {
                   if (param.offer === true) {
                     return (
                       <p key={i}>
-                        {param.name}<br />
-                        {param.price}
+                        {param.name}
                       </p>
-                    );
-                  })
-                : ""}
-            </article>
-            <article className="offer_box">
-              <h2>Ofertas</h2>
-              {ranking != null
-                ? ranking.map((param, i) => {
-                    if (param.offer === true) {
-                      return (
-                        <p key={i}>
-                          {param.name}<br />
-                          {param.price}
-                        </p>
-                      );
-                    } else {
-                      return null;
-                    }
-                  })
-                : ""}
-            </article>
-            <article className="recomendation_box">
-              <h2>Recomendaciones</h2>
-              <p>Aqui irían las recomendaciones</p>
-            </article>
+                    )
+                  } else {
+                    return null;
+                  }
+                }) : ''}
+              </article>
+              <article className='recomendation_box'>
+                <h2>Recomendacioens</h2>
+                <p>Aqui irian las recomendaciones</p>
+              </article>
+              </section>
           </section>
       }
     </>
