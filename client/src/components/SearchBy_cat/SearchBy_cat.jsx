@@ -124,18 +124,18 @@ const SearchBy_cat = ({ location, watch, settings }) => {
 
   useEffect(() => {
     let arr = []
-    let restaurants = []
+    let restaurant = []
     if (order != null) {
-      new Promise(resolve => setTimeout(resolve, 600))
+      new Promise(resolve => setTimeout(resolve, 1500))
         .then(() => {
           order.filter((element, i) => {
             arr.push(element.distance)
-            arr.sort((a, b) => a - b)
-            if (arr[i] === element.distance) {
-              restaurants.push(element)
+            let sortable =  arr.sort((a, b) => a - b)
+            if(sortable[i] === element.distance){
+              restaurant.push(element)
             }
           })
-          setList(restaurants)
+          setList(restaurant)
         })
     }
   }, [order])
