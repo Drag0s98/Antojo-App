@@ -136,7 +136,7 @@ function Result_Search({ location, watch, settings }) {
     <>
       <header className="header-general">
         <button onClick={() => history.push("/home")}>«--</button>
-        <h3>Resultaados de búsqueda</h3>
+        <h3>Resultados de búsqueda</h3>
       </header>
       <section className="result">
         <article className="result--box-input">

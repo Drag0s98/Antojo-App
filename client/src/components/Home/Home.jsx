@@ -34,13 +34,13 @@ const Home = () => {
 
   return (
     <>
-      <header className="header-general">
-        <h3>(Logo aquí)</h3>
-      </header>
       {spinner === true ? (
         <Loading />
       ) : (
         <section className="prueba">
+          <header className="header-general">
+            <h3>(Logo aquí)</h3>
+          </header>
           <section>
             <Browser />
             <Map />
