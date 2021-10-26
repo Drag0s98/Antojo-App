@@ -1,13 +1,15 @@
-import React, { useState, useEffect } from "react";
-
-import Browser from "../Browser";
-import Map from "../Map";
-import axios_hook from "../../hooks/get-axios";
-import PropagateLoader from "react-spinners/PropagateLoader";
+import React, { useState, useEffect, useContext } from "react";
+import Browser from '../Browser';
+import Map from '../Map';
+import axios_hook from '../../hooks/get-axios';
+import Loading from '../Loading';
+import { DataContext } from "../../context/context";
 
 const Home = () => {
   const [ranking, setRanking] = useState(null);
   const [spinner, setSpinner] = useState(false);
+  const { setHeader } = useContext(DataContext);
+  setHeader(true);
 
   const { loading, result } = axios_hook("http://localhost:5000/api/dishes");
 
@@ -34,27 +36,28 @@ const Home = () => {
   }, []);
 
   return (
-    <section>
-      
-      {spinner ? (
-        <div>
-          <PropagateLoader size={15} color={"#FF9D47"} loading={spinner} />
-        </div>
-      ) : (
-        <section className="prueba">
-          <div>
-            <PropagateLoader size={15} color={"#FF9D47"} loading={spinner} />
-          </div>
-          <section>
-            <header>
-              <img src="" alt="" />
-            </header>
-            <Browser />
-            <Map />
-            <article className="ranking_box">
-              <h2>Top 3 platos</h2>
-              {ranking != null
-                ? ranking.map((param, i) => {
+    <>
+      {
+        spinner === true ? <Loading /> :
+          <section className="prueba">
+            <section>
+              <Browser />
+              <Map />
+              <article className='ranking_box' >
+                <h2>Ranking </h2>
+                {ranking != null ? ranking.map((param, i) => {
+                  return (
+                    <p key={i}>
+                      {param.name}
+                    </p>
+                  )
+                }) : ''}
+              </article>
+              <br />
+              <article className='offer_box'>
+                <h2>Ofertas</h2>
+                {ranking != null ? ranking.map((param, i) => {
+                  if (param.offer === true) {
                     return (
                       <p key={i}>
                         {param.name}<br />
@@ -86,9 +89,8 @@ const Home = () => {
               <p>Aqui irían las recomendaciones</p>
             </article>
           </section>
-        </section>
-      )}
-    </section>
+      }
+    </>
   );
 };
 

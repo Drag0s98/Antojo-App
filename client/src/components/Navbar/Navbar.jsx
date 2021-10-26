@@ -1,6 +1,5 @@
 import React from "react";
 import { Link, NavLink } from 'react-router-dom';
-import './Navbar.css';
 import { auth } from "../../firebase";
 import { withRouter } from "react-router";
 

@@ -1,0 +1,29 @@
+main{
+    @include center;
+}
+.loading_container{
+    @include center;
+    flex-direction: column;
+    width: 100%;
+}
+.welcome_text_box{
+@include center;
+flex-direction: column;
+    & > p {
+        color: #000000;
+        margin: 0;
+        font-weight: 400;
+        font-style: normal;
+        size: 16px;
+        line-height: 24px;
+
+    }
+}
+.top_wave{
+    width: 375px;
+}
+.bot_wave {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
