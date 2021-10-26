@@ -133,26 +133,27 @@ function Result_Search({ location, watch, settings }) {
     }, [order])
 
     return (
-        <section>
-            <article>
+        
+        <section className="result">
+            <article className="result--box-input">
                 <form onSubmit={handleSubmit}>
-                    <label>Introduce una busca</label>
-                    <br />
-                    <input type="text" name="browser" placeholder='hamburguesa' />
+                    <input type="text" name="browser" placeholder='Busca plato...' />
                     <button>Search</button>
                 </form>
             </article>
             <br />
-            <article>
+            <article className="list">
                 {order !== null ? order.map((param, i) => {
                     return (
                         <div key={i}>
-                            {location.state[0].name}
-                            {param.name}
-                            <button onClick={() => history.push('/more', {
+                            {/* Imagen Aquí */}
+                            <h3>{location.state[0].name}</h3>
+                            <h4>{param.name}</h4>
+                            <h4>Precio</h4>
+                            <button  onClick={() => history.push('/more', {
                                 dish: location.state[0],
                                 restaurant: param.name
-                            })}>Pedir!</button>
+                            })}>Más detalles</button>
                         </div>
                     )
                 }) : ''}
