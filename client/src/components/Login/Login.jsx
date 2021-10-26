@@ -7,7 +7,7 @@ import warning from '../../styles/assets/img/png/warning.png'
 
 import { DataContext } from "../../context/context";
 
-
+import Header from '../Header/Header';
 
 const Login = (props) => {
 
@@ -151,10 +151,12 @@ const Login = (props) => {
     }
   }
 
-  return (
+  return ( 
     <section className='auth_container'>
+      <Header />
       {registro === true ? (
         <>
+       
           <h3 className='auth_title'>
             {registro ? 'Registro' : 'Login'}
           </h3>
@@ -295,6 +297,7 @@ const Login = (props) => {
           </>
         ) : ''}
     </section>
+    
   )
 }
 export default withRouter(Login);
