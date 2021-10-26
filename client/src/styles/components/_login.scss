@@ -5,7 +5,7 @@
   flex-direction: column;
 }
 .auth_title {
-  color: $primary-color-verde-oscurdo;
+  color: $primary-color-verde-oscuro;
   font-size: 32px;
   font-weight: 600;
   font-style: normal;
@@ -16,13 +16,13 @@
   width: 280px;
 
   & > .mb-3 {
-    border: 1px solid $primary-color-verde-oscurdo;
+    border: 1px solid $primary-color-verde-oscuro;
     box-sizing: border-box;
     border-radius: 4px;
-    background: #fbfff9;
+    background: $tertiary-color-white;
     opacity: 0.8;
     & > :focus {
-      border: 2px solid $primary-color-verde-oscurdo;
+      border: 2px solid $primary-color-verde-oscuro;
       box-shadow: none;
     }
   }
@@ -31,14 +31,14 @@
   }
 
   & > div > .error_msg { 
-    color: red ;
+    color: $semantic-color-red ;
   }
 
 }
 .answer_box {
   width: 280px;
   @include center;
-  color: $primary-color-verde-oscurdo;
+  color: $primary-color-verde-oscuro;
   font-style: normal;
   font-weight: 400;
   font-size: 14px;
@@ -53,14 +53,14 @@
     flex-direction: column;
 
     & > .auth_btn { 
-        background-color: $secundary-color-naranja-botones;
+        background-color: $secondary-color-naranja-botones;
         color: white;
         width: 304px;
         height: 36px;
         border-radius: 80px;
         border: none;
-        & > :hover { 
-          background-color: #FF751F;
+        &:hover { 
+          background-color: $secondary-color-naranja-hover;
         }
     }
 }

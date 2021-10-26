@@ -262,7 +262,7 @@ const Login = (props) => {
                 setError_email(null);
                 setError_pass(null);
                 setRegistro(!registro)
-              }}>¿Aún no tienes cuenta?, registrate aquí</p>
+              }}>¿Aún no tienes cuenta? Registrate aquí</p>
               <div className='buttons_container'>
 
                 <button type="submit" className='auth_btn'>
