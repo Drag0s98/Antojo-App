@@ -15,7 +15,6 @@ const SearchBy_cat = ({ location, watch, settings }) => {
   const [restaurants, setRestaurants] = useState('');
   const [coords, setCoords] = useState(null);
   const [order, setOrder] = useState(null);
-  const [list, setList] = useState(null);
 
 
 
@@ -124,25 +123,25 @@ const SearchBy_cat = ({ location, watch, settings }) => {
 
   useEffect(() => {
     let arr = []
-    let restaurant = []
     if (order != null) {
       new Promise(resolve => setTimeout(resolve, 1500))
         .then(() => {
           order.filter((element, i) => {
             arr.push(element.distance)
-            let sortable =  arr.sort((a, b) => a - b)
-            if(sortable[i] === element.distance){
-              restaurant.push(element)
+            arr.sort((a, b) => a - b )
+            if (arr[i] === element.distance) {
+              return element
             }
           })
-          setList(restaurant)
         })
+
     }
   }, [order])
+
   return (
     <section>
       <article>
-        {list !== null ? list.map((param, i) => {
+        {order !== null ? order.map((param, i) => {
           return (
             <div key={i}>
               <p>{dishes[i].name} </p>

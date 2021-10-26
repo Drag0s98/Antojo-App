@@ -20,9 +20,8 @@ const Add_CreditCard = () => {
 
   // if (!card) return "No Credit Card!";
 
-  function postCard (event) {
+  async function postCard  (event) {
     event.preventDefault();
-
     axios.post(apiURL, {
         uid: uid,
         titular: event.target.elements.name.value,
@@ -34,6 +33,7 @@ const Add_CreditCard = () => {
       .then((response) => {
         setCard(response.data);
       });
+      await new Promise(resolve => setTimeout(resolve, 1000))
       history.push('/card')
   };
 
