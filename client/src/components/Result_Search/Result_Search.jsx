@@ -56,6 +56,7 @@ function Result_Search({ location, watch, settings }) {
 
     useEffect(() => {
         if (location.state !== undefined) {
+            console.log('location', location.state);
             location.state.map(async (param) => {
                 return await axios.get(`http://localhost:5000/api/dish/${param.name}`)
                     .then((res) => {
@@ -155,6 +156,7 @@ function Result_Search({ location, watch, settings }) {
                     return (
                         <div key={i}>
                             {location.state[0].name}
+                            {console.log('location2', location.state)}
                             {param.name}
                             <button onClick={() => history.push('/more', {
                                 dish: location.state[0],

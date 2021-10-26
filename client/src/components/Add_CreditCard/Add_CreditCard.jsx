@@ -9,6 +9,8 @@ const Add_CreditCard = () => {
   const [card, setCard] = useState(null);
   const { uid, setUid } = useContext(DataContext);
 
+  const {orders} = useContext(DataContext);
+
   const history = useHistory();
    useEffect(() => {
      axios.get(`${apiURL}`).then((response) => {
@@ -38,6 +40,7 @@ const Add_CreditCard = () => {
   return (
     <>
       <button onClick={() => history.push('/card')}>«--</button>
+      {orders.name}
       <h4>Añadir tarjeta</h4>
       <form action="submit" onSubmit={postCard}>
         <label>Crea un alias para tu tarjeta: </label>

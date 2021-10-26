@@ -16,11 +16,12 @@ function App() {
   const [itsLog, setitsLog] = useState(false);
   const [uid, setUid] = useState(null);
   const [myGeolocation, setmyGeolocation] = useState(null);
+
+  const [orders, setOrders] = useState(null)
   const [header, setHeader] = useState(true);
-
-
   const contextObj = { //Hago un objeto para pasarselo por provider a los hijos
-    restaurants, setRestaurants, itsLog, setitsLog, uid, setUid, myGeolocation, setmyGeolocation, setHeader
+    restaurants, setRestaurants, itsLog, setitsLog, uid, setUid, myGeolocation, setmyGeolocation, setHeader, orders, setOrders
+
   }
 
   const { loading, result } = axios_hook(`http://localhost:5000/api/restaurants`);

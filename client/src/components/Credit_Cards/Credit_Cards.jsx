@@ -9,6 +9,8 @@ const Credit_Cards = () => {
   const { uid } = useContext(DataContext);
   const [myCards, setMyCards] = useState("");
 
+  const {orders} = useContext(DataContext);
+
   useEffect(() => {
     axios
       .get(`http://localhost:5000/api/payment/${uid}`)
@@ -17,7 +19,7 @@ const Credit_Cards = () => {
 
   return (
     <section>
-      {myCards !== ""
+  {myCards !== ""
         ? myCards.map((param, i) => {
             return (
               <article key={i}>
