@@ -128,7 +128,7 @@ const SearchBy_cat = ({ location, watch, settings }) => {
               <p>{dishes[i].name} </p>
               <p>{param.name}</p>
               <button onClick={() => history.push('/more', {
-                dish: dishes[i].name,
+                dish: dishes[i],
                 restaurant: param.name
               })}>Pedir!</button>
             </div>

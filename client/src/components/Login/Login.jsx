@@ -1,9 +1,7 @@
 import React, { useState, useCallback, useContext } from "react";
-import { auth, db, google, getAuth } from "../../firebase";
+import { auth, db, google } from "../../firebase";
 import { withRouter } from "react-router";
-import Navbar from "../Navbar/Navbar";
 import axios from 'axios'
-import TextField from '@mui/material/TextField';
 
 import warning from '../../styles/assets/img/png/warning.png'
 
@@ -19,8 +17,8 @@ const Login = (props) => {
   const [error_pass, setError_pass] = useState(null);
   const [error_email, setError_email] = useState(null);
   const [registro, setRegistro] = useState(true);
-  const { itsLog, setitsLog, uid, setUid, setHeader } = useContext(DataContext)
-  setHeader(true);
+  const { itsLog, setitsLog, uid, setUid } = useContext(DataContext)
+
 
   const loginGoogle = () => {
     auth.signInWithPopup(google)
@@ -163,7 +161,7 @@ const Login = (props) => {
           <form onSubmit={sendData} className='form_auth'>
             <div className="form-floating mb-3">
               <input type="email" className="form-control" id="floatingInput" placeholder="email" onChange={e => setEmail(e.target.value)} value={email} />
-              <label for="floatingInput">Email</label>
+              <label >Email</label>
             </div>
             {
               error_email ? (
@@ -176,8 +174,8 @@ const Login = (props) => {
               ) : null
             }
             <div className="form-floating mb-3 second_inp">
-              <input type="Contraseña" className="form-control" id="floatingInput" placeholder="Contraseña" onChange={e => setPassword(e.target.value)} value={password} />
-              <label for="floatingInput">Contraseña</label>
+              <input type="password" className="form-control" id="floatingInput" placeholder="Contraseña" onChange={e => setPassword(e.target.value)} value={password} />
+              <label >Contraseña</label>
             </div>
             {
               error_pass ? (
@@ -227,7 +225,7 @@ const Login = (props) => {
             <form onSubmit={sendData} className='form_auth'>
               <div className="form-floating mb-3">
                 <input type="email" className="form-control" id="floatingInput" placeholder="email" onChange={e => setEmail(e.target.value)} value={email} />
-                <label for="floatingInput">Email</label>
+                <label>Email</label>
               </div>
               {
                 error_email ? (
@@ -240,8 +238,8 @@ const Login = (props) => {
                 ) : null
               }
               <div className="form-floating mb-3 second_inp">
-                <input type="Contraseña" className="form-control" id="floatingInput" placeholder="Contraseña" onChange={e => setPassword(e.target.value)} value={password} />
-                <label for="floatingInput">Contraseña</label>
+                <input type="password" className="form-control" id="floatingInput" placeholder="Contraseña" onChange={e => setPassword(e.target.value)} value={password} />
+                <label >Contraseña</label>
               </div>
               {
                 error_email ? (
@@ -253,12 +251,6 @@ const Login = (props) => {
                   </div>
                 ) : null
               }
-              {registro === true ? (
-                <>
-                  <input type='text' name='username' placeholder='Username' />
-                  <input type="file" name='files' onChange={handleImage} />
-                </>
-              ) : ''}
               <p className='answer_box' onClick={() => {
                 setError_email(null);
                 setError_pass(null);

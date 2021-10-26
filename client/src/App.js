@@ -6,7 +6,6 @@ import axios_hook from './hooks/get-axios';
 //Personal imports
 import { DataContext } from './context/context'
 import './styles/styles.scss'
-import Header from './components/Header';
 import Main from './components/Main';
 import Footer from './components/Footer';
 
@@ -18,9 +17,8 @@ function App() {
   const [myGeolocation, setmyGeolocation] = useState(null);
 
   const [orders, setOrders] = useState(null)
-  const [header, setHeader] = useState(true);
   const contextObj = { //Hago un objeto para pasarselo por provider a los hijos
-    restaurants, setRestaurants, itsLog, setitsLog, uid, setUid, myGeolocation, setmyGeolocation, setHeader, orders, setOrders
+    restaurants, setRestaurants, itsLog, setitsLog, uid, setUid, myGeolocation, setmyGeolocation, orders, setOrders
 
   }
 
@@ -34,7 +32,6 @@ function App() {
 
   return (
     <div className="container">
-      {header === true ? <Header /> : ''}
       <BrowserRouter>
         {loading === false ? <DataContext.Provider value={contextObj}>
           <Main />

@@ -1,15 +1,12 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect } from "react";
 import Browser from '../Browser';
 import Map from '../Map';
 import axios_hook from '../../hooks/get-axios';
 import Loading from '../Loading';
-import { DataContext } from "../../context/context";
 
 const Home = () => {
   const [ranking, setRanking] = useState(null);
   const [spinner, setSpinner] = useState(false);
-  const { setHeader } = useContext(DataContext);
-  setHeader(true);
 
   const { loading, result } = axios_hook("http://localhost:5000/api/dishes");
 
@@ -37,8 +34,8 @@ const Home = () => {
 
   return (
     <>
-     {
-     spinner === true ? <Loading /> :
+      {
+        spinner === true ? <Loading /> :
           <section className="prueba">
             <section>
               <Browser />
@@ -72,7 +69,7 @@ const Home = () => {
                 <h2>Recomendacioens</h2>
                 <p>Aqui irian las recomendaciones</p>
               </article>
-              </section>
+            </section>
           </section>
       }
     </>

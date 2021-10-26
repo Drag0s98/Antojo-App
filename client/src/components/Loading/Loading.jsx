@@ -1,13 +1,10 @@
-import React, { useContext } from "react";
+import React from "react";
 import loader from '../../styles/assets/img/svg/emoji-happy.svg'
 import wave1 from '../../styles/assets/img/svg/wave.1svg.svg'
 import wave3 from '../../styles/assets/img/svg/wave3.svg.svg'
-import { DataContext } from "../../context/context";
 
 
 const Loading = () => {
-  const { setHeader } = useContext(DataContext);
-  setHeader(false);
   return (
     <section className='loading_container'>
       <img src={wave1} alt="" className='top_wave' />

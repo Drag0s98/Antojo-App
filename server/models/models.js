@@ -160,6 +160,19 @@ const entries = {
             console.log('Error to post addres by user ' + error);
         }
         return result;
+    },
+    get_restaurantsBy_name: async (name) => {
+        let result;
+        try {
+            const sql_query = (`
+        SELECT name, coordinates, address, phone, url, relevance, image, image2
+        FROM public.restaurants WHERE name=$1;    
+            `);
+            result = await pool.query(sql_query, [name]);
+        } catch (error) {
+            console.log('Error at get restaurants by name' + error);
+        }
+        return result.rows;
     }
 };
 

@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { Link } from "react-router-dom";
+import axios from 'axios';
+import { useHistory } from "react-router-dom";
 import { DataContext } from '../../context/context';
+
 
 
 
@@ -9,41 +11,55 @@ import { DataContext } from '../../context/context';
 
 function More_Info({ location }) {
 
-    const {orders, setOrders} = useContext(DataContext);
+  const history = useHistory();
 
-    const objDish = {
-        name: location.state.dish.name,
-        category: location.state.dish.category,
-        restaurant: location.state.restaurant,
-        price: location.state.dish.price
-    }
+  const { orders, setOrders } = useContext(DataContext);
+  const [morerestaurants, setMorerestaurants] = useState([]);
 
-    
-   
-    useEffect(() => {
-    setOrders(objDish)
-    }, [location])
+  const objDish = {
+    name: location.state.dish.name,
+    category: location.state.dish.category,
+    restaurant: location.state.restaurant,
+    price: location.state.dish.price
+  }
+  let objRestaurant = {}
+  useEffect(() => {
+    axios.get(`http://localhost:5000/api/restaurants/0${location.state.restaurant}`)
+      .then((res) => {
+        console.log(res.data);
+        objRestaurant = res.data[0]
+        setOrders([objRestaurant, objDish])//Le meto toda la informacion de ese restaurante
+      })
+  }, [location])
 
-    return (
-        <>
-        <div className="tgview">
-            <h2>Plato:</h2>  <h4 className="tituloview">{location.state.dish.name}</h4>
-             Categoría: <p>{location.state.dish.category}</p>
-             Restaurante: <h3>{location.state.restaurant}</h3>
-             Precio: <p>{location.state.dish.price}</p>
+  useEffect(() => {
+    axios.get(`http://localhost:5000/api/dish/${location.state.dish.name}`)
+      .then((res) => {
+        console.log(res.data);
+        res.data.map((param) => {
+          axios.get(`http://localhost:5000/api/restaurants/${param.id_restaurant}`)
+            .then((res) => {
+              console.log(res.data);
+            })
+        })
+      })
+  }, [orders])
 
-             <Link to={`/card`}>
-        <button type="submit" >
+  return (
+    <>
+      <div className="tgview">
+        <h2>Plato:</h2>  <h4 className="tituloview">{location.state.dish.name}</h4>
+        Categoría: <p>{location.state.dish.category}</p>
+        Restaurante: <h3>{location.state.restaurant}</h3>
+        Precio: <p>{location.state.dish.price}</p>
+        <button onClick={() => {
+          history.push('/card')
+        }} >
           Pagar
         </button>
-      </Link>
-             
-        
-             
-        </div>
-          
-         </>
-    )
+      </div>
+    </>
+  )
 }
 
 export default More_Info;
