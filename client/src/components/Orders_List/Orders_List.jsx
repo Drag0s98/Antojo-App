@@ -11,7 +11,6 @@ const Orders_List = () => {
 
   const [order, setOrder] = useState(null);
   const { uid } = useContext(DataContext);
-  const history = useHistory();
 
   useEffect(() => {
     axios
@@ -30,9 +29,9 @@ const Orders_List = () => {
       order != null ?
       <section>
         <header className="header-general">
-    <button onClick={() => history.push('/order_confirmed')}>«--</button>
-      <h3>Pedidos</h3>
-    </header>
+          <button onClick={() => history.push('/order_confirmed')}>«--</button>
+          <h3>Pedidos</h3>
+        </header>
         {order.map((param, i) => {
           return (
             <article key={i}>
