@@ -1,35 +1,35 @@
 import React, { useEffect, useState, useContext } from "react";
-import axios from 'axios';
-import { useHistory } from 'react-router-dom';
+import axios from "axios";
+import { useHistory } from "react-router-dom";
 
 import { DataContext } from "../../context/context";
+
 import pb from '../../styles/assets/img/png/progessbar1.png';
 import plus from '../../styles/assets/img/png/btn2.png';
 
 
 const Address = () => {
-
   const [addres, setAddres] = useState(null);
-  const { uid } = useContext(DataContext)
+  const { uid } = useContext(DataContext);
 
   const history = useHistory();
 
   useEffect(() => {
     if (uid !== null) {
-      axios.get(`http://localhost:5000/api/address/${uid}`)
-        .then((res) => {
-          setAddres(res.data[0])
-        })
+      axios.get(`http://localhost:5000/api/address/${uid}`).then((res) => {
+        setAddres(res.data[0]);
+      });
     }
-  }, [uid])
+  }, [uid]);
 
   const handleClick = () => {
-    history.push('/add/address', uid)
-  }
+    history.push("/add/address", uid);
+  };
 
   return (
     <section>
       <header className="header-general">
+
         <button onClick={() => history.push('/more')}>«--</button>
         <h3>Selecciona dirección</h3>
       </header>
@@ -65,19 +65,15 @@ const Address = () => {
               <div className="wpbtb">
             <button className="onboarding--btn btn4" onClick={() => history.push('/card')}>Continuar</button>
               </div>
-               
             </>
-            :
+          ) : (
             <>
             <div className="btnadd">
                <img src={plus} alt="" className="plus"/> <button onClick={handleClick} className="adddirectionbtn">Añadir dirección</button>
               
               </div>
             </>
-          }
-
-        
-
+          )}
         </div>
       </article>
     </section>

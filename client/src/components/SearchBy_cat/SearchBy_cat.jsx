@@ -146,6 +146,7 @@ const SearchBy_cat = ({ location, watch, settings }) => {
         <h3>Resultaados de búsqueda</h3>
       </header>
       <article>
+
         {order !== null ? order.map((param, i) => {
           return (
             <div key={i}>
@@ -154,7 +155,7 @@ const SearchBy_cat = ({ location, watch, settings }) => {
               <button onClick={() => history.push('/more', {
                 dish: dishes[i],
                 restaurant: param.name
-              })}>Pedir!</button>
+              })}>Más detalles</button>
             </div>
           )
         }) : ''}

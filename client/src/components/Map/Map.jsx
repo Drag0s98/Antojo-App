@@ -33,9 +33,7 @@ const Map = ({ watch, settings }) => {
             center={geolocation}
             zoom={13}
             scrollWheelZoom={false}
-
             style={{ height: "60vh", width: "94vw" }}
-
           >
             <TileLayer
               attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'

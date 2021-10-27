@@ -39,6 +39,7 @@ const Add_CreditCard = () => {
 
   return (
     <>
+
       <header className="header-general">
         <button onClick={() => history.push('/card')}>«--</button>
         <h3>Añadir tarjeta</h3>
@@ -57,7 +58,6 @@ const Add_CreditCard = () => {
         <label>Exp. Date</label>
         <input type="text" name="date" placeholder="MM/YY" /><br />
         <input type="submit" value="+  AÑADIR TARJETA" /> 
-        
       </form>
     </>
   );

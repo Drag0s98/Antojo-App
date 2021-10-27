@@ -22,6 +22,10 @@ const Add_Address = ({ location }) => {
 
   return (
     <section>
+      <header className="header-general">
+    <button onClick={() => history.push('/address')}>«--</button>
+      <h3>Añadir dirección</h3>
+    </header>
       <article>
         <form onSubmit={handleSubmit}>
           <div className="formulario">
