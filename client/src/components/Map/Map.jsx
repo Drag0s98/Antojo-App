@@ -27,7 +27,7 @@ const Map = ({ watch, settings }) => {
             center={geolocation}
             zoom={13}
             scrollWheelZoom={false}
-            style={{ height: "80vh", width: "94vw" }}
+            style={{ height: "60vh", width: "94vw" }}
             
           >
             <TileLayer

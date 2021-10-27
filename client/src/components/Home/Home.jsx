@@ -33,7 +33,7 @@ const Home = () => {
   }, []);
 
   return (
-    <>
+    <dic className="home">
       {
         spinner === true ? <Loading /> :
           <section className="prueba">
@@ -75,7 +75,7 @@ const Home = () => {
             </section>
           </section>
       }
-    </>
+    </dic>
   );
 };
 
