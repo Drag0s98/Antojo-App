@@ -134,6 +134,10 @@ function Result_Search({ location, watch, settings }) {
 
     return (
         <section>
+            <header className="header-general">
+    <button onClick={() => history.push('/home')}>«--</button>
+      <h3>Resultados de búsqueda</h3>
+    </header>
             <article>
                 <form onSubmit={handleSubmit}>
                     <label>Introduce una busca</label>
