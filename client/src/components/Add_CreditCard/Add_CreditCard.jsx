@@ -42,6 +42,7 @@ const Add_CreditCard = () => {
       <header className="header-general">
         <button onClick={() => history.push('/card')}>«--</button>
         <h3>Añadir tarjeta</h3>
+        <p>Hola</p>
       </header>
       {orders.name}
       <form action="submit" onSubmit={postCard}>

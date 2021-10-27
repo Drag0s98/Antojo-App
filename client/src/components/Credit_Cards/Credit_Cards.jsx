@@ -3,6 +3,9 @@ import { useHistory } from "react-router-dom";
 import axios from "axios";
 import { DataContext } from "../../context/context";
 
+import pb2 from '../../styles/assets/img/png/progressbar2.png';
+import tarjeta from '../../styles/assets/img/svg/fondo-tarjeta-de-pago.svg';
+
 const Credit_Cards = () => {
   const history = useHistory();
   const { uid } = useContext(DataContext);
@@ -31,6 +34,11 @@ const Credit_Cards = () => {
         <button onClick={() => history.push('/address')}>«--</button>
         <h3>Método de pago</h3>
       </header>
+      <div className="pbar">
+        <img src={pb2} alt="" />
+      </div>
+      <p>Tarjeta guardada:</p>
+      <img src={tarjeta} alt="" />
       <form onSubmit={handleSubmit}>
         {myCards !== ""
           ? myCards.map((param, i) => {

@@ -14,7 +14,7 @@ const Footer = () => {
       <div className="arrow-container">
 
           <div className="expl">
-            <Link to={`/home`} className={`expl ${window.location.pathname === '/home' ? 'linkfooter2' : 'linkfooter'}`}>
+            <Link to={`/home`} className={`expl ${window.location.pathname === '/home' || '/search' ? 'linkfooter2' : 'linkfooter'}`}>
             <img src={home} alt="" />
             <p className="explora">Explora</p>
             </Link>
