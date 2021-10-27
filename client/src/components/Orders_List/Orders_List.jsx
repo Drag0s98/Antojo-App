@@ -2,11 +2,14 @@ import React, { useState, useContext, useEffect } from "react";
 import { Redirect } from "react-router-dom";
 import axios from 'axios';
 import { DataContext } from "../../context/context";
+import { useHistory } from "react-router-dom";
 
 const Orders_List = () => {
 
   const [order, setOrder] = useState(null);
   const { uid } = useContext(DataContext);
+  const history = useHistory();
+
   useEffect(() => {
     axios.get(`http://localhost:5000/api/orders/${uid}`)
       .then((res) => setOrder(res.data))
@@ -17,6 +20,10 @@ console.log(order);
   return (
     order != null ?
       <section>
+        <header className="header-general">
+    <button onClick={() => history.push('/order_confirmed')}>«--</button>
+      <h3>Pedidos</h3>
+    </header>
         {order.map((param, i) => {
           return (
             <article key={i}>

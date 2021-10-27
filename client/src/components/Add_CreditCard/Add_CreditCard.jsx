@@ -39,9 +39,11 @@ const Add_CreditCard = () => {
 
   return (
     <>
-      <button onClick={() => history.push('/card')}>«--</button>
+    <header className="header-general">
+    <button onClick={() => history.push('/card')}>«--</button>
+      <h3>Añadir tarjeta</h3>
+    </header>
       {orders.name}
-      <h4>Añadir tarjeta</h4>
       <form action="submit" onSubmit={postCard}>
         <label>Crea un alias para tu tarjeta: </label>
         <input type="text" name="alias" placeholder="P.ej: Tarjeta BBVA, ... " /><br />
@@ -54,7 +56,6 @@ const Add_CreditCard = () => {
         <label>Exp. Date</label>
         <input type="text" name="date" placeholder="MM/YY" /><br />
         <input type="submit" value="+  AÑADIR TARJETA" /> 
-        {/* PENDIENTE: Añadir al botón la funcionalidad de volver a la pantalla anterior (9.Proceso de pago) con la tarjeta ya pintada  */}
       </form>
     </>
   );

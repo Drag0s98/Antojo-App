@@ -37,6 +37,9 @@ const Home = () => {
       {
         spinner === true ? <Loading /> :
           <section className="prueba">
+            <header className="header-general">
+      <h3>Logo</h3>
+    </header>
             <section>
               <Browser />
               <Map />

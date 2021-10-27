@@ -43,6 +43,10 @@ function More_Info({ location }) {
 
   return (
     <>
+    <header className="header-general">
+    <button onClick={() => history.push('/home')}>«--</button>
+      <h3>Nombre del plato</h3>
+    </header>
       <div className="tgview">
         <h2>Plato:</h2>  <h4 className="tituloview">{location.state.dish.name}</h4>
         Categoría: <p>{location.state.dish.category}</p>
