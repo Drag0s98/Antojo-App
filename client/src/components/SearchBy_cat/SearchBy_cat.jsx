@@ -18,6 +18,7 @@ const SearchBy_cat = ({ location, watch, settings }) => {
   const [order, setOrder] = useState(null);
 
 
+
   //Calcular la distancia
   function getDistance(origin, destination) {
 
@@ -74,7 +75,10 @@ const SearchBy_cat = ({ location, watch, settings }) => {
             arr.push(response.data[0])
           })
         })
-        .then(() => setRestaurants(arr))
+        .then(() => {
+          setRestaurants(arr)
+        }
+        )
         .catch(error => console.log(error))
     }
   }, [restaurants_id])
@@ -85,11 +89,9 @@ const SearchBy_cat = ({ location, watch, settings }) => {
       new Promise(resolve => setTimeout(resolve, 1000))
         .then(() => {
           restaurants.map((param) => {
-            console.log(param);
             let arr = param.coordinates.split(',');
             let lat = parseFloat(arr[0])
             let lon = parseFloat(arr[1])
-            console.log(lat, lon);
             let obj = {
               name: param.name,
               lat: lat,
@@ -118,10 +120,31 @@ const SearchBy_cat = ({ location, watch, settings }) => {
       })
     }
     // console.log('Distancia entre los 2 puntos:' + distance)
-  }, [coords])
+  }, [coords]) //Este alert hay que dejarlo porque si no se genera un bucle infinito
+
+  useEffect(() => {
+    let arr = []
+    if (order != null) {
+      new Promise(resolve => setTimeout(resolve, 1500))
+        .then(() => {
+          order.filter((element, i) => {
+            arr.push(element.distance)
+            arr.sort((a, b) => a - b )
+            if (arr[i] === element.distance) {
+              return element
+            }
+          })
+        })
+
+    }
+  }, [order])
 
   return (
-    <section>
+    <section className="searchCategory">
+      <header className="header-general">
+        <button onClick={() => history.push("/home")}>«--</button>
+        <h3>Resultaados de búsqueda</h3>
+      </header>
       <article>
         {order !== null ? order.map((param, i) => {
           return (

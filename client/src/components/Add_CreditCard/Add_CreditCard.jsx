@@ -20,9 +20,8 @@ const Add_CreditCard = () => {
 
   // if (!card) return "No Credit Card!";
 
-  function postCard (event) {
+  async function postCard  (event) {
     event.preventDefault();
-
     axios.post(apiURL, {
         uid: uid,
         titular: event.target.elements.name.value,
@@ -34,14 +33,17 @@ const Add_CreditCard = () => {
       .then((response) => {
         setCard(response.data);
       });
+      await new Promise(resolve => setTimeout(resolve, 1000))
       history.push('/card')
   };
 
   return (
     <>
-      <button onClick={() => history.push('/card')}>«--</button>
+      <header className="header-general">
+        <button onClick={() => history.push('/card')}>«--</button>
+        <h3>Añadir tarjeta</h3>
+      </header>
       {orders.name}
-      <h4>Añadir tarjeta</h4>
       <form action="submit" onSubmit={postCard}>
         <label>Crea un alias para tu tarjeta: </label>
         <input type="text" name="alias" placeholder="P.ej: Tarjeta BBVA, ... " /><br />
@@ -54,7 +56,7 @@ const Add_CreditCard = () => {
         <label>Exp. Date</label>
         <input type="text" name="date" placeholder="MM/YY" /><br />
         <input type="submit" value="+  AÑADIR TARJETA" /> 
-        {/* PENDIENTE: Añadir al botón la funcionalidad de volver a la pantalla anterior (9.Proceso de pago) con la tarjeta ya pintada  */}
+        
       </form>
     </>
   );

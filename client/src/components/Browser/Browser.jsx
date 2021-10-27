@@ -2,6 +2,8 @@ import React, { useContext, useState, useEffect } from "react";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
 
+import search from "../../styles/assets/img/png/arrow-left.png"
+
 const Browser = () => {
   let history = useHistory();
 
@@ -50,7 +52,6 @@ const Browser = () => {
   };
 
   if (searchValue !== "") history.push("/search", searchValue);
-
   return (
     <section className="browser">
       <div className="browser--box-input">
@@ -61,7 +62,8 @@ const Browser = () => {
             name="browser"
             placeholder="Busca plato..."
           />
-          <button className="browser--box-btn">Search</button>
+          <button className="browser--box-btn">
+            Search</button>
         </form>
       </div>
       <div className="browser--filter">
