@@ -6,6 +6,7 @@ import wave1 from '../../styles/assets/img/svg/wave.1svg.svg'
 import wave2 from '../../styles/assets/img/svg/wave2.svg.svg'
 
 
+
 const Onboarding = () => {
   const [index, setIndex] = useState(0);
 
@@ -47,6 +48,7 @@ const Onboarding = () => {
                 Amet minim mollit non deserunt ullamco est sit aliqua dolor do
                 amet sint. Velit officia consequat duis enim velit mollit.
                 Exercitation veniam consequat sunt nostrud amet.
+                
               </p>
               <br />
             </div>

@@ -27,10 +27,9 @@ const Confirm_Order = ({ location }) => {
   return (
     <section className="order">
       <header className="header-general">
-    <button onClick={() => history.push('/card')}>«--</button>
-      <h3>Resumen de su pedido</h3>
-    </header>
-      
+        <button onClick={() => history.push('/card')}>«--</button>
+        <h3>Resumen de tu pedido</h3>
+      </header>
       <div className="order--box">
         {orders ?
           <>

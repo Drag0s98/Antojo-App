@@ -3,6 +3,7 @@ import { useHistory } from 'react-router-dom';
 
 import axios from "axios";
 import { usePosition } from "../../hooks/usePosition";
+import Footer from "../Footer";
 
 
 const SearchBy_cat = ({ location, watch, settings }) => {
@@ -140,11 +141,12 @@ const SearchBy_cat = ({ location, watch, settings }) => {
 
   return (
     <section className="searchCategory">
-        <header className="header-general">
-    <button onClick={() => history.push('/home')}>«--</button>
-      <h3>Resultados de búsqueda</h3>
-    </header>
-      <article className='list'>
+      <header className="header-general">
+        <button onClick={() => history.push("/home")}>«--</button>
+        <h3>Resultaados de búsqueda</h3>
+      </header>
+      <article>
+
         {order !== null ? order.map((param, i) => {
           return (
             <div key={i}>
@@ -159,7 +161,7 @@ const SearchBy_cat = ({ location, watch, settings }) => {
         }) : ''}
 
       </article>
-
+        <Footer />
     </section>
   );
 };

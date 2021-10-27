@@ -39,10 +39,12 @@ const Add_CreditCard = () => {
 
   return (
     <>
-    <header className="header-general">
-    <button onClick={() => history.push('/card')}>«--</button>
-      <h3>Añadir tarjeta</h3>
-    </header>
+
+      <header className="header-general">
+        <button onClick={() => history.push('/card')}>«--</button>
+        <h3>Añadir tarjeta</h3>
+        <p>Hola</p>
+      </header>
       {orders.name}
       <form action="submit" onSubmit={postCard}>
         <label>Crea un alias para tu tarjeta: </label>

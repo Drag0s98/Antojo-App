@@ -2,6 +2,8 @@ import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
 import { DataContext } from '../../context/context';
+
+import Footer from '../Footer';
 import swal from 'sweetalert';
 
 
@@ -42,11 +44,11 @@ function More_Info({ location }) {
   const coordinates = [40.42166, -3.69271] // Coger coordenadas del restaurante
 
   return (
-    <>
-    <header className="header-general">
-    <button onClick={() => history.push('/home')}>«--</button>
-      <h3>Nombre del plato</h3>
-    </header>
+    <section className="moreInfo">
+      <header className="header-general">
+        <button onClick={() => history.push('/home')}>«--</button>
+        <h3>Nombre del plato</h3>
+      </header>
       <div className="tgview">
         <h2>Plato:</h2>  <h4 className="tituloview">{location.state.dish.name}</h4>
         Categoría: <p>{location.state.dish.category}</p>
@@ -71,8 +73,9 @@ function More_Info({ location }) {
         }} >
           Pedir plato
         </button>
+        <Footer />
       </div>
-    </>
+    </section>
   );
 }
 

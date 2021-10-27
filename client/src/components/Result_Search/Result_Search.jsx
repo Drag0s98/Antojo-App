@@ -3,8 +3,8 @@ import axios from "axios";
 import { useHistory } from "react-router-dom";
 import { usePosition } from "../../hooks/usePosition";
 import More_Info from "../More_Info";
+import Footer from '../Footer';
 
-//import leftarrow from '../../styles/assets/img/png/left-arrow.png'
 
 function Result_Search({ location, watch, settings }) {
   //location.state saco la informacion del plato
@@ -137,7 +137,7 @@ function Result_Search({ location, watch, settings }) {
   return (
     <div className="resultSearch">
       <header className="header-general">
-        <button onClick={() => history.push("/home")}>--</button>
+        <button onClick={() => history.push("/home")}>«--</button>
         <h3>Resultados de búsqueda</h3>
       </header>
       <section className="result">
@@ -181,6 +181,7 @@ function Result_Search({ location, watch, settings }) {
               })
             : ""}
         </article>
+<Footer />
       </section>
     </div>
   );

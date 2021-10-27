@@ -1,24 +1,33 @@
 import React, { useState, useContext, useEffect } from "react";
 import { Redirect } from "react-router-dom";
-import axios from 'axios';
+import axios from "axios";
 import { DataContext } from "../../context/context";
 import { useHistory } from "react-router-dom";
+import Footer from "../Footer";
+
 
 const Orders_List = () => {
+  const history = useHistory();
 
   const [order, setOrder] = useState(null);
   const { uid } = useContext(DataContext);
   const history = useHistory();
 
   useEffect(() => {
-    axios.get(`http://localhost:5000/api/orders/${uid}`)
-      .then((res) => setOrder(res.data))
-  }, [uid])
+    axios
+      .get(`http://localhost:5000/api/orders/${uid}`)
+      .then((res) => setOrder(res.data));
+  }, [uid]);
 
   //Lo del tiempo creo que lo puedo sacar pero necesito mirarlo mas en profundidad.
-console.log(order);
+  console.log(order);
   return (
-    order != null ?
+    <>
+      <header className="header-general">
+        <button onClick={() => history.push("/orderconfirmation")}>«--</button>
+        <h3>Pedidos</h3>
+      </header>
+      order != null ?
       <section>
         <header className="header-general">
     <button onClick={() => history.push('/order_confirmed')}>«--</button>
@@ -33,14 +42,14 @@ console.log(order);
               <p>Tiempo </p>
               <p>Precio {param.price}</p>
               <p>En camino</p>
-              <button >Ver pedido</button>
+              <button>Ver pedido</button>
             </article>
-          )
+          );
+          <Footer />
         })}
       </section>
-      : setTimeout(() => {
-        <Redirect to='/login' />
-      }, 200)
+      : setTimeout(() => {<Redirect to="/login" />}, 200)
+    </>
   );
 };
 

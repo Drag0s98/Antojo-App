@@ -1,6 +1,7 @@
 import React from "react";
 
 import { Link } from "react-router-dom";
+import Footer from "../Footer";
 
 const Error = () => {
   return (
@@ -19,6 +20,7 @@ const Error = () => {
           Volver a explora
         </button>
       </Link>
+      <Footer />
     </div>
   );
 };

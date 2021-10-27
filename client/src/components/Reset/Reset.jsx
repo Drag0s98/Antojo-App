@@ -4,6 +4,7 @@ import { useCallback } from "react";
 import { auth } from "../../firebase";
 import { withRouter } from "react-router";
 
+
 const Reset = (props) => {
 
   const [email, setEmail] = useState("");
@@ -60,7 +61,6 @@ const Reset = (props) => {
         </form>
       </div>
     </div>
-
   </div>
   )
 };

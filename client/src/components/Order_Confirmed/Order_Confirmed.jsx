@@ -3,16 +3,13 @@ import { Link } from "react-router-dom";
 import { useHistory } from "react-router-dom";
 
 const Order_Confirmed = () => {
-
   const history = useHistory();
-
-
   return (
     <section>
       <header className="header-general">
-    <button onClick={() => history.push('/confirm_order')}>«--</button>
-      <h3>Confirmación</h3>
-    </header>
+        <button onClick={() => history.push('/confirmorder')}>«--</button>
+        <h3>Confirmación</h3>
+      </header>
       <img src="" alt="" />
       <p>¡Gracias por su pedido! En breves recibirá una notificación</p>
       <Link to={`/home`}>

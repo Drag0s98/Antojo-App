@@ -28,13 +28,20 @@ const Add_Address = ({ location }) => {
     </header>
       <article>
         <form onSubmit={handleSubmit}>
-          <label>Direccion del domicilio</label>
-          <input type="text" name='direccion' placeholder='calle' />
-          <label>Numero</label>
-          <input type="number" name='number' placeholder='00' />
-          <label>Piso</label>
-          <input type="text" name='piso' placeholder='1A' />
-          <button type='submit'>Guardar Direccion</button>
+          <div className="formulario">
+          <label className="elementform">Nombre</label>
+          <input type="text" name='name' placeholder='nombre' className="inputform formnomb"/>
+          <label className="elementform">Dirección</label>
+          <input type="text" name='adress' placeholder='dirección' className="inputform formdir"/>
+          <label className="elementform ">Número</label>
+          <div className="downitem">
+          
+          <input type="number" name='number' placeholder='número' className="inputform formnumero"/>
+          <label className="elementform elementpiso">Piso</label>
+          <input type="text" name='piso' placeholder='piso' className="inputform formpiso"/>
+          </div>
+          </div>
+          <button type='submit' className="onboarding--btn  btn5">Guardar Dirección</button>
         </form>
       </article>
     </section>
