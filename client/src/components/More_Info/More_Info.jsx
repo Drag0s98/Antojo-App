@@ -2,6 +2,8 @@ import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
 import { DataContext } from '../../context/context';
+
+import Footer from '../Footer';
 import swal from 'sweetalert';
 
 
@@ -71,6 +73,7 @@ function More_Info({ location }) {
         }} >
           Pedir plato
         </button>
+        <Footer />
       </div>
     </section>
   );

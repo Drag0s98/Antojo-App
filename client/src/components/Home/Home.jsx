@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from "react";
-import Browser from "../Browser";
-import Map from "../Map";
-import axios_hook from "../../hooks/get-axios";
-import Loading from "../Loading";
+
+import Browser from '../Browser';
+import Map from '../Map';
+import axios_hook from '../../hooks/get-axios';
+import Loading from '../Loading';
+import Footer from "../Footer";
+
 
 const Home = () => {
   const [ranking, setRanking] = useState(null);
@@ -33,7 +36,7 @@ const Home = () => {
   }, []);
 
   return (
-    <div className="home">
+<div className="home">
       {spinner === true ? (
         <Loading />
       ) : (
@@ -70,10 +73,10 @@ const Home = () => {
               <p>Aqui irian las recomendaciones</p>
             </article>
           </section>
+          <Footer />
         </section>
       )}
     </div>
   );
 };
-
 export default Home;

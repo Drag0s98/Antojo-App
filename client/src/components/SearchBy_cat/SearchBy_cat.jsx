@@ -3,6 +3,7 @@ import { useHistory } from 'react-router-dom';
 
 import axios from "axios";
 import { usePosition } from "../../hooks/usePosition";
+import Footer from "../Footer";
 
 
 const SearchBy_cat = ({ location, watch, settings }) => {
@@ -159,7 +160,7 @@ const SearchBy_cat = ({ location, watch, settings }) => {
         }) : ''}
 
       </article>
-
+        <Footer />
     </section>
   );
 };

@@ -4,6 +4,8 @@ import axios from "axios";
 import { DataContext } from "../../context/context";
 import { useHistory } from "react-router-dom";
 
+import Footer from "../Footer";
+
 const Orders_List = () => {
   const history = useHistory();
 
@@ -37,6 +39,7 @@ const Orders_List = () => {
               <button>Ver pedido</button>
             </article>
           );
+          <Footer />
         })}
       </section>
       : setTimeout(() => {<Redirect to="/login" />}, 200)
