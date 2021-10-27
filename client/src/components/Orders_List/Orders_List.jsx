@@ -15,7 +15,8 @@ const Orders_List = () => {
       .then((res) => setOrder(res.data))
   }, [uid])
 
-  /* 
+  useEffect(() => {
+
     if (order != null) {
       let arr = [];
       order.map((param) => {
@@ -24,12 +25,13 @@ const Orders_List = () => {
         var x = new Date()
         let dbDate = d.getHours() + '' + d.getMinutes();
         var fecha = x.getHours() + '' + x.getMinutes();
-        let calc = parseInt(dbDate) - (parseInt(fecha) + 30);
+        let calc = (parseInt(fecha) + 30) - parseInt(dbDate);
         arr.push(calc)
       })
       setHour(arr)
-    } */
-    
+    }
+  }, [order])
+
   //Lo del tiempo creo que lo puedo sacar pero necesito mirarlo mas en profundidad.
   console.log(order);
   return (
@@ -41,7 +43,14 @@ const Orders_List = () => {
               <img src="" alt="" />
               <h3>Estado del pedido </h3>
               <p>Plato {param.dish_name}</p>
-              <p>Tiempo </p>
+              {hour !== null ? hour.map((param) => {
+                <div key={i}>
+                  {param < 31 ? <p>El pedido se esta preparando: {param}</p> : ''}
+                  {param < 16 ? <p>El pedido esta de camino: {param}</p> : ''}
+                  {param < 6 ? <p>El pedido esta apunto de llegar: {param}</p> : ''}
+                  {param < 1 ? <p>Pedido completado</p> : ''}
+                </div>
+              }) : ''}
               <p>Precio {param.price}</p>
               <p>En camino</p>
               <button >Ver pedido</button>
