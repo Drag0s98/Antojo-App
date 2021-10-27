@@ -52,17 +52,21 @@ const SearchBy_cat = ({ location, watch, settings }) => {
   useEffect(() => {
     let arr = []
     if (dishes.length !== 0) {
-      dishes.map(async (param) => {
-        await axios.get(`http://localhost:5000/api/dish/${param.name}`)
-          .then((res) => {
-            res.data.map((param) => {
-              arr.push(param.id_restaurant)
-            })
-            setRestaurants_id(arr)
-          }).catch(error => console.log(error))
+      dishes.map(async (param, i) => {
+        if (i < 11) {
+          await axios.get(`http://localhost:5000/api/dish/${param.name}`)
+            .then((res) => {
+              res.data.map((param) => {
+                arr.push(param.id_restaurant)
+              })
+              setRestaurants_id(arr)
+            }).catch(error => console.log(error))
+        }
       })
     }
   }, [dishes, setDishes])
+
+  
 
   useEffect(() => {
     let arr = []
@@ -128,7 +132,7 @@ const SearchBy_cat = ({ location, watch, settings }) => {
         .then(() => {
           order.filter((element, i) => {
             arr.push(element.distance)
-            arr.sort((a, b) => a - b )
+            arr.sort((a, b) => a - b)
             if (arr[i] === element.distance) {
               return element
             }

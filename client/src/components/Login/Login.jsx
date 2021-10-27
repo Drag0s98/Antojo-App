@@ -102,26 +102,15 @@ const Login = (props) => {
 
   const registrar = useCallback(async (e) => {
     try {
-      let img
-      console.log(image.image);
-      if (image.image === undefined) {
-        img = null
-      } else {
-        img = URL.createObjectURL(image.image)
-      }
       const res = await auth.createUserWithEmailAndPassword(email, password)
 
-      let emailForm = e.target.email.value;
+      let emailForm = email;
       let uidForm = res.user.uid
-      let username = e.target.username.value;
       let user = {
         uidForm,
-        img,
         emailForm,
-        username
       }
-      let response = await axios.post(`http://localhost:5000/api/register`, user)
-      console.log(response);
+      await axios.post(`http://localhost:5000/api/register`, user)
       await db.collection('usuarios').doc(res.user.uid).set({
         email: res.user.email,
         uid: res.user.uid,
@@ -143,7 +132,7 @@ const Login = (props) => {
         setError_email(' El email ya existe')
       }
     }
-  }, [email, password, props.history, image.image, setUid, setitsLog]);
+  }, [email, password, props.history, setUid, setitsLog]);
 
   const handleImage = (e) => {
     if (e.target.files[0].type === 'image/png' || e.target.files[0].type === 'image/jpeg' || e.target.files[0].type === 'image/jpg') {
@@ -187,7 +176,7 @@ const Login = (props) => {
                 </div>
               ) : null
             }
-            
+
 
 
             <p className='answer_box' onClick={() => {
@@ -197,7 +186,7 @@ const Login = (props) => {
             }
 
 
-            
+
             }>¿Tienes cuenta? Inicia sesión {'\u00A0'}<u>aquí</u></p>
             <div className='buttons_container'>
               <button type="submit" className='auth_btn'>
@@ -257,7 +246,7 @@ const Login = (props) => {
                   </div>
                 ) : null
               }
-              
+
               <p className='answer_box' onClick={() => {
                 setError_email(null);
                 setError_pass(null);

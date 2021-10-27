@@ -39,10 +39,10 @@ const Browser = () => {
         history.push("/category", { filter: "Healthy" });
         break;
       case "vegan":
-        history.push("/category", { filter: "Vegan" });
+        history.push("/category", { filter: "Vegano" });
         break;
       case "vegetarian":
-        history.push("/category", { filter: "Vegetarian" });
+        history.push("/category", { filter: "Vegetariano" });
         break;
       default:
         break;
