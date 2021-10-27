@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import Footer from "../Footer";
 
 const Orders_List = () => {
   return (
@@ -13,6 +14,7 @@ const Orders_List = () => {
       <Link to={`/orderdetails`}>
         <button>Ver pedido</button>
       </Link>
+      <Footer />
     </section>
   );
 };

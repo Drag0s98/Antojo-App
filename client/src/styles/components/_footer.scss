@@ -1,0 +1,111 @@
+@import '../utils/variables';
+@import '../utils/mixins';
+
+.footer2 {
+    width: 380px;
+    height: 70px;
+    margin-left: -20px;
+    z-index: 99;
+    position:fixed;
+    left:17px;
+    bottom:0;
+    right:0;
+    text-decoration: none;
+    background-color: $tertiary-color-white ;
+    box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 8px;
+        .arrow-container {
+            z-index: 90;
+            display: flex;
+            text-decoration: none;
+            flex-direction: row;
+            margin-top: 9px;
+            justify-content: space-evenly;
+        }
+
+}
+
+
+.expl {
+   @include footer;
+   @include link;
+   text-decoration: none;
+        .explora {
+            color: $primary-color-verde-medio;
+            display: flex;
+            justify-content: space-around;
+            text-decoration: none;
+            font-size: 14px;
+            cursor: pointer;
+            @include link;
+        }
+
+}
+
+.shop {
+    @include footer;
+    text-decoration: none;
+        .compra {
+            color: $primary-color-verde-medio;
+            cursor: pointer;
+            font-size: 14px;
+            text-decoration: none;
+            @include link;
+        }
+}
+
+.linkfooter {
+    @include footer;
+    text-decoration: none;
+}
+
+// .linkfooter3 {
+//     @include footer;
+//     text-decoration: none;
+// }
+
+.linkfooter2 {
+    @include footer;
+    text-decoration: none;
+    
+} 
+.linkfooter2::before {
+    content: "";
+    position: absolute;
+    left: 23%;
+    bottom: 5px;
+    width: 71px;
+    height: 12px;
+    -webkit-transform: skew(
+-12deg) translateX(-50%);
+    transform: skew(
+-12deg) translateX(-50%);
+    background: #66D039;
+    z-index: -1;
+}
+.linkfooter3::before {
+    content: "";
+    position: absolute;
+    left: 53%;
+    bottom: 5px;
+    width: 71px;
+    height: 12px;
+    -webkit-transform: skew(
+-12deg) translateX(-50%);
+    transform: skew(
+-12deg) translateX(-50%);
+    background: #66D039;
+    z-index: -1;
+}
+
+
+.acc {
+    @include footer;
+        .perf{
+            color: $primary-color-verde-medio;
+            cursor: pointer;
+            font-size: 14px;
+        }
+}
+
+
+

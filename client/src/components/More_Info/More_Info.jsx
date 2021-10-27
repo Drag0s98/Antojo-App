@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import { useHistory } from "react-router-dom";
 import { DataContext } from '../../context/context';
+import Footer from '../Footer';
 
 
 
@@ -57,6 +58,7 @@ function More_Info({ location }) {
         }} >
           Pagar
         </button>
+        <Footer />
       </div>
     </>
   )

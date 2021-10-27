@@ -37,7 +37,7 @@ function App() {
           <Main />
         </DataContext.Provider> : ''}
       </BrowserRouter>
-      <Footer />
+  
     </div>
   );
 }

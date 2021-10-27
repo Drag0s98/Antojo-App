@@ -3,6 +3,7 @@ import Carousel from "react-bootstrap/Carousel";
 import { Link } from "react-router-dom";
 
 
+
 const Onboarding = () => {
   const [index, setIndex] = useState(0);
 
@@ -43,6 +44,7 @@ const Onboarding = () => {
                 Amet minim mollit non deserunt ullamco est sit aliqua dolor do
                 amet sint. Velit officia consequat duis enim velit mollit.
                 Exercitation veniam consequat sunt nostrud amet.
+                
               </p>
               <br />
             </div>

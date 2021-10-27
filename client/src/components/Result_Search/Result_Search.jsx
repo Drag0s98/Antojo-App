@@ -3,6 +3,7 @@ import axios from 'axios';
 import { useHistory } from 'react-router-dom';
 import { usePosition } from "../../hooks/usePosition";
 import More_Info from '../More_Info';
+import Footer from '../Footer';
 
 
 
@@ -173,7 +174,7 @@ function Result_Search({ location, watch, settings }) {
                     )
                 }) : ''}
             </article>
-
+                <Footer />
         </section>
     )
 }
