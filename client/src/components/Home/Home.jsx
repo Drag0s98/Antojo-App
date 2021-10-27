@@ -33,7 +33,7 @@ const Home = () => {
   }, []);
 
   return (
-    <>
+    <div className="home">
       {spinner === true ? (
         <Loading />
       ) : (
@@ -72,7 +72,7 @@ const Home = () => {
           </section>
         </section>
       )}
-    </>
+    </div>
   );
 };
 
