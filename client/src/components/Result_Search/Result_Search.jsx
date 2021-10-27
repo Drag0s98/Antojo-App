@@ -133,7 +133,7 @@ function Result_Search({ location, watch, settings }) {
   }, [order]);
 
   return (
-    <>
+    <div className="resultSearch">
       <header className="header-general">
         <button onClick={() => history.push("/home")}>«--</button>
         <h3>Resultados de búsqueda</h3>
@@ -180,7 +180,7 @@ function Result_Search({ location, watch, settings }) {
             : ""}
         </article>
       </section>
-    </>
+    </div>
   );
 }
 

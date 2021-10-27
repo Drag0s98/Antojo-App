@@ -42,7 +42,7 @@ function More_Info({ location }) {
   const coordinates = [40.42166, -3.69271] // Coger coordenadas del restaurante
 
   return (
-    <>
+    <section className="moreInfo">
       <header className="header-general">
         <button onClick={() => history.push('/home')}>«--</button>
         <h3>Nombre del plato</h3>
@@ -72,7 +72,7 @@ function More_Info({ location }) {
           Pedir plato
         </button>
       </div>
-    </>
+    </section>
   );
 }
 

@@ -139,7 +139,7 @@ const SearchBy_cat = ({ location, watch, settings }) => {
   }, [order])
 
   return (
-    <section>
+    <section className="searchCategory">
       <header className="header-general">
         <button onClick={() => history.push("/home")}>«--</button>
         <h3>Resultaados de búsqueda</h3>
