@@ -31,7 +31,7 @@ const Orders_List = () => {
         var x = new Date()
         let dbDate = d.getHours() + '' + d.getMinutes();
         var fecha = x.getHours() + '' + x.getMinutes();
-        let calc = (parseInt(fecha) + 30) - parseInt(dbDate);
+        let calc = (parseInt(dbDate) - parseInt(fecha) + 30);
         return arr.push(calc)
       })
       setHour(arr)
@@ -43,29 +43,30 @@ const Orders_List = () => {
       <>
         <header className="header-general">
           <button className="header-general--button" onClick={() => history.push("/orderconfirmation")}>
-          <img src={arrowleft} alt="" />
+            <img src={arrowleft} alt="" />
           </button>
           <h3>Pedidos</h3>
         </header>
         <section>
           {order.map((param, i) => {
+            console.log(param);
             return (
               <article key={i}>
-                <img src="" alt="" />
+                <img src={param.image} alt="" width='150px' height='150px' />
                 <h3>Estado del pedido </h3>
                 <p>Plato {param.dish_name}</p>
                 {hour !== null ? hour.map((param) => {
+                  console.log(param);
                   return (
-                    <div key={i}>
-                      {param < 31 ? <p>El pedido se esta preparando: {param}</p> : ''}
-                      {param < 16 ? <p>El pedido esta de camino: {param}</p> : ''}
-                      {param < 6 ? <p>El pedido esta apunto de llegar: {param}</p> : ''}
-                      {param < 1 ? <p>Pedido completado</p> : ''}
+                    <div>
+                      {(param < 31 && param > 16) ? <p>El pedido se esta procesando {param}</p> : ''}
+                      {(param < 16 && param > 6) ? <p>El pedido esta de camino: {param}</p> : ''}
+                      {(param < 6 && param > 1) ? <p>El pedido esta apunto de llegar: {param}</p> : ''}
+                      {(param < 1 && param > 0) ? <p>Pedido completado</p> : ''}
                     </div>
                   )
                 }) : ''}
                 <p>Precio {param.price}</p>
-                <p>En camino</p>
                 <button>Ver pedido</button>
               </article>
             );
