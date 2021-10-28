@@ -21,7 +21,6 @@ const Map = ({ watch, settings }) => {
     }, 1000);
   }, []);
 
-  const coordinates = [40.42166, -3.69271];
   const geolocation = [latitude, longitude];
 
   return (
@@ -38,26 +37,23 @@ const Map = ({ watch, settings }) => {
               attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
               url={`https://api.mapbox.com/styles/v1/tamaragmartin/ckuykd13k01un14of1yunvqli/tiles/256/{z}/{x}/{y}@2x?access_token=${process.env.REACT_APP_MAPBOX_KEY}`}
             />
-            {/* {location.map((param, i) => {
-              return ( */} 
-              {/* <div key={i}></div> */}
-                <Marker 
-                  position={coordinates}
-                  icon={
-                    new Icon({
-                      iconUrl: markerIconPng,
-                      iconSize: [25, 41],
-                      iconAnchor: [12, 41],
-                    })
-                  }
-                >
-                  <Popup>
-                    The Bridge <br /> Paseo de Recoletos, 15 <br />
-                    {/* <a href="https://www.thebridge.tech/">Visit website » </a> */}
-                  </Popup>
-                </Marker>
-              );
-            
+
+            {coordinates.map((param) => {
+              return <Marker
+                position={param}
+                icon={
+                  new Icon({
+                    iconUrl: markerIconPng,
+                    iconSize: [25, 41],
+                    iconAnchor: [12, 41],
+                  })
+                }
+              >
+                <Popup>
+                  The Bridge <br /> Paseo de Recoletos, 15 <br />
+                </Popup>
+              </Marker>
+            })}
           </MapContainer>
         </section>
       ) : null}
