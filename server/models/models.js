@@ -18,7 +18,7 @@ const entries = {
         let result;
         try {
             result = await pool.query(`
-            SELECT id_dish, name, category, price, rating, offer
+            SELECT id_dish, name, category, price, rating, offer, image_web_dish
 	            FROM public.dishes;
             `)
         } catch (error) {
