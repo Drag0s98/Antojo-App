@@ -4,9 +4,7 @@ import { useHistory } from 'react-router-dom';
 import axios from "axios";
 import { usePosition } from "../../hooks/usePosition";
 import Footer from "../Footer";
-import arrowleft from "../../styles/assets/img/png/arrow-left.png";
-import ClipLoader from "react-spinners/ClipLoader";
-
+import arrowleft from "../../styles/assets/img/png/arrow-left.png"
 
 
 const SearchBy_cat = ({ location, watch, settings }) => {
@@ -19,7 +17,6 @@ const SearchBy_cat = ({ location, watch, settings }) => {
   const [restaurants, setRestaurants] = useState('');
   const [coords, setCoords] = useState(null);
   const [order, setOrder] = useState(null);
-  const [loader, setLoader] = useState(false);
 
 
 
@@ -49,10 +46,7 @@ const SearchBy_cat = ({ location, watch, settings }) => {
 
   useEffect(() => {
     axios.get(`http://localhost:5000/api/category/${location.state.filter}`)
-      .then((res) => {
-        setLoader(true)
-        setDishes(res.data)
-      })
+      .then((res) => setDishes(res.data))
       .catch(error => console.log(error))
   }, [location])
 
@@ -134,46 +128,37 @@ const SearchBy_cat = ({ location, watch, settings }) => {
             return arr.push(obj)
           })
         })
-        .then(() => {
-          setOrder(arr);
-          setLoader(false);
-        })
+        .then(() => setOrder(arr))
     }
     // console.log('Distancia entre los 2 puntos:' + distance)
   }, [coords]) //Este alert hay que dejarlo porque si no se genera un bucle infinito
 
 
   return (
-    <section className="searchCategory">
-      {loader === false ?
-        <>
-          <header className="header-general">
-            <button className="header-general--button" onClick={() => history.push("/home")}><img src={arrowleft} alt="" /></button>
-            <h3>Resultados de búsqueda</h3>
-          </header>
-          <article className="list">
-            {(order !== null && dishes !== null) ? dishes.map((param, i) => {
-              return (
-                i < order.length ?
-                  <div className="cards-container" key={i}>
-                    <img className="dish-image"  src={param.image_web_dish} width='150px' height='150px' alt="" />
-                    <article className="overlay">
-                    <h3>{param.name}</h3>
-                    <h4>{order[i].name}</h4>
-                    <h4>{param.price}</h4>
-                    <button className="detailsdish-btn" onClick={() => history.push('/more', {
-                      dish: param,
-                      restaurant: order[i].name
-                    })}>Más detalles</button>
-                    </article>
-                  </div>
-                  : ""
-              )
-            }) : ''}
-          </article>
-          <Footer />
-        </>
-        : <ClipLoader color={'#386641'} size={150} />}
+    <section className="resultSearch">
+      <header className="header-general">
+        <button className="header-general--button" onClick={() => history.push("/home")}><img src={arrowleft} alt="" /></button>
+        <h3>Resultados de búsqueda</h3>
+      </header>
+      <article className="list">
+        {order !== null ? order.map((param, i) => {
+          return (
+            <div className="cards-container" key={i}>
+              {dishes[i].image_web_dish !== undefined ? <img className="dish-image" src={dishes[i].image_web_dish} width='150px' height='150px' alt="" /> : ''}
+              <article className="overlay">
+              <h3>{dishes[i].name} </h3>
+              <h4>{param.name}</h4>
+              <h4>Precio {dishes[i].price}</h4>
+              <button className="detailsdish-btn" onClick={() => history.push('/more', {
+                dish: dishes[i],
+                restaurant: param.name
+              })}>Más detalles</button>
+              </article>
+            </div>
+          )
+        }) : ''}
+      </article>
+      <Footer />
     </section>
   );
 };
