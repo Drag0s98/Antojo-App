@@ -3,6 +3,7 @@ import axios from "axios";
 import { useHistory } from "react-router-dom";
 import { usePosition } from "../../hooks/usePosition";
 import Footer from "../Footer";
+import ClipLoader from "react-spinners/ClipLoader";
 
 import arrowleft from "../../styles/assets/img/png/arrow-left.png";
 
@@ -140,18 +141,19 @@ function Result_Search({ location, watch, settings }) {
     }
     new Promise((resolve) => setTimeout(resolve, 1800))
       .then(() => {
-        setLoader(false);
-      })
-      .then(() => {
         setdishes(location.state);
         setFinish(orden);
+      })
+      .then(() => {
+        setLoader(false);
+
       });
   }, [order]);
 
   return (
     <>
       {loader === true ? (
-        ""
+        <ClipLoader color={'#386641'} size={150} />
       ) : (
         <div className="resultSearch">
           <header className="header-general">
@@ -180,42 +182,42 @@ function Result_Search({ location, watch, settings }) {
             <article className="list">
               {finish !== undefined && finish !== ""
                 ? finish.map((param, i) => {
-                    console.log(dishes);
-                    return (
-                      <div key={i} className="cards-container">
-                        {dishes[i] !== undefined ? (
-                          <img
-                            className="dish-image"
-                            src={dishes[i].image_web_dish}
-                            alt=""
-                          />
-                        ) : (
-                          ""
-                        )}
-                        <article className="overlay">
-                          <h3>
-                            {dishes[i] !== undefined ? dishes[i].name.substr(0,20)+"..." : ""}
-                          </h3>
-                          <h4>{param.name}</h4>
-                          <h4>
-                            Precio{" "}
-                            {dishes[i] !== undefined ? dishes[i].price : ""}
-                          </h4>
-                          <button className="detailsdish-btn"
-                            onClick={() =>
-                              history.push("/more", {
-                                dish: location.state[i],
-                                restaurant: param.name,
-                              })
-                            }
-                          >
-                            Más detalles
-                          </button>
-                        </article>
-                      </div>
-                    );
-                  })
-                : ""}
+                  console.log(dishes);
+                  return (
+                    <div key={i} className="cards-container">
+                      {dishes[i] !== undefined ? (
+                        <img
+                          className="dish-image"
+                          src={dishes[i].image_web_dish}
+                          alt=""
+                        />
+                      ) : (
+                        ""
+                      )}
+                      <article className="overlay">
+                        <h3>
+                          {dishes[i] !== undefined ? dishes[i].name.substr(0, 20) + "..." : ""}
+                        </h3>
+                        <h4>{param.name}</h4>
+                        <h4>
+                          Precio{" "}
+                          {dishes[i] !== undefined ? dishes[i].price : ""}
+                        </h4>
+                        <button className="detailsdish-btn"
+                          onClick={() =>
+                            history.push("/more", {
+                              dish: location.state[i],
+                              restaurant: param.name,
+                            })
+                          }
+                        >
+                          Más detalles
+                        </button>
+                      </article>
+                    </div>
+                  );
+                })
+                : ''}
             </article>
             <Footer />
           </section>
