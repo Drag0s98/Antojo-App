@@ -26,7 +26,7 @@ const Browser = () => {
   //Creo un filtro por nombre de plato para el input
   const filter = async (inputSearch) => {
     let filterSearch = await dishes.filter((element) => {
-      if (element.name.includes(inputSearch.toLowerCase())) {
+      if (element.name.toLowerCase().includes(inputSearch.toLowerCase())) {
         return element;
       } else {
         return null;

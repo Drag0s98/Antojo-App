@@ -54,25 +54,27 @@ const SearchBy_cat = ({ location, watch, settings }) => {
     let arr = []
     if (dishes.length !== 0) {
       dishes.map(async (param, i) => {
-        if (i < 11) {
-          await axios.get(`http://localhost:5000/api/dish/${param.name}`)
-            .then((res) => {
-              res.data.map((param) => {
-                arr.push(param.id_restaurant)
-              })
-              setRestaurants_id(arr)
-            }).catch(error => console.log(error))
-        }
+        await axios.get(`http://localhost:5000/api/dish/${param.name}`)
+          .then(async (res) => {
+            res.data.map((param) => {
+              arr.push(param.id_restaurant)
+            })
+          }).catch(error => console.log(error))
       })
+      new Promise(resolve => setTimeout(resolve, 1000))
+        .then(() => {
+          setRestaurants_id(arr)
+        })
+
     }
   }, [dishes, setDishes])
 
-  
+
 
   useEffect(() => {
     let arr = []
     if (restaurants_id.length > 0) {
-      new Promise(resolve => setTimeout(resolve, 1000))
+      new Promise(resolve => setTimeout(resolve, 1200))
         .then(() => {
           restaurants_id.map(async (param, i) => {
             let response = await axios.get(`http://localhost:5000/api/restaurants/${param}`)
@@ -88,27 +90,30 @@ const SearchBy_cat = ({ location, watch, settings }) => {
   }, [restaurants_id])
 
   useEffect(() => {
-    let array = []
-    if (restaurants !== '') {
-      new Promise(resolve => setTimeout(resolve, 1000))
-        .then(() => {
-          restaurants.map((param) => {
-            let arr = param.coordinates.split(',');
-            let lat = parseFloat(arr[0])
-            let lon = parseFloat(arr[1])
-            let obj = {
-              name: param.name,
-              lat: lat,
-              lon: lon
-            }
-            return array.push(obj)
-          })
-          setCoords(array)
-        }).catch(error => console.log(error))
+    let array = [];
+    if (restaurants !== "") {
+      restaurants.map((param, i) => {
+        if (i < 10) {
+          let arr = param.coordinates.split(",");
+          let lat = parseFloat(arr[0]);
+          let lon = parseFloat(arr[1]);
+          let obj = {
+            name: param.name,
+            lat: lat,
+            lon: lon,
+          };
+          return array.push(obj);
+        } else {
+          return null;
+        }
+      });
+      new Promise((resolve) => setTimeout(resolve, 1500))
+        .then(() => setCoords(array))
+
     } else {
       return null;
     }
-  }, [restaurants])
+  }, [restaurants]);
 
   useEffect(() => {
     let arr = []
@@ -120,8 +125,10 @@ const SearchBy_cat = ({ location, watch, settings }) => {
           distance: distance
         }
         arr.push(obj)
-        setOrder(arr)
       })
+      new Promise(resolve => setTimeout(resolve, 1800))
+        .then(() => setOrder(arr))
+
     }
     // console.log('Distancia entre los 2 puntos:' + distance)
   }, [coords]) //Este alert hay que dejarlo porque si no se genera un bucle infinito
@@ -129,7 +136,7 @@ const SearchBy_cat = ({ location, watch, settings }) => {
   useEffect(() => {
     let arr = []
     if (order != null) {
-      new Promise(resolve => setTimeout(resolve, 1500))
+      new Promise(resolve => setTimeout(resolve, 2000))
         .then(() => {
           order.filter((element, i) => {
             arr.push(element.distance)
@@ -165,7 +172,7 @@ const SearchBy_cat = ({ location, watch, settings }) => {
         }) : ''}
 
       </article>
-        <Footer />
+      <Footer />
     </section>
   );
 };

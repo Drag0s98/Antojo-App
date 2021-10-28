@@ -12,8 +12,10 @@ function Result_Search({ location, watch, settings }) {
   const { latitude, longitude } = usePosition(watch, settings);
   const [restaurants_id, setRestaurants_id] = useState([]);
   const [restaurants, setRestaurants] = useState([]);
-  const [order, setOrder] = useState(null);
   const [coords, setCoords] = useState(null);
+  const [order, setOrder] = useState(null);
+  const [finish, setFinish] = useState('');
+  const [loader, setLoader] = useState(false);
   let history = useHistory();
 
   const [byCategory, setByCategory] = useState(null);
@@ -48,15 +50,17 @@ function Result_Search({ location, watch, settings }) {
   }
 
   useEffect(() => {
+    setLoader(true);
+    let arr = []
     if (location.state !== undefined) {
       location.state.map(async (param) => {
         return await axios
           .get(`http://localhost:5000/api/dish/${param.name}`)
           .then((res) => {
             let id = res.data.map((param) => {
-              return param.id_restaurant;
+              return arr.push(param.id_restaurant)
             });
-            setRestaurants_id(id);
+            setRestaurants_id(arr);
           })
           .catch((error) => console.log(error));
       });
@@ -64,37 +68,43 @@ function Result_Search({ location, watch, settings }) {
   }, [location]);
 
   useEffect(() => {
-    let arr = [];
-    if (restaurants_id.length > 0) {
-      restaurants_id.map(async (param, i) => {
-        let response = await axios.get(
-          `http://localhost:5000/api/restaurants/${param}`
-        );
-        arr.push(response.data[0]);
-      });
-      setRestaurants(arr);
-    }
+    let arr = []
+    new Promise((resolve) => setTimeout(resolve, 1000))
+      .then(() => {
+        if (restaurants_id.length > 0) {
+          restaurants_id.map(async (param, i) => {
+            let response = await axios.get(
+              `http://localhost:5000/api/restaurants/${param}`
+            );
+            arr.push(response.data[0]);
+          });
+          new Promise((resolve) => setTimeout(resolve, 1100))
+            .then(() => {
+              console.log(arr);
+              setRestaurants(arr)
+            })
+
+        }
+      })
   }, [restaurants_id]);
 
   useEffect(() => {
     let array = [];
     if (restaurants !== "") {
-      new Promise((resolve) => setTimeout(resolve, 500))
-        .then(() => {
-          restaurants.map((param) => {
-            let arr = param.coordinates.split(",");
-            let lat = parseFloat(arr[0]);
-            let lon = parseFloat(arr[1]);
-            let obj = {
-              name: param.name,
-              lat: lat,
-              lon: lon,
-            };
-            return array.push(obj);
-          });
-          setCoords(array);
-        })
-        .catch((error) => console.log(error));
+      restaurants.map((param) => {
+        let arr = param.coordinates.split(",");
+        let lat = parseFloat(arr[0]);
+        let lon = parseFloat(arr[1]);
+        let obj = {
+          name: param.name,
+          lat: lat,
+          lon: lon,
+        };
+        return array.push(obj);
+      });
+      new Promise((resolve) => setTimeout(resolve, 1200))
+        .then(() => setCoords(array))
+
     } else {
       return null;
     }
@@ -113,7 +123,9 @@ function Result_Search({ location, watch, settings }) {
           distance: distance,
         };
         arr.push(obj);
-        setOrder(arr);
+        new Promise(resolve => setTimeout(resolve, 1400))
+          .then(() => setOrder(arr))
+
       });
     }
     // console.log('Distancia entre los 2 puntos:' + distance)
@@ -121,36 +133,45 @@ function Result_Search({ location, watch, settings }) {
 
   useEffect(() => {
     let arr = [];
+    let orden = []
     if (order != null) {
-      new Promise((resolve) => setTimeout(resolve, 600)).then(() => {
-        order.filter((element, i) => {
-          arr.push(element.distance);
-          arr.sort((a, b) => a - b);
-          if (arr[i] === element.distance) {
-            return element;
-          }
-        });
+      order.filter((element, i) => {
+        arr.push(element.distance);
+        orden.push(arr.sort((a, b) => a - b));
+        if (i === element.distance) {
+          return orden.push(element);
+        } else {
+          return null;
+        }
       });
     }
+    new Promise(resolve => setTimeout(resolve, 1800))
+      .then(() => {
+        setLoader(false);
+      }).then(() => setFinish(orden[0]))
+
   }, [order]);
 
+
   return (
-    <div className="resultSearch">
-      <header className="header-general">
-        <button onClick={() => history.push("/home")}>«--</button>
-        <h3>Resultados de búsqueda</h3>
-      </header>
-      <section className="result">
-        <article className="result--box-input">
-          <form onSubmit={handleSubmit}>
-            <input type="text" name="browser" placeholder="Busca plato..." />
-            <button>Search</button>
-          </form>
-        </article>
-        <br />
-        <article className="list">
-          {order !== null
-            ? order.map((param, i) => {
+    <>
+      {loader === true ? '' : <div className="resultSearch">
+        <header className="header-general">
+          <button onClick={() => history.push("/home")}>«--</button>
+          <h3>Resultados de búsqueda</h3>
+        </header>
+        <section className="result">
+          <article className="result--box-input">
+            <form onSubmit={handleSubmit}>
+              <input type="text" name="browser" placeholder="Busca plato..." />
+              <button>Search</button>
+            </form>
+          </article>
+          <br />
+          <article className="list">
+            {finish !== undefined && finish !== ''
+              ?
+              finish.map((param, i) => {
                 return (
                   <div key={i}>
                     {/* Imagen Aquí */}
@@ -170,20 +191,21 @@ function Result_Search({ location, watch, settings }) {
                   </div>
                 );
               })
-            : ""}
-          {byCategory != null
-            ? byCategory.map((param, i) => {
+              : ""}
+            {byCategory != null
+              ? byCategory.map((param, i) => {
                 return (
                   <div key={i}>
                     <p>{param.name}</p>
                   </div>
                 );
               })
-            : ""}
-        </article>
-<Footer />
-      </section>
-    </div>
+              : ""}
+          </article>
+          <Footer />
+        </section>
+      </div>}
+    </>
   );
 }
 
