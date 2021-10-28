@@ -20,6 +20,7 @@ function Result_Search({ location, watch, settings }) {
   const [order, setOrder] = useState(null);
   const [finish, setFinish] = useState('');
   const [loader, setLoader] = useState(false);
+  const [dishes, setdishes] = useState(null);
   let history = useHistory();
 
   const handleSubmit = async (e) => {
@@ -145,7 +146,10 @@ function Result_Search({ location, watch, settings }) {
     new Promise(resolve => setTimeout(resolve, 1800))
       .then(() => {
         setLoader(false);
-      }).then(() => setFinish(orden))
+      }).then(() => {
+        setdishes(location.state)
+        setFinish(orden)
+      })
 
   }, [order]);
 
@@ -155,7 +159,7 @@ function Result_Search({ location, watch, settings }) {
       {loader === true ? '' : <div className="resultSearch">
         <header className="header-general">
           <button className="header-general--button" onClick={() => history.push("/home")}>
-          <img src={arrowleft} alt="" />
+            <img src={arrowleft} alt="" />
           </button>
           <h3>Resultados de búsqueda</h3>
         </header>
@@ -171,12 +175,13 @@ function Result_Search({ location, watch, settings }) {
             {finish !== undefined && finish !== ''
               ?
               finish.map((param, i) => {
+                console.log(dishes);
                 return (
                   <div key={i}>
-                    {location.state[i].image_web_dish !== undefined ? <img src={location.state[i].image_web_dish} width='150px' height='150px' alt="" /> : ''}
-                    <h3>{location.state[i].name !== undefined ? location.state[i].name : ''}</h3>
+                    {dishes[i] !== undefined ? <img src={dishes[i].image_web_dish} width='150px' height='150px' alt="" /> : ''}
+                    <h3>{dishes[i] !== undefined ? dishes[i].name : ''}</h3>
                     <h4>{param.name}</h4>
-                    <h4>Precio {location.state[i].price !== undefined ? location.state[i].price : ''}</h4>
+                    <h4>Precio {dishes[i] !== undefined ? dishes[i].price : ''}</h4>
                     <button
                       onClick={() =>
                         history.push("/more", {

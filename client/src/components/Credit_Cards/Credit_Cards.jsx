@@ -52,6 +52,7 @@ const Credit_Cards = () => {
                 <label >{param.card_name}
                   <input type="radio" name='check' value={param.card_name} />
                 </label>
+                <button type='submit' className="onboarding--btn btn5">Continuar</button>
               </article>
             );
           })
@@ -59,7 +60,6 @@ const Credit_Cards = () => {
         <div className="wrapcard">
           <button onClick={() => history.push("/addcard")} className="btncredit"> <img src={plus} alt="" className="plus" />Añadir tarjeta</button>
         </div>
-        <button type='submit' className="onboarding--btn btn5">Continuar</button>
       </form>
     </section>
   );
