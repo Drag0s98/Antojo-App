@@ -54,7 +54,7 @@ function More_Info({ location }) {
       <div className="tgview">
         IMAGEN
         <h4 className="tituloview">{location.state.dish.name}</h4>
-        <p>Descripción</p>
+        <p>Nuestro bowl especial, y el favorito de nuestro chef. Hecho con ingredientes naturales y frescos, aportando a nuestra dieta el toque saludable que necesita tu día. Nuestros bowls son la alternativa a la comida rápida, con mezcla de ingredientes, sabores y texturas que no te dejarán indiferente.</p>
         {/* <p>{location.state.dish.category}</p> */}
         <h3 className="moreinfo-price">Precio</h3>
         <p className="moreinfo-pricedetail">Precio del plato: {location.state.dish.price}</p>
@@ -103,12 +103,12 @@ function More_Info({ location }) {
               }
             >
               <Popup>
-                Nombre restaurante <br /> dirección <br />
+                <p>{location.state.restaurant}</p>
               </Popup>
             </Marker>
             );
           </MapContainer>
-          <p>{location.state.restaurant}</p> 
+          <p className="moreinfo-pricedetail">{location.state.restaurant}</p> 
         </section>
         <Footer />
       </div>

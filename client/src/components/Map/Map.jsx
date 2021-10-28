@@ -39,7 +39,8 @@ const Map = ({ watch, settings }) => {
               url={`https://api.mapbox.com/styles/v1/tamaragmartin/ckuykd13k01un14of1yunvqli/tiles/256/{z}/{x}/{y}@2x?access_token=${process.env.REACT_APP_MAPBOX_KEY}`}
             />
             {/* {location.map((param, i) => {
-              return ( */} {/* key={i} */}
+              return ( */} 
+              {/* <div key={i}></div> */}
                 <Marker 
                   position={coordinates}
                   icon={
@@ -56,24 +57,7 @@ const Map = ({ watch, settings }) => {
                   </Popup>
                 </Marker>
               );
-            {/* })} */}
-            {/* <Marker
-              position={[40.42141, -3.68813]}
-              icon={
-                new Icon({
-                  iconUrl: markerIconPng,
-                  iconSize: [25, 41],
-                  iconAnchor: [12, 41],
-                })
-              }
-            >
-              <Popup>
-                Puerta de Alcalá <br /> Plaza de la Independencia, s/n <br />
-                <a href="https://es.wikipedia.org/wiki/Puerta_de_Alcal%C3%A1/">
-                  Visit website »{" "}
-                </a>
-              </Popup>
-            </Marker> */}
+            
           </MapContainer>
         </section>
       ) : null}
