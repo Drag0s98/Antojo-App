@@ -53,7 +53,7 @@ function More_Info({ location }) {
         <h3>Nombre del plato</h3>
       </header>
       <div className="tgview">
-        IMAGEN
+        <img className="more-dish-image" src={location.state.dish.image_web_dish} alt="" />
         <h4 className="tituloview">{location.state.dish.name}</h4>
         <p>Nuestro bowl especial, y el favorito de nuestro chef. Hecho con ingredientes naturales y frescos, aportando a nuestra dieta el toque saludable que necesita tu día. Nuestros bowls son la alternativa a la comida rápida, con mezcla de ingredientes, sabores y texturas que no te dejarán indiferente.</p>
         {/* <p>{location.state.dish.category}</p> */}

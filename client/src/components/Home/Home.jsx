@@ -49,10 +49,15 @@ const Home = () => {
             <Browser />
             <Map />
             <article className="ranking_box">
-              <h2>Top 3 platos </h2>
+              <h2>Top platos </h2>
               {ranking != null
                 ? ranking.map((param, i) => {
-                    return <p key={i}>{param.name}</p>;
+                    return <div key={i} className="home-cards-container">
+                      <img className="home-dish-image" src={param.image_web_dish} alt="" />
+                      <article className="home-overlay"> 
+                      <h3 className="home-dish-title">{param.name.substr(0,20)+"..."}</h3>
+                      </article>
+                      </div>;
                   })
                 : ""}
             </article>
