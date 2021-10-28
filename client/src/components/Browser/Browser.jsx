@@ -2,7 +2,7 @@ import React, { useContext, useState, useEffect } from "react";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
 
-import search from "../../styles/assets/img/png/arrow-left.png"
+import search from "../../styles/assets/img/png/search.png"
 
 const Browser = () => {
   let history = useHistory();
@@ -55,7 +55,7 @@ const Browser = () => {
   return (
     <section className="browser">
       <div className="browser--box-input">
-        <form onSubmit={handleSubmit}>
+        <form  onSubmit={handleSubmit}>
           <input
             className="input"
             type="text"
@@ -63,7 +63,8 @@ const Browser = () => {
             placeholder="Busca plato..."
           />
           <button className="browser--box-btn">
-            Search</button>
+          <img src={search} alt="" />
+          </button>
         </form>
       </div>
       <div className="browser--filter">

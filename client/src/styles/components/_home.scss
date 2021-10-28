@@ -6,16 +6,31 @@
   flex-direction: column;
 }
 
-h2 {
-  color: $primary-color-verde-oscuro;
-  font-size: 26px;
+.ranking_box {
+  & > h2 {
+    margin-top: 0.5em;
+    color: $primary-color-verde-oscuro;
+    font-size: 26px;
+  }
+  
+  
+}
+
+.offer_box {
+  & > h2 {
+    margin-top: -1em;
+    color: $primary-color-verde-oscuro;
+    font-size: 26px;
+  }
+  
+  
 }
 
 .header-general {
     @include center;
     height: 6vh;
     //width:375px;
-    margin-bottom: 0.5em;
+    margin-bottom: 0.2em;
     margin-top: 0.5em;
     box-shadow: 0 4px 1px -1px lightgray;
     font-size: 20px;
