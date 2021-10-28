@@ -20,7 +20,7 @@ import { Icon } from "leaflet";
 
 function More_Info({ location }) {
   const history = useHistory();
-  console.log("Location state: " + location.state);
+  console.log(location.state.dish.image_web_dish);
 
   const { setOrders } = useContext(DataContext);
 
@@ -29,6 +29,7 @@ function More_Info({ location }) {
     category: location.state.dish.category,
     restaurant: location.state.restaurant,
     price: location.state.dish.price,
+    image: location.state.dish.image_web_dish
   };
 
   useEffect(() => {

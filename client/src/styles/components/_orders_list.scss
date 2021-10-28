@@ -1,0 +1,70 @@
+.orders_container {
+  width: 100%;
+}
+.order_list {
+  margin-top: 1em;
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+
+  & > hr {
+    width: 100%;
+    border: 0.5px solid #386641;
+  }
+}
+.img_box {
+  width: 80px;
+  height: 80px;
+}
+.right_box {
+  float: right;
+  margin-left: 1em;
+  & > p {
+    margin-top: 2em;
+  }
+}
+.hour_box {
+  width: 100%;
+  float: left;
+  margin-top: 1em;
+  margin-left: 3em;
+
+  & > .procesando {
+    color: $primary-color-verde-oscuro;
+    font-size: 12px;
+    line-height: 18px;
+  }
+  & > .completado {
+    color: $semantic-color-red;
+    font-size: 12px;
+    line-height: 18px;
+  }
+
+  & > .camino {
+    color: $primary-color-verde-oscuro;
+    font-size: 12px;
+    line-height: 18px;
+  }
+  & > .llegando {
+    color: $primary-color-verde-oscuro;
+    font-size: 12px;
+    line-height: 18px;
+  }
+}
+.bot_box {
+  & > button {
+    float: right;
+    width: 96px;
+    height: 36px;
+    position: relative;
+    margin-left: 2em;
+    bottom: 50px;
+    background-color: $secondary-color-naranja-botones;
+    border: none;
+    border-radius: 80px;
+    color: white;
+    font-size: 14px;
+    line-height: 20px;
+    font-weight: 600;
+  }
+}

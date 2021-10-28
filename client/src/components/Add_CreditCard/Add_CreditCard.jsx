@@ -42,23 +42,26 @@ const Add_CreditCard = () => {
     <>
 
       <header className="header-general">
-        <button  className="header-general--button" onClick={() => history.push('/card')}><img src={arrowleft} alt="" /></button>
-        <h3>Añadir tarjeta</h3>
-        <p>Hola</p>
+        <button className="header-general--button" onClick={() => history.push('/card')}><img src={arrowleft} alt="" /></button>
+        <h3 className="titulocard">Añadir tarjeta</h3>
       </header>
       {orders.name}
       <form action="submit" onSubmit={postCard}>
-        <label>Crea un alias para tu tarjeta: </label>
-        <input type="text" name="alias" placeholder="P.ej: Tarjeta BBVA, ... " /><br />
-        <label>Nombre del titular de la tarjeta: </label>
-        <input type="text" name="name" placeholder="John Doe" /><br />
-        <label>Número de la tarjeta:</label>
-        <input type="text" name="number" placeholder="#### #### #### ####" /><br />
-        <label>CVV</label>
-        <input type="text" name="cvv" placeholder="###" />
-        <label>Exp. Date</label>
-        <input type="text" name="date" placeholder="MM/YY" /><br />
-        <input type="submit" value="+  AÑADIR TARJETA" />
+        <div className="formularios111">
+          <label className="nombreaddcredit">Crea un alias para tu tarjeta: </label>
+          <input className="input1addcard" type="text" name="alias" placeholder="P.ej: Tarjeta BBVA, ... " /><br />
+          <label className="nombreaddcredit">Nombre del titular de la tarjeta: </label>
+          <input className="input1addcard" type="text" name="name" placeholder="John Doe" /><br />
+          <label className="nombreaddcredit">Número de la tarjeta:</label>
+          <input className="input1addcard" type="text" name="number" placeholder="#### #### #### ####" /><br />
+          <label className="cvv222">CVV</label>
+          <input className="input1addcard11" type="text" name="cvv" placeholder="###" />
+          <label className="expdates111">Exp. Date</label>
+          <input className="input1addcard11 input1addcard111" type="text" name="date" placeholder="MM/YY" /><br />
+        </div>
+        <div className="divbtntarjeta">
+          <input className="botnaddtarjeta" type="submit" value="+  AÑADIR TARJETA" />
+        </div>
       </form>
     </>
   );

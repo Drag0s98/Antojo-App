@@ -54,24 +54,34 @@ const Address = () => {
               <div className="wpbtb">
              <img src={plus} alt="" className="plus"/> <button onClick={handleClick} className="adddirectionbtn">Añadir dirección</button>
               </div> */}
-        {addres ?
-          <div className="domicile_box">
-            <p className="directtitle">Dirección guardada:</p>
-            <p>Nombre: {addres.name}</p>
-            <p>Dirección: {addres.domicile}</p>
-            <p>Número: {addres.domicile_num}</p>
-            <p>Piso: {addres.domicile_piso}</p>
-            {/* <button onClick={handleClick}>Cambiar domicilio</button> */}
-          </div>
-          : (
-            <div className="btnadd">
-              <img src={plus} alt="" className="plus" /> <button onClick={handleClick} className="adddirectionbtn">Añadir dirección</button>
-            </div>
-          )
-        }
-        <button className="onboarding--btn btn4" onClick={() => history.push('/card')}>Continuar</button>
-      </article >
-    </section >
+        <div>
+          {addres ?
+            <>
+              <p className="directtitle">Dirección guardada:</p>
+              <div className="domicile_box">
+                <p>Dirección: {addres.domicile}</p>
+                <p>Número: {addres.domicile_num}</p>
+                <p>Piso: {addres.domicile_piso}</p>
+                {/* <button onClick={handleClick}>Cambiar domicilio</button> */}
+
+              </div>
+
+              <img src={plus} alt="" className="plus plus2" /> <button onClick={handleClick} className="adddirectionbtn">Añadir dirección</button>
+              <button className="onboarding--btn btn4 btn6" onClick={() => history.push('/card')}>Continuar</button>
+
+            </>
+            : (
+              <>
+                <div className="btnadd">
+                  <img src={plus} alt="" className="plus" /> <button onClick={handleClick} className="adddirectionbtn">Añadir dirección</button>
+                  <button className="onboarding--btn btn4" onClick={() => history.push('/card')}>Continuar</button>
+                </div>
+              </>
+
+            )}
+        </div>
+      </article>
+    </section>
   );
 };
 
