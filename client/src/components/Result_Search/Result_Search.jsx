@@ -140,7 +140,6 @@ function Result_Search({ location, watch, settings }) {
           distance: arr.sort((a, b) => b - a)[0],
           name: element.name
         });
-
       });
     }
     new Promise(resolve => setTimeout(resolve, 1800))
