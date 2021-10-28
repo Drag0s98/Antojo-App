@@ -5,6 +5,7 @@ import Map from '../Map';
 import axios_hook from '../../hooks/get-axios';
 import Loading from '../Loading';
 import Footer from "../Footer";
+import smalllogo from '../../styles/assets/img/svg/yameal-small-logo.svg'
 
 
 const Home = () => {
@@ -43,7 +44,7 @@ const Home = () => {
       ) : (
         <section className="prueba">
           <header className="header-general">
-            <h3>(Logo aquí)</h3>
+            <img src={smalllogo} className="smallogo1" />
           </header>
           <section>
             <Browser />
