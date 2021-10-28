@@ -1,6 +1,6 @@
 import React from "react";
 import { useState } from "react";
-import { db, auth, google } from "../../firebase";
+import { db, auth } from "../../firebase";
 import firebase from "firebase";
 import { Input, Button } from '@mui/material'
 

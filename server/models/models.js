@@ -125,7 +125,7 @@ const entries = {
         let result;
         try {
             let sql_query = (`
-            SELECT id_dish, name, category, price, rating, offer
+            SELECT id_dish, name, category, price, rating, offer, image_web_dish
             FROM public.dishes WHERE category=$1
             `)
             result = await pool.query(sql_query, [category]);

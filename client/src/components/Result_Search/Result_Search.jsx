@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
 import { usePosition } from "../../hooks/usePosition";
-import More_Info from "../More_Info";
 import Footer from '../Footer';
 
 import arrowleft from "../../styles/assets/img/png/arrow-left.png"
@@ -23,12 +22,8 @@ function Result_Search({ location, watch, settings }) {
   const [loader, setLoader] = useState(false);
   let history = useHistory();
 
-  const [byCategory, setByCategory] = useState(null);
-
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(e.target.browser.value);
-    let res = axios.get(``);
   };
 
   //Calcular distancia
@@ -62,7 +57,7 @@ function Result_Search({ location, watch, settings }) {
         return await axios
           .get(`http://localhost:5000/api/dish/${param.name}`)
           .then((res) => {
-            let id = res.data.map((param) => {
+            res.data.map((param) => {
               return arr.push(param.id_restaurant)
             });
             setRestaurants_id(arr);
@@ -127,7 +122,7 @@ function Result_Search({ location, watch, settings }) {
           distance: distance,
         };
         arr.push(obj);
-        new Promise(resolve => setTimeout(resolve, 1400))
+        return new Promise(resolve => setTimeout(resolve, 1400))
           .then(() => setOrder(arr))
 
       });
@@ -141,11 +136,10 @@ function Result_Search({ location, watch, settings }) {
     if (order != null) {
       order.filter((element, i) => {
         arr.push(element.distance);
-        orden.push({
+        return orden.push({
           distance: arr.sort((a, b) => b - a)[0],
           name: element.name
         });
-
       });
     }
     new Promise(resolve => setTimeout(resolve, 1800))
@@ -193,15 +187,6 @@ function Result_Search({ location, watch, settings }) {
                     >
                       Más detalles
                     </button>
-                  </div>
-                );
-              })
-              : ""}
-            {byCategory != null
-              ? byCategory.map((param, i) => {
-                return (
-                  <div key={i}>
-                    <p>{param.name}</p>
                   </div>
                 );
               })

@@ -68,10 +68,6 @@ const Home = () => {
                   })
                 : ""}
             </article>
-            <article className="recomendation_box">
-              <h2>Recomendacioens</h2>
-              <p>Aqui irian las recomendaciones</p>
-            </article>
           </section>
           <Footer />
         </section>
