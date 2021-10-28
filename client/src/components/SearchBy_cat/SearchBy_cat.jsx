@@ -4,7 +4,9 @@ import { useHistory } from 'react-router-dom';
 import axios from "axios";
 import { usePosition } from "../../hooks/usePosition";
 import Footer from "../Footer";
-import arrowleft from "../../styles/assets/img/png/arrow-left.png"
+import arrowleft from "../../styles/assets/img/png/arrow-left.png";
+import ClipLoader from "react-spinners/ClipLoader";
+
 
 
 const SearchBy_cat = ({ location, watch, settings }) => {
@@ -17,6 +19,7 @@ const SearchBy_cat = ({ location, watch, settings }) => {
   const [restaurants, setRestaurants] = useState('');
   const [coords, setCoords] = useState(null);
   const [order, setOrder] = useState(null);
+  const [loader, setLoader] = useState(false);
 
 
 
@@ -46,7 +49,10 @@ const SearchBy_cat = ({ location, watch, settings }) => {
 
   useEffect(() => {
     axios.get(`http://localhost:5000/api/category/${location.state.filter}`)
-      .then((res) => setDishes(res.data))
+      .then((res) => {
+        setLoader(true)
+        setDishes(res.data)
+      })
       .catch(error => console.log(error))
   }, [location])
 
@@ -128,7 +134,10 @@ const SearchBy_cat = ({ location, watch, settings }) => {
             return arr.push(obj)
           })
         })
-        .then(() => setOrder(arr))
+        .then(() => {
+          setOrder(arr);
+          setLoader(false);
+        })
     }
     // console.log('Distancia entre los 2 puntos:' + distance)
   }, [coords]) //Este alert hay que dejarlo porque si no se genera un bucle infinito
@@ -136,29 +145,52 @@ const SearchBy_cat = ({ location, watch, settings }) => {
 
   return (
     <section className="searchCategory">
-      <header className="header-general">
-        <button className="header-general--button" onClick={() => history.push("/home")}><img src={arrowleft} alt="" /></button>
-        <h3>Resultados de búsqueda</h3>
-      </header>
-      <article>
-        {order !== null ? order.map((param, i) => {
-          return (
-            <div key={i}>
-              {dishes[i].image_web_dish !== undefined ? <img src={dishes[i].image_web_dish} width='150px' height='150px' alt="" /> : ''}
-              <p>{dishes[i].name} </p>
-              <p>{param.name}</p>
-              <p>{dishes[i].price}</p>
-              <button onClick={() => history.push('/more', {
-                dish: dishes[i],
-                restaurant: param.name
-              })}>Más detalles</button>
-            </div>
-          )
-        }) : ''}
-      </article>
-      <Footer />
+      {loader === false ?
+        <>
+          <header className="header-general">
+            <button className="header-general--button" onClick={() => history.push("/home")}><img src={arrowleft} alt="" /></button>
+            <h3>Resultados de búsqueda</h3>
+          </header>
+          <article>
+            {(order !== null && dishes.length > 1) ? dishes.map((param, i) => {
+              console.log(
+                param
+              );
+              return (
+                <div key={i}>
+                  <img src={param.image_web_dish} width='150px' height='150px' alt="" />
+                  <p>{param.name}</p>
+                  <p>{order[i].name}</p>
+                  <p>{param.price}</p>
+                  <button onClick={() => history.push('/more', {
+                    dish: param,
+                    restaurant: order[i].name
+                  })}>Más detalles</button>
+                </div>
+              )
+            }) : ''}
+          </article>
+          <Footer />
+        </>
+        : <ClipLoader color={'#386641'} size={150} />}
     </section>
   );
 };
 
 export default SearchBy_cat;
+
+//Filtro para healthy
+// {(order !== null && dishes.length > 1) ? order.map((param, i) => {
+//   return (
+//     <div key={i}>
+//       {(dishes.length > 1) ? '' : <img src={dishes[i].image_web_dish} width='150px' height='150px' alt="" />}
+//       <p>{dishes[i].name} </p>
+//       <p>{param.name}</p>
+//       <p>{dishes[i].price}</p>
+//       <button onClick={() => history.push('/more', {
+//         dish: dishes[i],
+//         restaurant: param.name
+//       })}>Más detalles</button>
+//     </div>
+//   )
+// }) : ''}
