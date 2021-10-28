@@ -12,9 +12,10 @@ const Add_Address = ({ location }) => {
     if (location.state != null) {
       const address = {
         id_user: location.state,
-        domicile: e.target.direccion.value,
+        domicile: e.target.adress.value,
         domicile_num: e.target.number.value,
-        domicile_piso: e.target.piso.value
+        domicile_piso: e.target.piso.value,
+        name: e.target.name.value
       }
       await axios.post(`http://localhost:5000/api/address`, address) 
       await new Promise(resolve => setTimeout(resolve, 1000))

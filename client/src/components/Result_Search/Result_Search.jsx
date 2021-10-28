@@ -182,7 +182,6 @@ function Result_Search({ location, watch, settings }) {
             <article className="list">
               {finish !== undefined && finish !== ""
                 ? finish.map((param, i) => {
-                  console.log(dishes);
                   return (
                     <div key={i} className="cards-container">
                       {dishes[i] !== undefined ? (

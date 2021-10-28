@@ -20,7 +20,6 @@ import { Icon } from "leaflet";
 
 function More_Info({ location }) {
   const history = useHistory();
-  console.log(location.state.dish.image_web_dish);
 
   const { setOrders } = useContext(DataContext);
 
@@ -36,7 +35,6 @@ function More_Info({ location }) {
     axios
       .get(`http://localhost:5000/api/more/${location.state.restaurant}`)
       .then((res) => {
-        console.log(res.data);
         let objRestaurant = res.data[0];
         setOrders([objRestaurant, objDish]); //Le meto toda la informacion de ese restaurante y del plato
       });

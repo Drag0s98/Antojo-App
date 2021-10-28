@@ -147,15 +147,15 @@ const entries = {
         }
         return result.rows;
     },
-    post_addressBy_user: async ({ id_user, domicile, domicile_num, domicile_piso }) => {
+    post_addressBy_user: async ({ id_user, domicile, domicile_num, domicile_piso, name }) => {
         let result;
         try {
             let sql_query = (` 
             UPDATE public.users
-	            SET domicile=$2, domicile_num=$3, domicile_piso=$4
+	            SET domicile=$2, domicile_num=$3, domicile_piso=$4, name=$5
 	            WHERE id_user=$1;
             `)
-            result = await pool.query(sql_query, [id_user, domicile, domicile_num, domicile_piso]);
+            result = await pool.query(sql_query, [id_user, domicile, domicile_num, domicile_piso, name]);
         } catch (error) {
             console.log('Error to post addres by user ' + error);
         }

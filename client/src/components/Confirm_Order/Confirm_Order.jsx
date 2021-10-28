@@ -91,8 +91,7 @@ const Confirm_Order = ({ location }) => {
                   buttons: true,
                 }).then(async (value) => {
                   if (value) {
-                    console.log(orders);
-                    await new Promise((resolve) => setTimeout(resolve, 500));
+                    await new Promise(resolve => setTimeout(resolve, 500))
                     await axios.post(`http://localhost:5000/api/orders`, {
                       id_user: uid,
                       dish_name: orders[1].name,

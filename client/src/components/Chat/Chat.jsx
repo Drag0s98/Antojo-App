@@ -1,63 +1,52 @@
 import React from "react";
 import { useState, useEffect, useRef } from "react";
-import {db, auth, google} from '../../firebase';
-import './Chat.css'
+import { db, auth } from '../../firebase';
+import { useHistory } from "react-router-dom";
+
 
 import Agregar from '../Agregar';
+import logo from '../../styles/assets/img/svg/yameal-small-logo.svg';
+import arrowleft from "../../styles/assets/img/png/arrow-left.png"
+
 
 
 
 const Chat = () => {
 
+  const history = useHistory();
   const scroll = useRef()
   const [mensajes, setMensajes] = useState([]);
-  console.log(mensajes)
   useEffect(() => {
     db.collection('chat').orderBy('createdAt').limit(50).onSnapshot(snapshot => {
-        setMensajes(snapshot.docs.map(doc => doc.data()))
+      setMensajes(snapshot.docs.map(doc => doc.data()))
     })
-}, [])
+  }, [])
 
 
-  return(
+  return (
 
-    <div>
-    <div className="msgs">
-  
-  
-
+    <div className='chat_container'>
+      <header className="header-general">
+        <button className="header-general--button" onClick={() => history.push("/orders")}>
+          <img src={arrowleft} alt="" />
+        </button>
+        <h3>Contacta con nosotros</h3>
+      </header>
+      <div className="msgs">
         {
-
-          mensajes.map(({id, text, photoURL, uid}) => {
-            console.log(mensajes);
-            return <div key={id} className={`msg ${ uid === auth.currentUser.uid ? 'sent' : 'received'}`}>
-              {console.log(uid)}
-                <img src={photoURL} alt="" className="fotochat"/>
-                 <p className="textochat">{text}</p>
-                 
-               </div>
+          mensajes.map(({ id, text, photoURL, uid }) => {
+            return <div key={id} className={`msg ${uid === auth.currentUser.uid ? 'sent' : 'received'}`}>
+              <p className="textochat">{text}</p>
+              <img src={photoURL !== null ? photoURL : logo} alt="" className="fotochat" />
+            </div>
           })
-
         }
+          <Agregar scroll={scroll} />
+        <div ref={scroll}></div>
+      </div>
+    </div>
 
-
-      
-      
-      {/* <div className='d-flex justify-content-start mb-2'>
-        <span className="badge bg-success">
-          mensaje de uno
-        </span>
-      </div> */}
-      
-
-   
-
-    <Agregar scroll={scroll}/>
-    <div ref={scroll}></div>
-</div>
- </div>
-
-)
+  )
 
 };
 
