@@ -80,7 +80,6 @@ function Result_Search({ location, watch, settings }) {
           });
           new Promise((resolve) => setTimeout(resolve, 1100))
             .then(() => {
-              console.log(arr);
               setRestaurants(arr)
             })
 
@@ -136,23 +135,18 @@ function Result_Search({ location, watch, settings }) {
     let orden = []
     if (order != null) {
       order.filter((element, i) => {
-        console.log(element);
-        arr.push({
-          distance: element.distance,
+        arr.push(element.distance);
+        orden.push({
+          distance: arr.sort((a, b) => b - a)[0],
           name: element.name
         });
-        orden.push(arr.sort((a, b) => a - b));
-        if (i === element.distance && i < 10) {
-          return orden.push(element);
-        } else {
-          return null;
-        }
+
       });
     }
     new Promise(resolve => setTimeout(resolve, 1800))
       .then(() => {
         setLoader(false);
-      }).then(() => setFinish(orden[1]))
+      }).then(() => setFinish(orden))
 
   }, [order]);
 
@@ -178,10 +172,10 @@ function Result_Search({ location, watch, settings }) {
               finish.map((param, i) => {
                 return (
                   <div key={i}>
-                    {/* Imagen Aquí */}
+                    {location.state[i].image_web_dish !== undefined ? <img src={location.state[i].image_web_dish} width='150px' height='150px' alt="" /> : ''}
                     <h3>{location.state[i].name !== undefined ? location.state[i].name : ''}</h3>
                     <h4>{param.name}</h4>
-                    <h4>Precio</h4>
+                    <h4>Precio {location.state[i].price !== undefined ? location.state[i].price : ''}</h4>
                     <button
                       onClick={() =>
                         history.push("/more", {
