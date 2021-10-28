@@ -15,7 +15,6 @@ const Orders_List = () => {
 
 
   const { uid } = useContext(DataContext);
-
   useEffect(() => {
     axios
       .get(`http://localhost:5000/api/orders/${uid}`)

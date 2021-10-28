@@ -66,7 +66,11 @@ const Address = () => {
                 {/* <button onClick={handleClick}>Cambiar domicilio</button> */}
 
               </div>
-              <div className="wpbtb">
+            </>
+           : (
+            <>
+            <div className="btnadd">
+               <img src={plus} alt="" className="plus"/> <button onClick={handleClick} className="adddirectionbtn">Añadir dirección</button>
                 <button className="onboarding--btn btn4" onClick={() => history.push('/card')}>Continuar</button>
               </div>
             </>
