@@ -152,21 +152,20 @@ const SearchBy_cat = ({ location, watch, settings }) => {
             <h3>Resultados de búsqueda</h3>
           </header>
           <article>
-            {(order !== null && dishes.length > 1) ? dishes.map((param, i) => {
-              console.log(
-                param
-              );
+            {(order !== null && dishes !== null) ? dishes.map((param, i) => {
               return (
-                <div key={i}>
-                  <img src={param.image_web_dish} width='150px' height='150px' alt="" />
-                  <p>{param.name}</p>
-                  <p>{order[i].name}</p>
-                  <p>{param.price}</p>
-                  <button onClick={() => history.push('/more', {
-                    dish: param,
-                    restaurant: order[i].name
-                  })}>Más detalles</button>
-                </div>
+                i < order.length ?
+                  <div key={i}>
+                    <img src={param.image_web_dish} width='150px' height='150px' alt="" />
+                    <p>{param.name}</p>
+                    <p>{order[i].name}</p>
+                    <p>{param.price}</p>
+                    <button onClick={() => history.push('/more', {
+                      dish: param,
+                      restaurant: order[i].name
+                    })}>Más detalles</button>
+                  </div>
+                  : ""
               )
             }) : ''}
           </article>
@@ -178,19 +177,3 @@ const SearchBy_cat = ({ location, watch, settings }) => {
 };
 
 export default SearchBy_cat;
-
-//Filtro para healthy
-// {(order !== null && dishes.length > 1) ? order.map((param, i) => {
-//   return (
-//     <div key={i}>
-//       {(dishes.length > 1) ? '' : <img src={dishes[i].image_web_dish} width='150px' height='150px' alt="" />}
-//       <p>{dishes[i].name} </p>
-//       <p>{param.name}</p>
-//       <p>{dishes[i].price}</p>
-//       <button onClick={() => history.push('/more', {
-//         dish: dishes[i],
-//         restaurant: param.name
-//       })}>Más detalles</button>
-//     </div>
-//   )
-// }) : ''}
