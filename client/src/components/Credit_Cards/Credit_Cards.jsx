@@ -35,7 +35,7 @@ const Credit_Cards = () => {
     <section>
       <header className="header-general">
         <button className="header-general--button" onClick={() => history.push('/address')}>
-        <img src={arrowleft} alt="" />
+          <img src={arrowleft} alt="" />
         </button>
         <h3>Método de pago</h3>
       </header>
@@ -56,9 +56,8 @@ const Credit_Cards = () => {
             );
           })
           : ""}
-          
-         <div className="wrapcard">
-        <button onClick={() => history.push("/addcard")} className="btncredit"> <img src={plus} alt="" className="plus"/>Añadir tarjeta</button>
+        <div className="wrapcard">
+          <button onClick={() => history.push("/addcard")} className="btncredit"> <img src={plus} alt="" className="plus" />Añadir tarjeta</button>
         </div>
         <button type='submit' className="onboarding--btn btn5">Continuar</button>
       </form>
