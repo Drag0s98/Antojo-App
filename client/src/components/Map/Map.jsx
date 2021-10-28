@@ -33,7 +33,7 @@ const Map = ({ watch, settings }) => {
       })
   }, []);
 
-
+//comentario
 
   const geolocation = [latitude, longitude];
 
