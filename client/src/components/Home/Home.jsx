@@ -7,10 +7,14 @@ import Loading from '../Loading';
 import Footer from "../Footer";
 import smalllogo from '../../styles/assets/img/svg/yameal-small-logo.svg'
 
+import { useHistory } from "react-router-dom";
 
-const Home = () => {
+
+const Home = ( {location} ) => {
   const [ranking, setRanking] = useState(null);
   const [spinner, setSpinner] = useState(false);
+
+  let history = useHistory();
 
   const { loading, result } = axios_hook("http://localhost:5000/api/dishes");
 
@@ -57,6 +61,16 @@ const Home = () => {
                       <img className="home-dish-image" src={param.image_web_dish} alt="" />
                       <article className="home-overlay"> 
                       <h3 className="home-dish-title">{param.name.substr(0,20)+"..."}</h3>
+                      <button className="detailsdish-btn"
+                            onClick={() =>
+                              history.push("/more", {
+                                dish: location.state[i],
+                                restaurant: param.name,
+                              })
+                            }
+                          >
+                            Más detalles
+                          </button>
                       </article>
                       </div>;
                   })
