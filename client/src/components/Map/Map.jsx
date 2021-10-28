@@ -9,31 +9,17 @@ import "leaflet/dist/leaflet.css";
 import markerIconPng from "leaflet/dist/images/marker-icon.png";
 import { Icon } from "leaflet";
 import { usePosition } from "../../hooks/usePosition";
-import axios from 'axios'
 
 const Map = ({ watch, settings }) => {
   const { latitude, longitude } = usePosition(watch, settings);
   const [location, setLocation] = useState(false);
-  const [coordinates, setCoordinates] = useState(null);
 
   useEffect(() => {
-    let arr = [];
-    axios.get(`http://localhost:5000/api/restaurants`)
-      .then((res) => {
-        res.data.map((param) => {
-          let nose = param.coordinates.split(',')
-          let hola = [parseFloat(nose[0]), parseFloat(nose[1])]
-          arr.push(hola)
-        })
-        setCoordinates(arr)
-        setLocation(false);
-        setTimeout(() => {
-          setLocation(true);
-        }, 1000);
-      })
+    setLocation(false);
+    setTimeout(() => {
+      setLocation(true);
+    }, 1000);
   }, []);
-
-
 
   const geolocation = [latitude, longitude];
 
@@ -51,6 +37,7 @@ const Map = ({ watch, settings }) => {
               attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
               url={`https://api.mapbox.com/styles/v1/tamaragmartin/ckuykd13k01un14of1yunvqli/tiles/256/{z}/{x}/{y}@2x?access_token=${process.env.REACT_APP_MAPBOX_KEY}`}
             />
+
             {coordinates.map((param) => {
               return <Marker
                 position={param}
@@ -67,7 +54,6 @@ const Map = ({ watch, settings }) => {
                 </Popup>
               </Marker>
             })}
-
           </MapContainer>
         </section>
       ) : null}
