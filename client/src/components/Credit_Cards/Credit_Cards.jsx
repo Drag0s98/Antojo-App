@@ -5,6 +5,7 @@ import { DataContext } from "../../context/context";
 
 import pb2 from '../../styles/assets/img/png/progressbar2.png';
 import tarjeta from '../../styles/assets/img/svg/fondo-tarjeta-de-pago.svg';
+import arrowleft from "../../styles/assets/img/png/arrow-left.png"
 
 const Credit_Cards = () => {
   const history = useHistory();
@@ -31,7 +32,9 @@ const Credit_Cards = () => {
   return (
     <section>
       <header className="header-general">
-        <button onClick={() => history.push('/address')}>«--</button>
+        <button className="header-general--button" onClick={() => history.push('/address')}>
+        <img src={arrowleft} alt="" />
+        </button>
         <h3>Método de pago</h3>
       </header>
       <div className="pbar">
