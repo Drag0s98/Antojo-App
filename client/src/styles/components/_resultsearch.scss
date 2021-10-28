@@ -20,12 +20,20 @@
         box-shadow: none;
       }
       & > button {
-        position: absolute;
-        background-image: url(../assets/img/png/search.png);
-        background-repeat: no-repeat;
-        width: 10px;
-        height: 20px;
+        
       }
+      
+    }
+    &--box-btn {
+      background-color: transparent;
+      border: none;
+      position: absolute;
+      top: 88px;
+      right: 28px;
+      position: absolute;
+      background-repeat: no-repeat;
+        
+  
     }
 }
 

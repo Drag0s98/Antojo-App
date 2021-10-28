@@ -5,6 +5,8 @@ import { usePosition } from "../../hooks/usePosition";
 import More_Info from "../More_Info";
 import Footer from '../Footer';
 
+import search from "../../styles/assets/img/png/search.png"
+
 
 function Result_Search({ location, watch, settings }) {
   //location.state saco la informacion del plato
@@ -162,7 +164,7 @@ function Result_Search({ location, watch, settings }) {
           <article className="result--box-input">
             <form onSubmit={handleSubmit}>
               <input type="text" name="browser" placeholder="Busca plato..." />
-              <button>Search</button>
+              <button className="result--box-btn"><img src={search} alt="" /></button>
             </form>
           </article>
           <br />
