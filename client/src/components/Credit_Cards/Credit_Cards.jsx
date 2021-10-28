@@ -35,7 +35,7 @@ const Credit_Cards = () => {
     <section>
       <header className="header-general">
         <button className="header-general--button" onClick={() => history.push('/address')}>
-        <img src={arrowleft} alt="" />
+          <img src={arrowleft} alt="" />
         </button>
         <h3>Método de pago</h3>
       </header>
@@ -43,24 +43,30 @@ const Credit_Cards = () => {
         <img src={pb2} alt="" />
       </div>
       <p className="cardsave">Tarjeta guardada:</p>
-      <img src={tarjeta} alt="" />
+      <p className="numerocuenta">Número: **** **** ** **** ****</p>
+      <p className="expdate">Exp.date: **/**</p>
+      <p className="cvv">CVV: ***</p>
+      <img src={tarjeta} alt="" className="tarjeta11" />
       <form onSubmit={handleSubmit}>
         {myCards !== ""
           ? myCards.map((param, i) => {
             return (
               <article key={i}>
-                <label >{param.card_name}
+                <label className="nombrebanco">{param.card_name}
                   <input type="radio" name='check' value={param.card_name} />
                 </label>
+                {/* <button type='submit' className="onboarding--btn btn5">Continuar</button> */}
               </article>
+              
             );
+            
           })
-          : ""}
           
-         <div className="wrapcard">
-        <button onClick={() => history.push("/addcard")} className="btncredit"> <img src={plus} alt="" className="plus"/>Añadir tarjeta</button>
+          : ""}
+        <div className="wrapcard">
+          <button onClick={() => history.push("/addcard")} className="btncredit btncredit11"> <img src={plus} alt="" className="plus" />Añadir tarjeta</button>
         </div>
-        <button type='submit' className="onboarding--btn btn5">Continuar</button>
+        <button type='submit' className="onboarding--btn btn5 botoncontinuar">Continuar</button>
       </form>
     </section>
   );
