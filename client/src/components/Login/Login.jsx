@@ -4,6 +4,7 @@ import { withRouter } from "react-router";
 import axios from 'axios'
 
 import warning from '../../styles/assets/img/png/warning.png'
+import yameal from '../../styles/assets/img/svg/yameal-logo.svg'
 
 import { DataContext } from "../../context/context";
 
@@ -136,6 +137,7 @@ const Login = (props) => {
 
   return (
     <section className='auth_container'>
+      <img src={yameal} className="yameallg1" />
       <Header />
       {registro === true ? (
         <>

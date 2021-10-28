@@ -5,11 +5,16 @@ import Map from '../Map';
 import axios_hook from '../../hooks/get-axios';
 import Loading from '../Loading';
 import Footer from "../Footer";
+import smalllogo from '../../styles/assets/img/svg/yameal-small-logo.svg'
+
+import { useHistory } from "react-router-dom";
 
 
-const Home = () => {
+const Home = ( {location} ) => {
   const [ranking, setRanking] = useState(null);
   const [spinner, setSpinner] = useState(false);
+
+  let history = useHistory();
 
   const { loading, result } = axios_hook("http://localhost:5000/api/dishes");
 
@@ -42,16 +47,31 @@ const Home = () => {
       ) : (
         <section className="prueba">
           <header className="header-general">
-            <h3>(Logo aquí)</h3>
+            <img src={smalllogo} className="smallogo1" />
           </header>
           <section>
             <Browser />
             <Map />
             <article className="ranking_box">
-              <h2>Top 3 platos </h2>
+              <h2>Top platos </h2>
               {ranking != null
                 ? ranking.map((param, i) => {
-                    return <p key={i}>{param.name}</p>;
+                    return <div key={i} className="home-cards-container">
+                      <img className="home-dish-image" src={param.image_web_dish} alt="" />
+                      <article className="home-overlay"> 
+                      <h3 className="home-dish-title">{param.name.substr(0,20)+"..."}</h3>
+                      <button className="detailsdish-btn"
+                            onClick={() =>
+                              history.push("/more", {
+                                dish: location.state[i],
+                                restaurant: param.name,
+                              })
+                            }
+                          >
+                            Más detalles
+                          </button>
+                      </article>
+                      </div>;
                   })
                 : ""}
             </article>

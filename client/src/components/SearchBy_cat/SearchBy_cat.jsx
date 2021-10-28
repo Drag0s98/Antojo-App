@@ -151,19 +151,21 @@ const SearchBy_cat = ({ location, watch, settings }) => {
             <button className="header-general--button" onClick={() => history.push("/home")}><img src={arrowleft} alt="" /></button>
             <h3>Resultados de búsqueda</h3>
           </header>
-          <article>
+          <article className="list">
             {(order !== null && dishes !== null) ? dishes.map((param, i) => {
               return (
                 i < order.length ?
-                  <div key={i}>
-                    <img src={param.image_web_dish} width='150px' height='150px' alt="" />
-                    <p>{param.name}</p>
-                    <p>{order[i].name}</p>
-                    <p>{param.price}</p>
-                    <button onClick={() => history.push('/more', {
+                  <div className="cards-container" key={i}>
+                    <img className="dish-image"  src={param.image_web_dish} width='150px' height='150px' alt="" />
+                    <article className="overlay">
+                    <h3>{param.name}</h3>
+                    <h4>{order[i].name}</h4>
+                    <h4>{param.price}</h4>
+                    <button className="detailsdish-btn" onClick={() => history.push('/more', {
                       dish: param,
                       restaurant: order[i].name
                     })}>Más detalles</button>
+                    </article>
                   </div>
                   : ""
               )
