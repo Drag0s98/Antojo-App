@@ -7,7 +7,7 @@ import swal from 'sweetalert';
 
 
 const Confirm_Order = ({ location }) => {
-  const { orders, uid, setConfirmed } = useContext(DataContext);
+  const { orders, uid } = useContext(DataContext);
 
   const [address, setAddress] = useState(null)
   const [contadorValue, actualizarContador] = useState(1);

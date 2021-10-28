@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useEffect, useContext } from "react";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
 import { DataContext } from "../../context/context";
@@ -11,7 +11,6 @@ import {
   TileLayer,
   Marker,
   Popup,
-  MapConsumer,
 } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import markerIconPng from "leaflet/dist/images/marker-icon.png";
@@ -21,7 +20,7 @@ function More_Info({ location }) {
   const history = useHistory();
   console.log("Location state: " + location.state);
 
-  const { orders, setOrders } = useContext(DataContext);
+  const { setOrders } = useContext(DataContext);
 
   const objDish = {
     name: location.state.dish.name,
@@ -30,11 +29,7 @@ function More_Info({ location }) {
     price: location.state.dish.price,
   };
 
-  const objRestaurant = {
-    name: location.state.restaurant.name,
-    address: location.state.restaurant.address,
-    coordinates: location.state.restaurant.coordinates,
-  };
+
 
   useEffect(() => {
     axios

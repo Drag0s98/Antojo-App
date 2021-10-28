@@ -1,7 +1,6 @@
-import React, { useContext } from "react";
-import { Route, Switch, useHistory, Redirect } from 'react-router-dom';
+import React from "react";
+import { Route, Switch } from 'react-router-dom';
 
-import { DataContext } from "../../context/context";
 import Onboarding from '../Onboarding';
 import Login from "../Login";
 import Reset from "../Reset";
@@ -27,10 +26,8 @@ import loader from '../Loading';
 
 const Main = () => {
 
-  const { itsLog, setitsLog } = useContext(DataContext)
   return (
     <main>
-     {/*  {itsLog === false ? <Redirect to='/login' /> : ''} */}
       <Switch>
         <Route path='/' component={Onboarding} exact />
         <Route path='/home' component={Home} />
@@ -48,7 +45,7 @@ const Main = () => {
         <Route path='/orderconfirmation' component={Order_Confirmed} />
         <Route path='/orders' component={Orders_List} />
         <Route path='/orderdetails' component={Order_Details} />
-        <Route path='/loader' component={loader}/>
+        <Route path='/loader' component={loader} />
         <Route component={Error} />
       </Switch>
     </main>

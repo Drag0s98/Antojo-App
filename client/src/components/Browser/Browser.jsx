@@ -1,8 +1,7 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
 
-import search from "../../styles/assets/img/png/arrow-left.png"
 
 const Browser = () => {
   let history = useHistory();
@@ -15,8 +14,11 @@ const Browser = () => {
   useEffect(() => {
     axios
       .get(`http://localhost:5000/api/dishes`)
-      .then((res) => setDishes(res.data));
-  }, []);
+      .then((res) => {
+        return setDishes(res.data)
+      }).catch(error => console.log(error))
+
+  });
 
   //Al clickar en el boton digo que se esta buscando y le pongo un timer para controlar la asincronia de la aplicacion y que no suelte errores a la hora de imprimir
   const handleSubmit = async (event) => {

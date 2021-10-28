@@ -57,7 +57,7 @@ const SearchBy_cat = ({ location, watch, settings }) => {
         await axios.get(`http://localhost:5000/api/dish/${param.name}`)
           .then(async (res) => {
             res.data.map((param) => {
-              arr.push(param.id_restaurant)
+              return arr.push(param.id_restaurant)
             })
           }).catch(error => console.log(error))
       })
