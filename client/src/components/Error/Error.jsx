@@ -1,26 +1,31 @@
 import React from "react";
 
 import { Link } from "react-router-dom";
-import Footer from "../Footer";
+
+import yamealsad from '../../styles/assets/img/svg/emoji-sad.svg'
 
 const Error = () => {
   return (
     <div className="error">
       <img
-        src="https://static.vecteezy.com/system/resources/previews/003/435/646/non_2x/error-404-with-the-cute-melon-fruit-mascot-free-vector.jpg"
+        src={yamealsad}
         alt="error"
         height="350px"
         width="350px"
       />
+      <div className="errorbox">
       <p className="error--text">
         ¡Lo sentimos mucho! Ha habido un problema al cargar la página
       </p>
-      <Link to={`/home`}>
-        <button type="submit" name="button" className="error--btn">
-          Volver a explora
+      </div>
+      <Link to={`/home`} className="errorlink">
+        <div className="btnerror">
+        <button type="submit" name="button" className="error--btn errorbtn">
+          Volver a inicio
         </button>
+        </div>
       </Link>
-      <Footer />
+     
     </div>
   );
 };

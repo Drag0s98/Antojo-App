@@ -1,0 +1,72 @@
+.confirm-order-container {
+    width: 100%;
+    
+  }
+
+  .confirmorder-box {
+    margin-top: 3em;
+    margin-bottom:3em;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    border: 1px solid $primary-color-verde-oscuro;
+    & > img {
+        position: relative;
+        margin-top: 1em;
+        margin-left: 6em;
+        margin-bottom: 2em;
+
+    }
+    
+  }
+
+  .confirmimage {
+      position: absolute;
+      margin-top: 2em;
+      margin-left: 2em;
+  }
+
+  .confirmorder-btn {
+    background-color: $secondary-color-naranja-botones;
+    color: white;
+    width: 280px;
+    height: 36px;
+    border-radius: 80px;
+    border: none;
+    margin-top: 3.4em;
+
+    margin-left: 2em;
+    &:hover {
+      background-color: $secondary-color-naranja-hover;
+    }
+  }
+
+  .confirmorder-title {
+    
+    color: $primary-color-verde-oscuro;
+    font-size: 20px;
+  }
+
+  .confirmorder-details {
+      margin-left: 0.8em;
+  }
+
+  .buttons-group-confirm {
+      position: absolute;
+      border: 1px solid $primary-color-verde-oscuro;
+      padding-top: 1em;
+      padding-bottom: 1em;
+      margin-left: 7em;
+      
+
+  }
+
+  .button-double {
+    border: none;
+    background-color: transparent;
+    padding-left: 1.5em;
+    padding-right: 1.5em;
+    
+    
+  }
+
