@@ -19,9 +19,11 @@ app.use(express.json());
 app.use(cors());
 
 
+
 //Routes
 app.use('/api', routes);
 app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname + '/client/build/index.html'));
     res.status(400).json({ message: 'A error has occured' })
 })
 
