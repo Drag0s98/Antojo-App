@@ -66,7 +66,7 @@ const Address = () => {
             <button className="onboarding--btn btn4" onClick={() => history.push('/card')}>Continuar</button>
               </div>
             </>
-          ) : (
+           : (
             <>
             <div className="btnadd">
                <img src={plus} alt="" className="plus"/> <button onClick={handleClick} className="adddirectionbtn">Añadir dirección</button>

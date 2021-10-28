@@ -5,6 +5,7 @@ import { DataContext } from "../../context/context";
 
 import pb2 from '../../styles/assets/img/png/progressbar2.png';
 import tarjeta from '../../styles/assets/img/svg/fondo-tarjeta-de-pago.svg';
+import plus from '../../styles/assets/img/png/btn2.png';
 
 const Credit_Cards = () => {
   const history = useHistory();
@@ -37,7 +38,7 @@ const Credit_Cards = () => {
       <div className="pbar">
         <img src={pb2} alt="" />
       </div>
-      <p>Tarjeta guardada:</p>
+      <p className="cardsave">Tarjeta guardada:</p>
       <img src={tarjeta} alt="" />
       <form onSubmit={handleSubmit}>
         {myCards !== ""
@@ -51,8 +52,11 @@ const Credit_Cards = () => {
             );
           })
           : ""}
-        <button onClick={() => history.push("/addcard")}>Add Card</button>
-        <button type='submit'>Continuar</button>
+          
+         <div className="wrapcard">
+        <button onClick={() => history.push("/addcard")} className="btncredit"> <img src={plus} alt="" className="plus"/>Añadir tarjeta</button>
+        </div>
+        <button type='submit' className="onboarding--btn btn5">Continuar</button>
       </form>
     </section>
   );

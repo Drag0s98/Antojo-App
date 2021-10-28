@@ -10,12 +10,13 @@ const Agregar = ({scroll}) => {
 
   async function sendMessage(e) {
     e.preventDefault()
-    const {photoURL} = auth.currentUser
+    const {uid, photoURL} = auth.currentUser
   
 
     await db.collection('chat').add({
       text: msg,
       photoURL,
+      uid,
       createdAt: firebase.firestore.FieldValue.serverTimestamp()
   })
   setMsg('')
