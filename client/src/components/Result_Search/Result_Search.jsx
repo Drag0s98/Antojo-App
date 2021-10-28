@@ -194,7 +194,7 @@ function Result_Search({ location, watch, settings }) {
                         )}
                         <article className="overlay">
                           <h3>
-                            {dishes[i] !== undefined ? dishes[i].name : ""}
+                            {dishes[i] !== undefined ? dishes[i].name.substr(0,20)+"..." : ""}
                           </h3>
                           <h4>{param.name}</h4>
                           <h4>

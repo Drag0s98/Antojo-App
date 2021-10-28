@@ -38,6 +38,7 @@
 }
 
 .cards-container {
+  text-transform: capitalize;
   position: relative;
    & > img {
      width: 98%;
