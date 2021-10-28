@@ -2,14 +2,11 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
 import { usePosition } from "../../hooks/usePosition";
-import More_Info from "../More_Info";
-import Footer from '../Footer';
+import Footer from "../Footer";
 
-import arrowleft from "../../styles/assets/img/png/arrow-left.png"
+import arrowleft from "../../styles/assets/img/png/arrow-left.png";
 
-import search from "../../styles/assets/img/png/search.png"
-
-
+import search from "../../styles/assets/img/png/search.png";
 
 function Result_Search({ location, watch, settings }) {
   //location.state saco la informacion del plato
@@ -19,16 +16,13 @@ function Result_Search({ location, watch, settings }) {
   const [restaurants, setRestaurants] = useState([]);
   const [coords, setCoords] = useState(null);
   const [order, setOrder] = useState(null);
-  const [finish, setFinish] = useState('');
+  const [finish, setFinish] = useState("");
   const [loader, setLoader] = useState(false);
+  const [dishes, setdishes] = useState(null);
   let history = useHistory();
-
-  const [byCategory, setByCategory] = useState(null);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(e.target.browser.value);
-    let res = axios.get(``);
   };
 
   //Calcular distancia
@@ -56,14 +50,14 @@ function Result_Search({ location, watch, settings }) {
 
   useEffect(() => {
     setLoader(true);
-    let arr = []
+    let arr = [];
     if (location.state !== undefined) {
       location.state.map(async (param) => {
         return await axios
           .get(`http://localhost:5000/api/dish/${param.name}`)
           .then((res) => {
-            let id = res.data.map((param) => {
-              return arr.push(param.id_restaurant)
+            res.data.map((param) => {
+              return arr.push(param.id_restaurant);
             });
             setRestaurants_id(arr);
           })
@@ -73,23 +67,20 @@ function Result_Search({ location, watch, settings }) {
   }, [location]);
 
   useEffect(() => {
-    let arr = []
-    new Promise((resolve) => setTimeout(resolve, 1000))
-      .then(() => {
-        if (restaurants_id.length > 0) {
-          restaurants_id.map(async (param, i) => {
-            let response = await axios.get(
-              `http://localhost:5000/api/restaurants/${param}`
-            );
-            arr.push(response.data[0]);
-          });
-          new Promise((resolve) => setTimeout(resolve, 1100))
-            .then(() => {
-              setRestaurants(arr)
-            })
-
-        }
-      })
+    let arr = [];
+    new Promise((resolve) => setTimeout(resolve, 1000)).then(() => {
+      if (restaurants_id.length > 0) {
+        restaurants_id.map(async (param, i) => {
+          let response = await axios.get(
+            `http://localhost:5000/api/restaurants/${param}`
+          );
+          arr.push(response.data[0]);
+        });
+        new Promise((resolve) => setTimeout(resolve, 1100)).then(() => {
+          setRestaurants(arr);
+        });
+      }
+    });
   }, [restaurants_id]);
 
   useEffect(() => {
@@ -106,9 +97,9 @@ function Result_Search({ location, watch, settings }) {
         };
         return array.push(obj);
       });
-      new Promise((resolve) => setTimeout(resolve, 1200))
-        .then(() => setCoords(array))
-
+      new Promise((resolve) => setTimeout(resolve, 1200)).then(() =>
+        setCoords(array)
+      );
     } else {
       return null;
     }
@@ -127,9 +118,9 @@ function Result_Search({ location, watch, settings }) {
           distance: distance,
         };
         arr.push(obj);
-        new Promise(resolve => setTimeout(resolve, 1400))
-          .then(() => setOrder(arr))
-
+        return new Promise((resolve) => setTimeout(resolve, 1400)).then(() =>
+          setOrder(arr)
+        );
       });
     }
     // console.log('Distancia entre los 2 puntos:' + distance)
@@ -137,79 +128,99 @@ function Result_Search({ location, watch, settings }) {
 
   useEffect(() => {
     let arr = [];
-    let orden = []
+    let orden = [];
     if (order != null) {
       order.filter((element, i) => {
         arr.push(element.distance);
-        orden.push({
+        return orden.push({
           distance: arr.sort((a, b) => b - a)[0],
-          name: element.name
+          name: element.name,
         });
-
       });
     }
-    new Promise(resolve => setTimeout(resolve, 1800))
+    new Promise((resolve) => setTimeout(resolve, 1800))
       .then(() => {
         setLoader(false);
-      }).then(() => setFinish(orden))
-
+      })
+      .then(() => {
+        setdishes(location.state);
+        setFinish(orden);
+      });
   }, [order]);
-
 
   return (
     <>
-      {loader === true ? '' : <div className="resultSearch">
-        <header className="header-general">
-          <button className="header-general--button" onClick={() => history.push("/home")}>
-          <img src={arrowleft} alt="" />
-          </button>
-          <h3>Resultados de búsqueda</h3>
-        </header>
-        <section className="result">
-          <article className="result--box-input">
-            <form onSubmit={handleSubmit}>
-              <input type="text" name="browser" placeholder="Busca plato..." />
-              <button className="result--box-btn"><img src={search} alt="" /></button>
-            </form>
-          </article>
-          <br />
-          <article className="list">
-            {finish !== undefined && finish !== ''
-              ?
-              finish.map((param, i) => {
-                return (
-                  <div key={i}>
-                    {location.state[i].image_web_dish !== undefined ? <img src={location.state[i].image_web_dish} width='150px' height='150px' alt="" /> : ''}
-                    <h3>{location.state[i].name !== undefined ? location.state[i].name : ''}</h3>
-                    <h4>{param.name}</h4>
-                    <h4>Precio {location.state[i].price !== undefined ? location.state[i].price : ''}</h4>
-                    <button
-                      onClick={() =>
-                        history.push("/more", {
-                          dish: location.state[i],
-                          restaurant: param.name,
-                        })
-                      }
-                    >
-                      Más detalles
-                    </button>
-                  </div>
-                );
-              })
-              : ""}
-            {byCategory != null
-              ? byCategory.map((param, i) => {
-                return (
-                  <div key={i}>
-                    <p>{param.name}</p>
-                  </div>
-                );
-              })
-              : ""}
-          </article>
-          <Footer />
-        </section>
-      </div>}
+      {loader === true ? (
+        ""
+      ) : (
+        <div className="resultSearch">
+          <header className="header-general">
+            <button
+              className="header-general--button"
+              onClick={() => history.push("/home")}
+            >
+              <img src={arrowleft} alt="" />
+            </button>
+            <h3>Resultados de búsqueda</h3>
+          </header>
+          <section className="result">
+            <article className="result--box-input">
+              <form onSubmit={handleSubmit}>
+                <input
+                  type="text"
+                  name="browser"
+                  placeholder="Busca plato..."
+                />
+                <button className="result--box-btn">
+                  <img src={search} alt="" />
+                </button>
+              </form>
+            </article>
+            <br />
+            <article className="list">
+              {finish !== undefined && finish !== ""
+                ? finish.map((param, i) => {
+                    console.log(dishes);
+                    return (
+                      <div key={i} className="cards-container">
+                        {dishes[i] !== undefined ? (
+                          <img
+                            className="dish-image"
+                            src={dishes[i].image_web_dish}
+                            alt=""
+                          />
+                        ) : (
+                          ""
+                        )}
+                        <article className="overlay">
+                          <h3>
+                            {dishes[i] !== undefined ? dishes[i].name.substr(0,20)+"..." : ""}
+                          </h3>
+                          <h4>{param.name}</h4>
+                          <h4>
+                            Precio{" "}
+                            {dishes[i] !== undefined ? dishes[i].price : ""}
+                          </h4>
+                          <button className="detailsdish-btn"
+                            onClick={() =>
+                              history.push("/more", {
+                                dish: location.state[i],
+                                restaurant: param.name,
+                              })
+                            }
+                          >
+                            Más detalles
+                          </button>
+                        </article>
+                      </div>
+                    );
+                  })
+                : ""}
+            </article>
+            <Footer />
+          </section>
+        </div>
+      )}
     </>
   );
 }

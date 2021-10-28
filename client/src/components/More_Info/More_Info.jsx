@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useEffect, useContext } from "react";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
 import { DataContext } from "../../context/context";
@@ -13,7 +13,6 @@ import {
   TileLayer,
   Marker,
   Popup,
-  MapConsumer,
 } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import markerIconPng from "leaflet/dist/images/marker-icon.png";
@@ -21,21 +20,16 @@ import { Icon } from "leaflet";
 
 function More_Info({ location }) {
   const history = useHistory();
-  console.log("Location state: " + location.state);
+  console.log(location.state.dish.image_web_dish);
 
-  const { orders, setOrders } = useContext(DataContext);
+  const { setOrders } = useContext(DataContext);
 
   const objDish = {
     name: location.state.dish.name,
     category: location.state.dish.category,
     restaurant: location.state.restaurant,
     price: location.state.dish.price,
-  };
-
-  const objRestaurant = {
-    name: location.state.restaurant.name,
-    address: location.state.restaurant.address,
-    coordinates: location.state.restaurant.coordinates,
+    image: location.state.dish.image_web_dish
   };
 
   useEffect(() => {
@@ -48,7 +42,7 @@ function More_Info({ location }) {
       });
   }, [location]);
 
-  const coordinates = [40.42166, -3.69271]; // Coger coordenadas del restaurante
+  const coordinates = [40.41328, -3.70376]; // Coger coordenadas del restaurante
 
   return (
     <section className="moreInfo">
@@ -59,12 +53,16 @@ function More_Info({ location }) {
         <h3>Nombre del plato</h3>
       </header>
       <div className="tgview">
-        <h2>Plato:</h2>{" "}
+        <img className="more-dish-image" src={location.state.dish.image_web_dish} alt="" />
         <h4 className="tituloview">{location.state.dish.name}</h4>
-        Categoría: <p>{location.state.dish.category}</p>
-        Restaurante: <h3>{location.state.restaurant}</h3>
-        Precio: <p>{location.state.dish.price}</p>
-        <button
+        <p>Nuestro bowl especial, y el favorito de nuestro chef. Hecho con ingredientes naturales y frescos, aportando a nuestra dieta el toque saludable que necesita tu día. Nuestros bowls son la alternativa a la comida rápida, con mezcla de ingredientes, sabores y texturas que no te dejarán indiferente.</p>
+        {/* <p>{location.state.dish.category}</p> */}
+        <h3 className="moreinfo-price">Precio</h3>
+        <p className="moreinfo-pricedetail">Precio del plato: {location.state.dish.price}</p>
+        <p className="moreinfo-pricedetail">Precio del servicio: 2,90</p>
+        {/* Restaurante: <h3>{location.state.restaurant}</h3> */}
+        
+        <button className="moreinfo-btn"
           onClick={() => {
             swal({
               title: "¡Su plato ha sido añadido a pedidos!",
@@ -84,10 +82,10 @@ function More_Info({ location }) {
           Pedir plato
         </button>
         <section>
-          <h4>Ubicación</h4>
+          <h4 className="moreInfo-location">Ubicación</h4>
           <MapContainer
             center={coordinates}
-            zoom={13}
+            zoom={15}
             scrollWheelZoom={false}
             style={{ height: "30vh", width: "94vw" }}
           >
@@ -106,11 +104,12 @@ function More_Info({ location }) {
               }
             >
               <Popup>
-                Nombre restaurante <br /> dirección <br />
+                <p>{location.state.restaurant}</p>
               </Popup>
             </Marker>
             );
           </MapContainer>
+          <p className="moreinfo-pricedetail">{location.state.restaurant}</p> 
         </section>
         <Footer />
       </div>

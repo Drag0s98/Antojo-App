@@ -7,7 +7,7 @@ import swal from 'sweetalert';
 import arrowleft from "../../styles/assets/img/png/arrow-left.png"
 
 const Confirm_Order = ({ location }) => {
-  const { orders, uid, setConfirmed } = useContext(DataContext);
+  const { orders, uid } = useContext(DataContext);
 
   const [address, setAddress] = useState(null)
   const [contadorValue, actualizarContador] = useState(1);
@@ -21,21 +21,19 @@ const Confirm_Order = ({ location }) => {
       })
   }, [uid])
 
-  console.log(address);
-  console.log();
 
   return (
     <section className="order">
       <header className="header-general">
         <button className="header-general--button" onClick={() => history.push('/card')}>
-        <img src={arrowleft} alt="" />
+          <img src={arrowleft} alt="" />
         </button>
         <h3>Resumen de tu pedido</h3>
       </header>
       <div className="order--box">
         {orders ?
           <>
-            <img src="" alt="" />
+            <img src={orders[1].image} alt={orders[1].name} width='150px' height='150px' className='img_list' />
             <p>Nombre del plato: {orders[1].name}</p>
             <p>Precio:  {orders[1].price}</p>
             <p>Tiempo estimado: 35 minutes</p>
@@ -66,7 +64,8 @@ const Confirm_Order = ({ location }) => {
                       id_user: uid,
                       dish_name: orders[1].name,
                       price: orders[1].price,
-                      cantidad: contadorValue
+                      cantidad: contadorValue,
+                      image : orders[1].image
                     })
                     history.push('/orderconfirmation')
                   } else {

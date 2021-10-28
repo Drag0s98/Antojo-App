@@ -19,6 +19,7 @@ const Home = () => {
     result.filter((element) => {
       if (element.rating < numA || element.rating === 5) {
         numA = element.rating;
+        console.log(element);
         return arr.push(element);
       } else {
         return null;
@@ -48,10 +49,15 @@ const Home = () => {
             <Browser />
             <Map />
             <article className="ranking_box">
-              <h2>Top 3 platos </h2>
+              <h2>Top platos </h2>
               {ranking != null
                 ? ranking.map((param, i) => {
-                    return <p key={i}>{param.name}</p>;
+                    return <div key={i} className="home-cards-container">
+                      <img className="home-dish-image" src={param.image_web_dish} alt="" />
+                      <article className="home-overlay"> 
+                      <h3 className="home-dish-title">{param.name.substr(0,20)+"..."}</h3>
+                      </article>
+                      </div>;
                   })
                 : ""}
             </article>
@@ -67,10 +73,6 @@ const Home = () => {
                     }
                   })
                 : ""}
-            </article>
-            <article className="recomendation_box">
-              <h2>Recomendacioens</h2>
-              <p>Aqui irian las recomendaciones</p>
             </article>
           </section>
           <Footer />

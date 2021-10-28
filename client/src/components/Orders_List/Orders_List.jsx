@@ -31,7 +31,7 @@ const Orders_List = () => {
         var x = new Date()
         let dbDate = d.getHours() + '' + d.getMinutes();
         var fecha = x.getHours() + '' + x.getMinutes();
-        let calc = (parseInt(fecha) + 30) - parseInt(dbDate);
+        let calc = (parseInt(dbDate) - parseInt(fecha) + 30);
         return arr.push(calc)
       })
       setHour(arr)
@@ -39,38 +39,45 @@ const Orders_List = () => {
   }, [order])
 
   return (
-    order != null ?
-      <>
+    (order != null && hour !== null) ?
+      <div className='orders_container'>
         <header className="header-general">
           <button className="header-general--button" onClick={() => history.push("/orderconfirmation")}>
-          <img src={arrowleft} alt="" />
+            <img src={arrowleft} alt="" />
           </button>
           <h3>Pedidos</h3>
         </header>
-        <section>
+        <section className='orders_list_body'>
           {order.map((param, i) => {
             return (
-              <article key={i}>
-                <img src="" alt="" />
-                <h3>Estado del pedido </h3>
-                <p>Plato {param.dish_name}</p>
-                {hour !== null ? hour.map((param) => {
-                  <div key={i}>
-                    {param < 31 ? <p>El pedido se esta preparando: {param}</p> : ''}
-                    {param < 16 ? <p>El pedido esta de camino: {param}</p> : ''}
-                    {param < 6 ? <p>El pedido esta apunto de llegar: {param}</p> : ''}
-                    {param < 1 ? <p>Pedido completado</p> : ''}
-                  </div>
-                }) : ''}
-                <p>Precio {param.price}</p>
-                <p>En camino</p>
-                <button>Ver pedido</button>
+              <article key={i} className='order_list'>
+                <div className='img_box'>
+                  <img src={param.image} alt="" width='80px' height='80px' />
+                </div>
+                <div className='right_box'>
+                  <h3>Estado del pedido </h3>
+                  <p>Plato {param.dish_name}</p>
+                  <p>Cantidad {param.cantidad}</p>
+                  <p>Precio {param.price} €</p>
+                </div>
+                <div className='bot_box'>
+                  {hour !== null ?
+                    <div className='hour_box'>
+                      {(hour[i] < 31 && hour[i] > 16) ? <p className='procesando'>🟢 Procesando ({hour[i]}:00)</p> : ''}
+                      {(hour[i] < 16 && hour[i] > 6) ? <p className='camino'>🏃🏼‍♂️ En camino: ({hour[i]}:00)</p> : ''}
+                      {(hour[i] < 6 && hour[i] > 1) ? <p className='llegando'> 📦 Llegando: ({hour[i]}:00)</p> : ''}
+                      {(hour[i] < 1) ? <p className='completado'>🔴 Completado</p> : ''}
+                    </div>
+                    : ''}
+                  <button>Ver pedido</button>
+                </div>
+                <hr />
               </article>
             );
           })}
         </section>
         <Footer />
-      </> : setTimeout(() => { <Redirect to="/login" /> }, 200)
+      </div> : setTimeout(() => { <Redirect to="/login" /> }, 200)
   );
 
 };
