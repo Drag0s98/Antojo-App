@@ -136,9 +136,13 @@ function Result_Search({ location, watch, settings }) {
     let orden = []
     if (order != null) {
       order.filter((element, i) => {
-        arr.push(element.distance);
+        console.log(element);
+        arr.push({
+          distance: element.distance,
+          name: element.name
+        });
         orden.push(arr.sort((a, b) => a - b));
-        if (i === element.distance) {
+        if (i === element.distance && i < 10) {
           return orden.push(element);
         } else {
           return null;
@@ -148,7 +152,7 @@ function Result_Search({ location, watch, settings }) {
     new Promise(resolve => setTimeout(resolve, 1800))
       .then(() => {
         setLoader(false);
-      }).then(() => setFinish(orden[0]))
+      }).then(() => setFinish(orden[1]))
 
   }, [order]);
 
@@ -175,13 +179,13 @@ function Result_Search({ location, watch, settings }) {
                 return (
                   <div key={i}>
                     {/* Imagen Aquí */}
-                    <h3>{location.state[0].name}</h3>
+                    <h3>{location.state[i].name !== undefined ? location.state[i].name : ''}</h3>
                     <h4>{param.name}</h4>
                     <h4>Precio</h4>
                     <button
                       onClick={() =>
                         history.push("/more", {
-                          dish: location.state[0],
+                          dish: location.state[i],
                           restaurant: param.name,
                         })
                       }
