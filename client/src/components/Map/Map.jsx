@@ -35,7 +35,6 @@ const Map = ({ watch, settings }) => {
 
 
 
-  const mYcoordinates = [40.42166, -3.69271];
   const geolocation = [latitude, longitude];
 
   return (
@@ -65,7 +64,6 @@ const Map = ({ watch, settings }) => {
               >
                 <Popup>
                   The Bridge <br /> Paseo de Recoletos, 15 <br />
-                  {/* <a href="https://www.thebridge.tech/">Visit website » </a> */}
                 </Popup>
               </Marker>
             })}
