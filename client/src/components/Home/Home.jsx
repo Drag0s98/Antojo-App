@@ -24,6 +24,7 @@ const Home = ( {location} ) => {
     result.filter((element) => {
       if (element.rating < numA || element.rating === 5) {
         numA = element.rating;
+        console.log(element);
         return arr.push(element);
       } else {
         return null;
