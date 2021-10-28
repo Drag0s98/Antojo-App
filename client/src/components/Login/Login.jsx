@@ -2,7 +2,7 @@ import React, { useState, useCallback, useContext } from "react";
 import { auth, db, google } from "../../firebase";
 import { withRouter } from "react-router";
 import axios from 'axios'
-
+import { FcGoogle } from "react-icons/fc"; 
 import warning from '../../styles/assets/img/png/warning.png'
 import yameal from '../../styles/assets/img/svg/yameal-logo.svg'
 
@@ -184,7 +184,7 @@ const Login = (props) => {
             }
 
 
-
+            
             }>¿Tienes cuenta? Inicia sesión {'\u00A0'}<u>aquí</u></p>
             <div className='buttons_container'>
               <button type="submit" className='auth_btn'>
@@ -192,7 +192,7 @@ const Login = (props) => {
                   registro ? "Registro" : "Iniciar sesión"
                 }
               </button>
-
+              <FcGoogle className="google"/>
               <button
                 type="button" className='google-btn'
                 onClick={() => loginGoogle(registro)}>
@@ -215,6 +215,7 @@ const Login = (props) => {
             <h3 className='auth_title'>
               {registro ? "Registro de usuario" : "Iniciar sesión"}
             </h3>
+            <FcGoogle className="google"/>
             <form onSubmit={sendData} className='form_auth'>
               <div className="form-floating mb-3">
                 <input type="email" className="form-control" id="floatingInput" placeholder="email" onChange={e => setEmail(e.target.value)} value={email} />
@@ -257,12 +258,14 @@ const Login = (props) => {
                     registro ? "Registro" : "Iniciar sesión"
                   }
                 </button>
+                
                 <button
                   type="button" className='google-btn'
                   onClick={() => loginGoogle(registro)}>
-
+                   
                   {
-                    registro ? "Identifícate con Google" : "Identifícate con Google"
+                    registro ? "Identifícate con Google"  : "Identifícate con Google "
+                  
                   }
 
                 </button>
