@@ -24,13 +24,11 @@ const Home = ( {location} ) => {
     result.filter((element) => {
       if (element.rating < numA || element.rating === 5) {
         numA = element.rating;
-        console.log(element);
         return arr.push(element);
       } else {
         return null;
       }
     });
-    console.log(arr);
     setRanking(arr);
   }, [loading, result]);
 
@@ -57,7 +55,6 @@ const Home = ( {location} ) => {
               <h2>Top platos </h2>
               {ranking != null
                 ? ranking.map((param, i) => {
-                      console.log(param);                  
                     return <div key={i} className="home-cards-container">
                       <img className="home-dish-image" src={param.image_web_dish} alt="" />
                       <article className="home-overlay"> 

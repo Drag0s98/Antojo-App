@@ -12,12 +12,18 @@ import arrowleft from "../../styles/assets/img/png/arrow-left.png"
 const Credit_Cards = () => {
   const history = useHistory();
   const { uid } = useContext(DataContext);
-  const [myCards, setMyCards] = useState("");
+  const [myCards, setMyCards] = useState(null);
 
   useEffect(() => {
     axios
       .get(`http://localhost:5000/api/payment/${uid}`)
-      .then((res) => setMyCards(res.data));
+      .then((res) => {
+        if (Object.keys(res.data).length === 0) {
+          setMyCards(null);
+        } else {
+          setMyCards(res.data)
+        }
+      }).catch(error => console.log(error))
   }, [uid]);
 
   const handleSubmit = async (e) => {
@@ -31,6 +37,11 @@ const Credit_Cards = () => {
     history.push('/confirmorder', value)
   }
 
+
+  let style = {
+    visibility: "hidden"
+  }
+
   return (
     <section>
       <header className="header-general">
@@ -42,28 +53,31 @@ const Credit_Cards = () => {
       <div className="pbar">
         <img src={pb2} alt="" />
       </div>
-      <p className="cardsave">Tarjeta guardada:</p>
-      <p className="numerocuenta">Número: **** **** ** **** ****</p>
-      <p className="expdate">Exp.date: **/**</p>
-      <p className="cvv">CVV: ***</p>
-      <img src={tarjeta} alt="" className="tarjeta11" />
       <form onSubmit={handleSubmit}>
-        {myCards !== ""
+        {myCards !== null
           ? myCards.map((param, i) => {
             return (
               <article key={i}>
-                <label className="nombrebanco">{param.card_name}
-                  <input type="radio" name='check' value={param.card_name} />
+                <label className="nombrebanco">
+                  <p className="cardsave">Tarjeta guardada: {param.card_name}</p>
+                  <p className="numerocuenta">Número: **** **** ** **** ****</p>
+                  <p className="expdate">Exp.date: **/**</p>
+                  <p className="cvv">CVV: ***</p>
+                  <img src={tarjeta} alt="" className="tarjeta11" />
+                  <input type="radio" name='check' value={param.card_name} className='radioBtn' />
                 </label>
-                {/* <button type='submit' className="onboarding--btn btn5">Continuar</button> */}
-
               </article>
-              
             );
-            
           })
-
-          : ""}
+          :
+          <>
+            <p className="cardsave" >Tarjeta guardada: No hay tarjeta</p>
+            <p className="numerocuenta" style={style}>Número: **** **** ** **** ****</p>
+            <p className="expdate" style={style}>Exp.date: **/**</p>
+            <p className="cvv" style={style}>CVV: ***</p>
+            <img src={tarjeta} alt="" className="tarjeta11" style={style} />
+          </>
+        }
         <div className="wrapcard">
           <button onClick={() => history.push("/addcard")} className="btncredit btncredit11"> <img src={plus} alt="" className="plus" />Añadir tarjeta</button>
         </div>

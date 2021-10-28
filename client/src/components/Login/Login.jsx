@@ -147,7 +147,7 @@ const Login = (props) => {
           </h3>
           <form onSubmit={sendData} className='form_auth'>
             <div className="form-floating mb-3">
-              <input type="email" className="form-control" id="floatingInput" placeholder="email" onChange={e => setEmail(e.target.value)} value={email} />
+              <input type="email" className="form-control"  placeholder="email" onChange={e => setEmail(e.target.value)} value={email} />
               <label >Email</label>
             </div>
             {
@@ -161,7 +161,7 @@ const Login = (props) => {
               ) : null
             }
             <div className="form-floating mb-3 second_inp">
-              <input type="password" className="form-control" id="floatingInput" placeholder="Contraseña" onChange={e => setPassword(e.target.value)} value={password} />
+              <input type="password" className="form-control"  placeholder="Contraseña" onChange={e => setPassword(e.target.value)} value={password} />
               <label >Contraseña</label>
             </div>
             {
@@ -217,7 +217,7 @@ const Login = (props) => {
             </h3>
             <form onSubmit={sendData} className='form_auth'>
               <div className="form-floating mb-3">
-                <input type="email" className="form-control" id="floatingInput" placeholder="email" onChange={e => setEmail(e.target.value)} value={email} />
+                <input type="email" className="form-control"  placeholder="email" onChange={e => setEmail(e.target.value)} value={email} />
                 <label>Email</label>
               </div>
               {
@@ -231,7 +231,7 @@ const Login = (props) => {
                 ) : null
               }
               <div className="form-floating mb-3 second_inp">
-                <input type="password" className="form-control" id="floatingInput" placeholder="Contraseña" onChange={e => setPassword(e.target.value)} value={password} />
+                <input type="password" className="form-control"  placeholder="Contraseña" onChange={e => setPassword(e.target.value)} value={password} />
                 <label >Contraseña</label>
               </div>
               {

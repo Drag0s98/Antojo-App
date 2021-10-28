@@ -66,10 +66,10 @@ const Orders_List = () => {
                       {(hour[i] < 31 && hour[i] > 16) ? <p className='procesando'>🟢 Procesando ({hour[i]}:00)</p> : ''}
                       {(hour[i] < 16 && hour[i] > 6) ? <p className='camino'>🏃🏼‍♂️ En camino: ({hour[i]}:00)</p> : ''}
                       {(hour[i] < 6 && hour[i] > 1) ? <p className='llegando'> 📦 Llegando: ({hour[i]}:00)</p> : ''}
-                      {(hour[i] < 1) ? <p className='completado'>🔴 Completado</p> : ''}
+                      {(hour[i] < 1 || hour[i] > 30) ? <p className='completado'>🔴 Completado</p> : ''}
                     </div>
                     : ''}
-                  <button>Ver pedido</button>
+                  <button onClick={() => history.push('/chat')}>Att.Cliente</button>
                 </div>
                 <hr />
               </article>

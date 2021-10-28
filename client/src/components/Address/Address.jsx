@@ -42,27 +42,15 @@ const Address = () => {
       </div>
       <article>
 
-        {/* Borrar */}
-        {/* <div className="domicile_box">
-              <p>Name:</p>
-              <p>Domicile:</p>
-              <p>Domicile num:</p>
-              <p>Domicile piso:</p> */}
-        {/* <button onClick={handleClick}>Cambiar domicilio</button> */}
-
-        {/* </div>
-              <div className="wpbtb">
-             <img src={plus} alt="" className="plus"/> <button onClick={handleClick} className="adddirectionbtn">Añadir dirección</button>
-              </div> */}
         <div>
           {addres ?
             <>
               <p className="directtitle">Dirección guardada:</p>
               <div className="domicile_box">
+                <p>Nombre: {addres.name}</p>
                 <p>Dirección: {addres.domicile}</p>
                 <p>Número: {addres.domicile_num}</p>
                 <p>Piso: {addres.domicile_piso}</p>
-                {/* <button onClick={handleClick}>Cambiar domicilio</button> */}
 
               </div>
 
