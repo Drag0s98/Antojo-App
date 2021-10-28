@@ -7,8 +7,6 @@ import { Link } from "react-router-dom";
 
 const Footer = () => {
 
-  console.log(window.location.pathname)
-
   return (
     <footer className="footer2">
       <div className="arrow-container">

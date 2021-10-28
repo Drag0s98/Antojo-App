@@ -32,7 +32,7 @@ const Address = () => {
       <header className="header-general">
 
         <button className="header-general--button" onClick={() => history.push('/more')}>
-        <img src={arrowleft} alt="" />
+          <img src={arrowleft} alt="" />
 
         </button>
         <h3>Selecciona dirección</h3>
@@ -63,21 +63,21 @@ const Address = () => {
                 <p>Número: {addres.domicile_num}</p>
                 <p>Piso: {addres.domicile_piso}</p>
                 {/* <button onClick={handleClick}>Cambiar domicilio</button> */}
-                
+
               </div>
-            
-               <img src={plus} alt="" className="plus plus2"/> <button onClick={handleClick} className="adddirectionbtn">Añadir dirección</button>
-                <button className="onboarding--btn btn4 btn6" onClick={() => history.push('/card')}>Continuar</button>
-              
+
+              <img src={plus} alt="" className="plus plus2" /> <button onClick={handleClick} className="adddirectionbtn">Añadir dirección</button>
+              <button className="onboarding--btn btn4 btn6" onClick={() => history.push('/card')}>Continuar</button>
+
             </>
-           : (
-            <>
-            <div className="btnadd">
-               <img src={plus} alt="" className="plus"/> <button onClick={handleClick} className="adddirectionbtn">Añadir dirección</button>
-                <button className="onboarding--btn btn4" onClick={() => history.push('/card')}>Continuar</button>
-              </div>
-            </>
-          
+            : (
+              <>
+                <div className="btnadd">
+                  <img src={plus} alt="" className="plus" /> <button onClick={handleClick} className="adddirectionbtn">Añadir dirección</button>
+                  <button className="onboarding--btn btn4" onClick={() => history.push('/card')}>Continuar</button>
+                </div>
+              </>
+
             )}
         </div>
       </article>

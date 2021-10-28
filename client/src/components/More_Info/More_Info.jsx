@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useEffect, useContext } from "react";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
 import { DataContext } from "../../context/context";
@@ -13,7 +13,6 @@ import {
   TileLayer,
   Marker,
   Popup,
-  MapConsumer,
 } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import markerIconPng from "leaflet/dist/images/marker-icon.png";
@@ -23,19 +22,13 @@ function More_Info({ location }) {
   const history = useHistory();
   console.log("Location state: " + location.state);
 
-  const { orders, setOrders } = useContext(DataContext);
+  const { setOrders } = useContext(DataContext);
 
   const objDish = {
     name: location.state.dish.name,
     category: location.state.dish.category,
     restaurant: location.state.restaurant,
     price: location.state.dish.price,
-  };
-
-  const objRestaurant = {
-    name: location.state.restaurant.name,
-    address: location.state.restaurant.address,
-    coordinates: location.state.restaurant.coordinates,
   };
 
   useEffect(() => {
@@ -48,7 +41,7 @@ function More_Info({ location }) {
       });
   }, [location]);
 
-  const coordinates = [40.42166, -3.69271]; // Coger coordenadas del restaurante
+  const coordinates = [40.41328, -3.70376]; // Coger coordenadas del restaurante
 
   return (
     <section className="moreInfo">
@@ -59,13 +52,13 @@ function More_Info({ location }) {
         <h3>Nombre del plato</h3>
       </header>
       <div className="tgview">
-        <h2>Plato:</h2>{" "}
+        IMAGEN
         <h4 className="tituloview">{location.state.dish.name}</h4>
         Categoría: <p>{location.state.dish.category}</p>
         Restaurante: <h3>{location.state.restaurant}</h3>
         Precio: <p>{location.state.dish.price}</p>
-       
         <button
+
           onClick={() => {
             swal({
               title: "¡Su plato ha sido añadido a pedidos!",
@@ -85,10 +78,10 @@ function More_Info({ location }) {
           Pedir plato
         </button>
         <section>
-          <h4>Ubicación</h4>
+          <h4 className="moreInfo-location">Ubicación</h4>
           <MapContainer
             center={coordinates}
-            zoom={13}
+            zoom={15}
             scrollWheelZoom={false}
             style={{ height: "30vh", width: "94vw" }}
           >
@@ -112,6 +105,7 @@ function More_Info({ location }) {
             </Marker>
             );
           </MapContainer>
+          <p>{location.state.restaurant}</p>
         </section>
         <Footer />
       </div>

@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
 import { usePosition } from "../../hooks/usePosition";
-import More_Info from "../More_Info";
 import Footer from '../Footer';
 
 import arrowleft from "../../styles/assets/img/png/arrow-left.png"
@@ -21,14 +20,11 @@ function Result_Search({ location, watch, settings }) {
   const [order, setOrder] = useState(null);
   const [finish, setFinish] = useState('');
   const [loader, setLoader] = useState(false);
+  const [dishes, setdishes] = useState(null);
   let history = useHistory();
-
-  const [byCategory, setByCategory] = useState(null);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(e.target.browser.value);
-    let res = axios.get(``);
   };
 
   //Calcular distancia
@@ -62,7 +58,7 @@ function Result_Search({ location, watch, settings }) {
         return await axios
           .get(`http://localhost:5000/api/dish/${param.name}`)
           .then((res) => {
-            let id = res.data.map((param) => {
+            res.data.map((param) => {
               return arr.push(param.id_restaurant)
             });
             setRestaurants_id(arr);
@@ -127,7 +123,7 @@ function Result_Search({ location, watch, settings }) {
           distance: distance,
         };
         arr.push(obj);
-        new Promise(resolve => setTimeout(resolve, 1400))
+        return new Promise(resolve => setTimeout(resolve, 1400))
           .then(() => setOrder(arr))
 
       });
@@ -141,17 +137,19 @@ function Result_Search({ location, watch, settings }) {
     if (order != null) {
       order.filter((element, i) => {
         arr.push(element.distance);
-        orden.push({
+        return orden.push({
           distance: arr.sort((a, b) => b - a)[0],
           name: element.name
         });
-
       });
     }
     new Promise(resolve => setTimeout(resolve, 1800))
       .then(() => {
         setLoader(false);
-      }).then(() => setFinish(orden))
+      }).then(() => {
+        setdishes(location.state)
+        setFinish(orden)
+      })
 
   }, [order]);
 
@@ -161,7 +159,7 @@ function Result_Search({ location, watch, settings }) {
       {loader === true ? '' : <div className="resultSearch">
         <header className="header-general">
           <button className="header-general--button" onClick={() => history.push("/home")}>
-          <img src={arrowleft} alt="" />
+            <img src={arrowleft} alt="" />
           </button>
           <h3>Resultados de búsqueda</h3>
         </header>
@@ -177,12 +175,13 @@ function Result_Search({ location, watch, settings }) {
             {finish !== undefined && finish !== ''
               ?
               finish.map((param, i) => {
+                console.log(dishes);
                 return (
                   <div key={i}>
-                    {location.state[i].image_web_dish !== undefined ? <img src={location.state[i].image_web_dish} width='150px' height='150px' alt="" /> : ''}
-                    <h3>{location.state[i].name !== undefined ? location.state[i].name : ''}</h3>
+                    {dishes[i] !== undefined ? <img src={dishes[i].image_web_dish} width='150px' height='150px' alt="" /> : ''}
+                    <h3>{dishes[i] !== undefined ? dishes[i].name : ''}</h3>
                     <h4>{param.name}</h4>
-                    <h4>Precio {location.state[i].price !== undefined ? location.state[i].price : ''}</h4>
+                    <h4>Precio {dishes[i] !== undefined ? dishes[i].price : ''}</h4>
                     <button
                       onClick={() =>
                         history.push("/more", {
@@ -193,15 +192,6 @@ function Result_Search({ location, watch, settings }) {
                     >
                       Más detalles
                     </button>
-                  </div>
-                );
-              })
-              : ""}
-            {byCategory != null
-              ? byCategory.map((param, i) => {
-                return (
-                  <div key={i}>
-                    <p>{param.name}</p>
                   </div>
                 );
               })

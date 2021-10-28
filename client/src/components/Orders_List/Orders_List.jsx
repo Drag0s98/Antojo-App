@@ -55,12 +55,14 @@ const Orders_List = () => {
                 <h3>Estado del pedido </h3>
                 <p>Plato {param.dish_name}</p>
                 {hour !== null ? hour.map((param) => {
-                  <div key={i}>
-                    {param < 31 ? <p>El pedido se esta preparando: {param}</p> : ''}
-                    {param < 16 ? <p>El pedido esta de camino: {param}</p> : ''}
-                    {param < 6 ? <p>El pedido esta apunto de llegar: {param}</p> : ''}
-                    {param < 1 ? <p>Pedido completado</p> : ''}
-                  </div>
+                  return (
+                    <div key={i}>
+                      {param < 31 ? <p>El pedido se esta preparando: {param}</p> : ''}
+                      {param < 16 ? <p>El pedido esta de camino: {param}</p> : ''}
+                      {param < 6 ? <p>El pedido esta apunto de llegar: {param}</p> : ''}
+                      {param < 1 ? <p>Pedido completado</p> : ''}
+                    </div>
+                  )
                 }) : ''}
                 <p>Precio {param.price}</p>
                 <p>En camino</p>

@@ -13,11 +13,10 @@ const Login = (props) => {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [image, setImage] = useState('');
   const [error_pass, setError_pass] = useState(null);
   const [error_email, setError_email] = useState(null);
   const [registro, setRegistro] = useState(true);
-  const { itsLog, setitsLog, uid, setUid } = useContext(DataContext)
+  const { setitsLog, setUid } = useContext(DataContext)
 
 
   const loginGoogle = () => {
@@ -134,18 +133,13 @@ const Login = (props) => {
     }
   }, [email, password, props.history, setUid, setitsLog]);
 
-  const handleImage = (e) => {
-    if (e.target.files[0].type === 'image/png' || e.target.files[0].type === 'image/jpeg' || e.target.files[0].type === 'image/jpg') {
-      setImage({ image: e.target.files[0] })
-    }
-  }
 
-  return ( 
+  return (
     <section className='auth_container'>
       <Header />
       {registro === true ? (
         <>
-       
+
           <h3 className='auth_title'>
             {registro ? 'Registro' : 'Login'}
           </h3>
@@ -286,7 +280,7 @@ const Login = (props) => {
           </>
         ) : ''}
     </section>
-    
+
   )
 }
 export default withRouter(Login);

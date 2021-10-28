@@ -1,11 +1,9 @@
 import React from "react";
 import { useState, useEffect, useRef } from "react";
-import {db, auth, google} from '../../firebase';
+import { db, auth } from '../../firebase';
 import './Chat.css'
 
 import Agregar from '../Agregar';
-
-
 
 const Chat = () => {
 
@@ -14,21 +12,21 @@ const Chat = () => {
   console.log(mensajes)
   useEffect(() => {
     db.collection('chat').orderBy('createdAt').limit(50).onSnapshot(snapshot => {
-        setMensajes(snapshot.docs.map(doc => doc.data()))
+      setMensajes(snapshot.docs.map(doc => doc.data()))
     })
-}, [])
+  }, [])
 
 
-  return(
+  return (
 
     <div>
-    <div className="msgs">
-  
-  
+      <div className="msgs">
+
+
 
         {
 
-          mensajes.map(({id, text, photoURL, uid}) => {
+          mensajes.map(({ id, text, photoURL, uid }) => {
             console.log(mensajes);
             return <div key={id} className={`msg ${ uid === auth.currentUser.uid ? 'sent' : 'received'}`}>
               {console.log(uid)}
@@ -41,23 +39,23 @@ const Chat = () => {
         }
 
 
-      
-      
-      {/* <div className='d-flex justify-content-start mb-2'>
+
+
+        {/* <div className='d-flex justify-content-start mb-2'>
         <span className="badge bg-success">
           mensaje de uno
         </span>
       </div> */}
-      
 
-   
 
-    <Agregar scroll={scroll}/>
-    <div ref={scroll}></div>
-</div>
- </div>
 
-)
+
+        <Agregar scroll={scroll} />
+        <div ref={scroll}></div>
+      </div>
+    </div>
+
+  )
 
 };
 
