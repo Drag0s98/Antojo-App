@@ -5,7 +5,6 @@ import './Chat.css'
 
 import Agregar from '../Agregar';
 
-
 const Chat = () => {
 
   const scroll = useRef()
@@ -29,12 +28,12 @@ const Chat = () => {
 
           mensajes.map(({ id, text, photoURL, uid }) => {
             console.log(mensajes);
-            return <div key={id} className={`msg ${uid === auth.currentUser.uid ? 'sent' : 'received'}`}>
-              <img src={photoURL} alt="" className="fotochat" />
-              {console.log({ photoURL })}
-              <p className="textochat">{text}</p>
-
-            </div>
+            return <div key={id} className={`msg ${ uid === auth.currentUser.uid ? 'sent' : 'received'}`}>
+              {console.log(uid)}
+                <img src={photoURL} alt="" className="fotochat"/>
+                 <p className="textochat">{text}</p>
+                 
+               </div>
           })
 
         }

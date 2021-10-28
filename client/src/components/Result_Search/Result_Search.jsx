@@ -4,6 +4,11 @@ import { useHistory } from "react-router-dom";
 import { usePosition } from "../../hooks/usePosition";
 import Footer from '../Footer';
 
+import arrowleft from "../../styles/assets/img/png/arrow-left.png"
+
+import search from "../../styles/assets/img/png/search.png"
+
+
 
 function Result_Search({ location, watch, settings }) {
   //location.state saco la informacion del plato
@@ -149,14 +154,16 @@ function Result_Search({ location, watch, settings }) {
     <>
       {loader === true ? '' : <div className="resultSearch">
         <header className="header-general">
-          <button onClick={() => history.push("/home")}>«--</button>
+          <button className="header-general--button" onClick={() => history.push("/home")}>
+          <img src={arrowleft} alt="" />
+          </button>
           <h3>Resultados de búsqueda</h3>
         </header>
         <section className="result">
           <article className="result--box-input">
             <form onSubmit={handleSubmit}>
               <input type="text" name="browser" placeholder="Busca plato..." />
-              <button>Search</button>
+              <button className="result--box-btn"><img src={search} alt="" /></button>
             </form>
           </article>
           <br />

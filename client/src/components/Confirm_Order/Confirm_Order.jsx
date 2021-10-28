@@ -4,7 +4,7 @@ import { DataContext } from "../../context/context";
 import axios from "axios";
 import swal from 'sweetalert';
 
-
+import arrowleft from "../../styles/assets/img/png/arrow-left.png"
 
 const Confirm_Order = ({ location }) => {
   const { orders, uid } = useContext(DataContext);
@@ -27,7 +27,9 @@ const Confirm_Order = ({ location }) => {
   return (
     <section className="order">
       <header className="header-general">
-        <button onClick={() => history.push('/card')}>«--</button>
+        <button className="header-general--button" onClick={() => history.push('/card')}>
+        <img src={arrowleft} alt="" />
+        </button>
         <h3>Resumen de tu pedido</h3>
       </header>
       <div className="order--box">

@@ -6,6 +6,8 @@ import { DataContext } from "../../context/context";
 import Footer from "../Footer";
 import swal from "sweetalert";
 
+import arrowleft from "../../styles/assets/img/png/arrow-left.png";
+
 import {
   MapContainer,
   TileLayer,
@@ -46,7 +48,9 @@ function More_Info({ location }) {
   return (
     <section className="moreInfo">
       <header className="header-general">
-        <button onClick={() => history.push("/home")}>«--</button>
+        <button className="header-general--button" onClick={() => history.push("/home")}>
+          <img src={arrowleft} alt="" />
+        </button>
         <h3>Nombre del plato</h3>
       </header>
       <div className="tgview">
@@ -75,6 +79,7 @@ function More_Info({ location }) {
           Pedir plato
         </button>
         <section>
+          <h4>Ubicación</h4>
           <MapContainer
             center={coordinates}
             zoom={13}
@@ -106,6 +111,6 @@ function More_Info({ location }) {
       </div>
     </section>
   );
-};
+}
 
 export default More_Info;

@@ -1,0 +1,28 @@
+@import '../utils/variables';
+
+.btncredit {
+    border: none;
+    background-color: $tertiary-color-white;
+    color: $secondary-color-naranja-botones;
+    font-weight: bolder;
+    margin-right: 25px;
+}
+.cardsave {
+    margin-top: 50px;
+    margin-bottom: 30px;
+}
+
+.wrapcard {
+    margin: 0  auto;
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+}
+.btncredit > img {
+    margin-right: 15px;
+}
+
+.btn5 {
+    width: 150px;
+    margin-left: 80px;
+}
