@@ -18,7 +18,7 @@ const entries = {
         let result;
         try {
             result = await pool.query(`
-            SELECT id_dish, name, category, price, rating, offer
+            SELECT id_dish, name, category, price, rating, offer, image_web_dish
 	            FROM public.dishes;
             `)
         } catch (error) {
@@ -107,15 +107,15 @@ const entries = {
         }
         return result.rows;
     },
-    post_user_register: async ({ img, username, uidForm, emailForm }) => {
+    post_user_register: async ({ uidForm, emailForm }) => {
         let result;
         try {
             let sql_query = (`
             INSERT INTO public.users(
-                img, username, uid, email)
-                VALUES ($1, $2, $3, $4);
+                uid, email)
+                VALUES ($1, $2);
             `);
-            result = await pool.query(sql_query, [img, username, uidForm, emailForm])
+            result = await pool.query(sql_query, [uidForm, emailForm])
         } catch (error) {
             console.log('Error to post user ' + error);
         }

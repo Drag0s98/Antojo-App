@@ -2,6 +2,8 @@ import axios from "axios";
 import React from "react";
 import { useHistory } from "react-router-dom";
 
+import arrowleft from "../../styles/assets/img/png/arrow-left.png"
+
 const Add_Address = ({ location }) => {
   let history = useHistory();
 
@@ -23,7 +25,7 @@ const Add_Address = ({ location }) => {
   return (
     <section>
       <header className="header-general">
-    <button onClick={() => history.push('/address')}>«--</button>
+    <button className="header-general--button" onClick={() => history.push('/address')}><img src={arrowleft} alt="" /></button>
       <h3>Añadir dirección</h3>
     </header>
       <article>

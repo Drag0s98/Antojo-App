@@ -6,6 +6,7 @@ import { DataContext } from "../../context/context";
 
 import pb from '../../styles/assets/img/png/progessbar1.png';
 import plus from '../../styles/assets/img/png/btn2.png';
+import arrowleft from "../../styles/assets/img/png/arrow-left.png"
 
 
 const Address = () => {
@@ -30,50 +31,57 @@ const Address = () => {
     <section>
       <header className="header-general">
 
-        <button onClick={() => history.push('/more')}>«--</button>
+        <button className="header-general--button" onClick={() => history.push('/more')}>
+        <img src={arrowleft} alt="" />
+
+        </button>
         <h3>Selecciona dirección</h3>
       </header>
       <div className="pbar">
         <img src={pb} alt="" />
       </div>
       <article>
-        
-          {/* Borrar */}
-          {/* <div className="domicile_box">
+
+        {/* Borrar */}
+        {/* <div className="domicile_box">
               <p>Name:</p>
               <p>Domicile:</p>
               <p>Domicile num:</p>
               <p>Domicile piso:</p> */}
-              {/* <button onClick={handleClick}>Cambiar domicilio</button> */}
-              
-              {/* </div>
+        {/* <button onClick={handleClick}>Cambiar domicilio</button> */}
+
+        {/* </div>
               <div className="wpbtb">
              <img src={plus} alt="" className="plus"/> <button onClick={handleClick} className="adddirectionbtn">Añadir dirección</button>
               </div> */}
         <div>
           {addres ?
             <>
-            <p className="directtitle">Dirección guardada:</p>
+              <p className="directtitle">Dirección guardada:</p>
               <div className="domicile_box">
-              <p>Nombre: {addres.name}</p>
-              <p>Dirección: {addres.domicile}</p>
-              <p>Número: {addres.domicile_num}</p>
-              <p>Piso: {addres.domicile_piso}</p>
-              {/* <button onClick={handleClick}>Cambiar domicilio</button> */}
-             
-           </div>
-              <div className="wpbtb">
-            <button className="onboarding--btn btn4" onClick={() => history.push('/card')}>Continuar</button>
+                <p>Nombre: {addres.name}</p>
+                <p>Dirección: {addres.domicile}</p>
+                <p>Número: {addres.domicile_num}</p>
+                <p>Piso: {addres.domicile_piso}</p>
+                {/* <button onClick={handleClick}>Cambiar domicilio</button> */}
+
               </div>
             </>
            : (
             <>
             <div className="btnadd">
                <img src={plus} alt="" className="plus"/> <button onClick={handleClick} className="adddirectionbtn">Añadir dirección</button>
-              
+                <button className="onboarding--btn btn4" onClick={() => history.push('/card')}>Continuar</button>
               </div>
             </>
-          )}
+            : (
+              <>
+                <div className="btnadd">
+                  <img src={plus} alt="" className="plus" /> <button onClick={handleClick} className="adddirectionbtn">Añadir dirección</button>
+
+                </div>
+              </>
+            )}
         </div>
       </article>
     </section>

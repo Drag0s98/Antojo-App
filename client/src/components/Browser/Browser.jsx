@@ -2,7 +2,7 @@ import React, { useContext, useState, useEffect } from "react";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
 
-import search from "../../styles/assets/img/png/arrow-left.png"
+import search from "../../styles/assets/img/png/search.png"
 
 const Browser = () => {
   let history = useHistory();
@@ -26,7 +26,7 @@ const Browser = () => {
   //Creo un filtro por nombre de plato para el input
   const filter = async (inputSearch) => {
     let filterSearch = await dishes.filter((element) => {
-      if (element.name.includes(inputSearch.toLowerCase())) {
+      if (element.name.toLowerCase().includes(inputSearch.toLowerCase())) {
         return element;
       } else {
         return null;
@@ -41,10 +41,10 @@ const Browser = () => {
         history.push("/category", { filter: "Healthy" });
         break;
       case "vegan":
-        history.push("/category", { filter: "Vegan" });
+        history.push("/category", { filter: "Vegano" });
         break;
       case "vegetarian":
-        history.push("/category", { filter: "Vegetarian" });
+        history.push("/category", { filter: "Vegetariano" });
         break;
       default:
         break;
@@ -55,7 +55,7 @@ const Browser = () => {
   return (
     <section className="browser">
       <div className="browser--box-input">
-        <form onSubmit={handleSubmit}>
+        <form  onSubmit={handleSubmit}>
           <input
             className="input"
             type="text"
@@ -63,7 +63,8 @@ const Browser = () => {
             placeholder="Busca plato..."
           />
           <button className="browser--box-btn">
-            Search</button>
+          <img src={search} alt="" />
+          </button>
         </form>
       </div>
       <div className="browser--filter">
