@@ -1,0 +1,58 @@
+.moreInfo {
+    width: 100%;
+    height: 100%;
+    @include center;
+    flex-direction: column;
+    font-size: 13px;
+}
+
+.tituloview {
+  font-size: 32px;
+  color: $primary-color-verde-oscuro
+}
+
+.moreinfo-price {
+  font-size: 20px;
+  color: $secondary-color-naranja-hover;
+  & > p {
+    color: red;
+  }
+}
+
+.moreinfo-btn {
+  background-color: $secondary-color-naranja-botones;
+  color: white;
+  margin-left: 76px;
+  width: 204px;
+  height: 36px;
+  border-radius: 80px;
+  border: none;
+  margin-top: 10px;
+  &:hover {
+    background-color: $secondary-color-naranja-hover;
+  }
+}
+
+.moreInfo-location {
+  margin-top: 0.6em;
+  font-size: 26px;
+  color: $primary-color-verde-oscuro
+}
+
+.moreinfo-pricedetail {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.more-dish-image {
+  margin-top: 1em;
+  width: 98%;
+     height: 80%;
+     z-index: -10;
+     max-width: auto;
+   max-height: 300px;
+}
+
+
+
+

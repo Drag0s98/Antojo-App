@@ -1,0 +1,60 @@
+.pbar {
+    margin-top: 60px;
+}
+
+.directtitle {
+    margin-top: 50px;
+}
+
+.domicile_box {
+    border: 2px solid $primary-color-verde-oscuro;
+    border-radius: 2%;
+    padding: 10px;
+        p {
+            font-weight: bolder;
+            margin-top: 8px;
+        }
+}
+
+.btnadd {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin-top: 200px;
+        .btn4 {
+            width: 200px;
+            margin: 0 auto;
+            margin-top: 470px;
+        }
+
+}
+.wpbtb {
+    display: flex;
+    justify-content: center;
+    margin-top: 240px;
+}
+
+.adddirectionbtn {
+    border: none;
+    background-color: $tertiary-color-white;
+    color: $secondary-color-naranja-botones;
+    font-weight: bolder;
+    padding-left: 133px;
+    cursor: pointer;
+    margin-right: 20px;
+    margin-top: 40px;
+}
+
+.plus2 {
+    position: absolute;
+    left: 100px;
+    margin-top: 40px;
+}
+
+.btn6 {
+    width: 150px;
+    margin-left: 100px;
+    margin-top: 230px;
+}
+
+

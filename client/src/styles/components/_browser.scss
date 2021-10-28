@@ -1,0 +1,45 @@
+.browser {
+  & > div > form > input {
+    width: 100%;
+    margin-bottom: 0.5em;
+    padding: 0.5em;
+    border: 2px solid $primary-color-verde-oscuro;
+    box-sizing: border-box;
+    border-radius: 14px;
+    background: $tertiary-color-white;
+    opacity: 0.8;
+    margin-top: 1em;
+    &:focus {
+      border: 2px solid $primary-color-verde-oscuro;
+      box-shadow: none;
+    }
+    
+  }
+  &--filter {
+    margin-bottom: 0.5em;
+    margin-left: 0.7em;
+    & > button {
+      
+      color: $tertiary-color-black;
+      background-color: $primary-color-verde-claro;
+      width: 28%;
+      margin: 0.4em;
+      padding: 0.4em;
+      border: none;
+      border-radius: 17px;
+      font-size: 14px;
+    }
+  }
+  &--box-btn {
+    background-color: transparent;
+    border: none;
+    position: absolute;
+    top: 88px;
+    right: 20px;
+    position: absolute;
+    background-repeat: no-repeat;
+      
+
+  }
+  
+}

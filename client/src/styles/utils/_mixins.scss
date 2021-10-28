@@ -1,0 +1,17 @@
+@mixin center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@mixin footer {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+@mixin link {
+    text-decoration: none;
+    list-style: none;
+    
+}

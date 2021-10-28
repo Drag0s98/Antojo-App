@@ -1,0 +1,61 @@
+.onboarding {
+  justify-content: center;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  align-content: center;
+  &--top-wave{
+    width: 375px;
+  }
+  &--bottom-wave {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+  }
+
+  &--carousel {
+    max-width: 100%;
+
+    &--item {
+      margin: 4rem;
+      //max-width: 60%;
+      align-items: center;
+      align-content: center;
+      align-self: center;
+      justify-content: center;
+      max-width: 50%;
+      & > h1{
+          font-size: 32px;
+          color: $primary-color-verde-oscuro;
+      }
+      & > p {
+          margin-top: 1rem;
+          font-size: 13px;
+          color: black;
+      }
+    }
+  }
+}
+
+.onboarding--btn {
+  background-color: $secondary-color-naranja-botones;
+  color: white;
+  width: 304px;
+  height: 36px;
+  border-radius: 80px;
+  border: none;
+  &:hover {
+    background-color: $secondary-color-naranja-hover;
+  }
+}
+
+
+// .onboarding-1a {
+//   margin-top: 30px;
+//   margin-bottom: 10em;
+// }
+
+.header {
+  display: none;
+}

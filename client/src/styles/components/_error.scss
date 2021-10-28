@@ -1,0 +1,36 @@
+@import '../utils/variables';
+
+.error {
+    margin-top: 80px;
+}
+
+.errorbox {
+    width: 60%;
+    text-align: center;
+    margin: 0 auto;
+    line-height: 32px;
+    font-weight: bolder;
+}
+
+.btnerror {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+   
+}
+
+.errorbtn {
+    border: none;
+    outline: none;
+    background-color: $secondary-color-naranja-botones;
+    color: $tertiary-color-white;
+    border-radius: 80px;
+    width: 230px;
+    height: 40px;
+    margin-top: 20px;
+}
+
+.errorlink {
+    text-decoration: none;
+}
+

@@ -1,0 +1,52 @@
+.formulario {
+    //border: 1px solid black;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-top: 100px;
+        .elementform {
+            color: $primary-color-verde-oscuro;
+            font-size: 14px;
+            margin-left: 15px;
+            margin-bottom: 3px;
+        }
+}
+
+.btn5 {
+    margin-top: 250px;
+    margin-left: 20px;
+}
+
+.formnomb,
+.formdir {
+    margin-left: 15px;
+}
+
+
+.inputform {
+    border: 2px solid $primary-color-verde-oscuro;
+    border-radius: 2%;
+    width: 90%;
+    height: 50px;
+    padding: 0 20px;
+    margin-bottom: 20px;
+}
+
+.downitem {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: flex-start;
+    align-items: stretch;
+    justify-content: space-evenly;
+}
+
+.formnumero, .formpiso{
+    width: 35%;
+}
+
+.elementpiso {
+    position: relative;
+    top: -23px;
+    left: 43px;
+}
