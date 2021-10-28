@@ -58,7 +58,7 @@ const SearchBy_cat = ({ location, watch, settings }) => {
         await axios.get(`http://localhost:5000/api/dish/${param.name}`)
           .then(async (res) => {
             res.data.map((param) => {
-              arr.push(param.id_restaurant)
+              return arr.push(param.id_restaurant)
             })
           }).catch(error => console.log(error))
       })
@@ -93,24 +93,22 @@ const SearchBy_cat = ({ location, watch, settings }) => {
   useEffect(() => {
     let array = [];
     if (restaurants !== "") {
-      restaurants.map((param, i) => {
-        if (i < 10) {
-          let arr = param.coordinates.split(",");
-          let lat = parseFloat(arr[0]);
-          let lon = parseFloat(arr[1]);
-          let obj = {
-            name: param.name,
-            lat: lat,
-            lon: lon,
-          };
-          return array.push(obj);
-        } else {
-          return null;
-        }
-      });
-      new Promise((resolve) => setTimeout(resolve, 1500))
-        .then(() => setCoords(array))
-
+      new Promise(resolve => setTimeout(resolve, 2000))
+        .then(() => {
+          restaurants.map((param, i) => {
+            let arr = param.coordinates.split(",");
+            let lat = parseFloat(arr[0]);
+            let lon = parseFloat(arr[1]);
+            let obj = {
+              name: param.name,
+              lat: lat,
+              lon: lon,
+            };
+            return array.push(obj);
+          }, [restaurants]);
+          new Promise((resolve) => setTimeout(resolve, 2200))
+            .then(() => setCoords(array))
+        })
     } else {
       return null;
     }
@@ -119,37 +117,22 @@ const SearchBy_cat = ({ location, watch, settings }) => {
   useEffect(() => {
     let arr = []
     if (coords != null) {
-      coords.map((param) => {
-        const distance = getDistance([latitude, longitude], [param.lat, param.lon]) // [origen lat, origen lon],[destination lat, destination lon]
-        let obj = {
-          name: param.name,
-          distance: distance
-        }
-        arr.push(obj)
-      })
-      new Promise(resolve => setTimeout(resolve, 1800))
+      new Promise(resolve => setTimeout(resolve, 2400))
+        .then(() => {
+          coords.map((param, i) => {
+            const distance = getDistance([latitude, longitude], [param.lat, param.lon]) // [origen lat, origen lon],[destination lat, destination lon]
+            let obj = {
+              name: param.name,
+              distance: distance
+            }
+            return arr.push(obj)
+          })
+        })
         .then(() => setOrder(arr))
-
     }
     // console.log('Distancia entre los 2 puntos:' + distance)
   }, [coords]) //Este alert hay que dejarlo porque si no se genera un bucle infinito
 
-  useEffect(() => {
-    let arr = []
-    if (order != null) {
-      new Promise(resolve => setTimeout(resolve, 2000))
-        .then(() => {
-          order.filter((element, i) => {
-            arr.push(element.distance)
-            arr.sort((a, b) => a - b)
-            if (arr[i] === element.distance) {
-              return element
-            }
-          })
-        })
-
-    }
-  }, [order])
 
   return (
     <section className="searchCategory">
@@ -158,12 +141,13 @@ const SearchBy_cat = ({ location, watch, settings }) => {
         <h3>Resultados de búsqueda</h3>
       </header>
       <article>
-
         {order !== null ? order.map((param, i) => {
           return (
             <div key={i}>
+              {dishes[i].image_web_dish !== undefined ? <img src={dishes[i].image_web_dish} width='150px' height='150px' alt="" /> : ''}
               <p>{dishes[i].name} </p>
               <p>{param.name}</p>
+              <p>{dishes[i].price}</p>
               <button onClick={() => history.push('/more', {
                 dish: dishes[i],
                 restaurant: param.name
@@ -171,7 +155,6 @@ const SearchBy_cat = ({ location, watch, settings }) => {
             </div>
           )
         }) : ''}
-
       </article>
       <Footer />
     </section>

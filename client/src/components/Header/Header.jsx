@@ -1,12 +1,6 @@
 import React from "react";
-import { auth } from "../../firebase";
 
 const Header = () => {
-
-  const logOut = async () => {
-    let res = await auth.signOut();
-    console.log(res);
-  }
 
   return (
     <header className="header">

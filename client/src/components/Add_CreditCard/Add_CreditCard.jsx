@@ -9,39 +9,37 @@ const apiURL = "http://localhost:5000/api/payment";
 
 const Add_CreditCard = () => {
   const [card, setCard] = useState(null);
-  const { uid, setUid } = useContext(DataContext);
+  const { uid } = useContext(DataContext);
 
-  const {orders} = useContext(DataContext);
+  const { orders } = useContext(DataContext);
 
   const history = useHistory();
-   useEffect(() => {
-     axios.get(`${apiURL}`).then((response) => {
-       setCard(response.data);
-     });
-   }, []);
+  useEffect(() => {
+    axios.get(`${apiURL}`).then((response) => {
+      setCard(response.data);
+    });
+  }, []);
 
-  // if (!card) return "No Credit Card!";
 
-  async function postCard  (event) {
+  async function postCard(event) {
     event.preventDefault();
     axios.post(apiURL, {
-        uid: uid,
-        titular: event.target.elements.name.value,
-        card_num: event.target.elements.number.value,
-        cvv: event.target.elements.cvv.value,
-        exp_date: event.target.elements.date.value,
-        card_name: event.target.elements.alias.value
-      }) 
+      uid: uid,
+      titular: event.target.elements.name.value,
+      card_num: event.target.elements.number.value,
+      cvv: event.target.elements.cvv.value,
+      exp_date: event.target.elements.date.value,
+      card_name: event.target.elements.alias.value
+    })
       .then((response) => {
         setCard(response.data);
       });
-      await new Promise(resolve => setTimeout(resolve, 1000))
-      history.push('/card')
+    await new Promise(resolve => setTimeout(resolve, 1000))
+    history.push('/card')
   };
 
   return (
     <>
-
     <header className="header-general">
       <button className="header-general--button" onClick={() => history.push('/card')}><img src={arrowleft} alt="" /></button>
       <h3 className="titulocard">Añadir tarjeta</h3>
@@ -66,6 +64,7 @@ const Add_CreditCard = () => {
     </form>
   </>
 );
+
 };
 
 export default Add_CreditCard;
