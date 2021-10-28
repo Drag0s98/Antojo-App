@@ -54,14 +54,11 @@ function More_Info({ location }) {
       <div className="tgview">
         IMAGEN
         <h4 className="tituloview">{location.state.dish.name}</h4>
-        <p>Descripción</p>
-        {/* <p>{location.state.dish.category}</p> */}
-        <h3 className="moreinfo-price">Precio</h3>
-        <p className="moreinfo-pricedetail">Precio del plato: {location.state.dish.price}</p>
-        <p className="moreinfo-pricedetail">Precio del servicio: 2,90</p>
-        {/* Restaurante: <h3>{location.state.restaurant}</h3> */}
-        
-        <button className="moreinfo-btn"
+        Categoría: <p>{location.state.dish.category}</p>
+        Restaurante: <h3>{location.state.restaurant}</h3>
+        Precio: <p>{location.state.dish.price}</p>
+        <button
+
           onClick={() => {
             swal({
               title: "¡Su plato ha sido añadido a pedidos!",
@@ -108,7 +105,7 @@ function More_Info({ location }) {
             </Marker>
             );
           </MapContainer>
-          <p>{location.state.restaurant}</p> 
+          <p>{location.state.restaurant}</p>
         </section>
         <Footer />
       </div>
