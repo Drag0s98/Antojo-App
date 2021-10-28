@@ -3,6 +3,8 @@ import axios from "axios";
 import { DataContext } from "../../context/context";
 import { useHistory } from "react-router-dom";
 
+import arrowleft from "../../styles/assets/img/png/arrow-left.png"
+
 const apiURL = "http://localhost:5000/api/payment";
 
 const Add_CreditCard = () => {
@@ -41,7 +43,7 @@ const Add_CreditCard = () => {
     <>
 
       <header className="header-general">
-        <button onClick={() => history.push('/card')}>«--</button>
+        <button  className="header-general--button" onClick={() => history.push('/card')}><img src={arrowleft} alt="" /></button>
         <h3>Añadir tarjeta</h3>
         <p>Hola</p>
       </header>

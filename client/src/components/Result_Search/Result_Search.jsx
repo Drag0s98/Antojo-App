@@ -5,7 +5,10 @@ import { usePosition } from "../../hooks/usePosition";
 import More_Info from "../More_Info";
 import Footer from '../Footer';
 
+import arrowleft from "../../styles/assets/img/png/arrow-left.png"
+
 import search from "../../styles/assets/img/png/search.png"
+
 
 
 function Result_Search({ location, watch, settings }) {
@@ -157,7 +160,9 @@ function Result_Search({ location, watch, settings }) {
     <>
       {loader === true ? '' : <div className="resultSearch">
         <header className="header-general">
-          <button onClick={() => history.push("/home")}>«--</button>
+          <button className="header-general--button" onClick={() => history.push("/home")}>
+          <img src={arrowleft} alt="" />
+          </button>
           <h3>Resultados de búsqueda</h3>
         </header>
         <section className="result">

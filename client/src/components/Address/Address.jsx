@@ -6,6 +6,7 @@ import { DataContext } from "../../context/context";
 
 import pb from '../../styles/assets/img/png/progessbar1.png';
 import plus from '../../styles/assets/img/png/btn2.png';
+import arrowleft from "../../styles/assets/img/png/arrow-left.png"
 
 
 const Address = () => {
@@ -30,7 +31,10 @@ const Address = () => {
     <section>
       <header className="header-general">
 
-        <button onClick={() => history.push('/more')}>«--</button>
+        <button className="header-general--button" onClick={() => history.push('/more')}>
+        <img src={arrowleft} alt="" />
+
+        </button>
         <h3>Selecciona dirección</h3>
       </header>
       <div className="pbar">

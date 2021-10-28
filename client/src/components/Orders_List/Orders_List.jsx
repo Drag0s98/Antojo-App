@@ -5,6 +5,7 @@ import { DataContext } from "../../context/context";
 import { useHistory } from "react-router-dom";
 import Footer from "../Footer";
 
+import arrowleft from "../../styles/assets/img/png/arrow-left.png"
 
 const Orders_List = () => {
   const history = useHistory();
@@ -42,7 +43,9 @@ const Orders_List = () => {
     order != null ?
       <>
         <header className="header-general">
-          <button onClick={() => history.push("/orderconfirmation")}>«--</button>
+          <button className="header-general--button" onClick={() => history.push("/orderconfirmation")}>
+          <img src={arrowleft} alt="" />
+          </button>
           <h3>Pedidos</h3>
         </header>
         <section>
