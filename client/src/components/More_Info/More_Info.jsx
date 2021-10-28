@@ -64,6 +64,7 @@ function More_Info({ location }) {
         Categoría: <p>{location.state.dish.category}</p>
         Restaurante: <h3>{location.state.restaurant}</h3>
         Precio: <p>{location.state.dish.price}</p>
+       
         <button
           onClick={() => {
             swal({

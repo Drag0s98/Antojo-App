@@ -43,13 +43,16 @@ const Credit_Cards = () => {
         <img src={pb2} alt="" />
       </div>
       <p className="cardsave">Tarjeta guardada:</p>
-      <img src={tarjeta} alt="" />
+      <p className="numerocuenta">Número: **** **** ** **** ****</p>
+      <p className="expdate">Exp.date: **/**</p>
+      <p className="cvv">CVV: ***</p>
+      <img src={tarjeta} alt="" className="tarjeta11"/>
       <form onSubmit={handleSubmit}>
         {myCards !== ""
           ? myCards.map((param, i) => {
             return (
               <article key={i}>
-                <label >{param.card_name}
+                <label className="nombrebanco">{param.card_name}
                   <input type="radio" name='check' value={param.card_name} />
                 </label>
               </article>
@@ -58,9 +61,9 @@ const Credit_Cards = () => {
           : ""}
           
          <div className="wrapcard">
-        <button onClick={() => history.push("/addcard")} className="btncredit"> <img src={plus} alt="" className="plus"/>Añadir tarjeta</button>
+        <button onClick={() => history.push("/addcard")} className="btncredit btncredit11"> <img src={plus} alt="" className="plus"/>Añadir tarjeta</button>
         </div>
-        <button type='submit' className="onboarding--btn btn5">Continuar</button>
+        <button type='submit' className="onboarding--btn btn5 botoncontinuar">Continuar</button>
       </form>
     </section>
   );

@@ -26,3 +26,40 @@
     width: 150px;
     margin-left: 80px;
 }
+
+.tarjeta11 {
+    position: relative;
+    bottom: 130px;
+    z-index: -1;
+}
+
+.expdate {
+    color: $tertiary-color-white;
+    margin-left: 10px;
+}
+
+.numerocuenta {
+    margin-left: 10px;
+    padding-top: 10px;
+    color: $tertiary-color-white;
+}
+
+.cvv {
+    color: $tertiary-color-white;
+    margin-left: 10px;
+}
+
+.btncredit11 {
+    position: relative;
+    bottom: 150px;
+}
+
+.nombrebanco {
+    position: relative;
+    bottom: 60px;
+}
+
+.botoncontinuar {
+    position: relative;
+    bottom: 240px;
+}
