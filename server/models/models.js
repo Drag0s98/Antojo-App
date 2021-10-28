@@ -174,15 +174,15 @@ const entries = {
         }
         return result.rows;
     },
-    post_order: async ({ id_user, dish_name, price, cantidad }) => {
+    post_order: async ({ id_user, dish_name, price, cantidad, image }) => {
         let result;
         try {
             const sql_query = (`
             INSERT INTO public.orders(
-                id_user, dish_name, price, cantidad)
-                VALUES ($1, $2, $3, $4);
+                id_user, dish_name, price, cantidad, image)
+                VALUES ($1, $2, $3, $4, $5);
             `);
-            result = await pool.query(sql_query, [id_user, dish_name, price, cantidad]);
+            result = await pool.query(sql_query, [id_user, dish_name, price, cantidad, image]);
         } catch (error) {
             console.log('Error to post order ' + error);
         }
@@ -191,7 +191,7 @@ const entries = {
         let result;
         try {
             const sql_query = (`
-            SELECT id_order, id_user, dish_name, created_at, cantidad, price
+            SELECT id_order, id_user, dish_name, created_at, cantidad, price, image
 	            FROM public.orders WHERE id_user=$1;
             `)
             result = await pool.query(sql_query, [id])
